@@ -43,6 +43,7 @@ namespace UserMangementTemplate.Models
         public virtual ICollection<DepPointer> DepPointer1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
         public virtual ICollection<UserInOrg> UserInOrg1 { get; set; }
     }
 }

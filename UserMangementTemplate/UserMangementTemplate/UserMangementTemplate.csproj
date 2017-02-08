@@ -144,6 +144,8 @@
     <Compile Include="Models\UserContext.cs" />
     <Compile Include="Models\UserInOrg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AddEditDeleteUser.cs" />
+    <Compile Include="Security\AuthCheck.cs" />
     <Compile Include="Security\SearchBasedUser.cs" />
     <Compile Include="Security\SearchDepTree.cs" />
   </ItemGroup>
