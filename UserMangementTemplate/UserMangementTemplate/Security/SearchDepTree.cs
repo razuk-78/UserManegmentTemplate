@@ -7,7 +7,7 @@ namespace UserMangementTemplate.Security
 {
     public class SearchDepTree
     {
-       public class Deps
+        public class Deps
         {
             public Deps()
             {
@@ -19,30 +19,43 @@ namespace UserMangementTemplate.Security
         }
         public SearchDepTree()
         {
-           
+
         }
 
-        public List<Deps> DepsTree(UMDataBaseEntitiesConnection db,int depId)
-       
+        public List<Deps> DepsTree(UserContext db, int depId)
+
         {
             List<Deps> deps = new List<Deps>();
 
-           for(db.DepPointer.Where(x => x.ParentId == depId){
+            List<DepPointer> AllDep = db.DepPointer.ToList();
+            List<DepPointer> AllDep1 = new List<DepPointer>();
+            List<int> ii = new List<int>();
+            List<int> q = new List<int>();
+            while (true)
+            {
+                ii = new List<int>();
+                foreach (DepPointer dp in db.DepPointer.Where(x => x.ParentId == depId))
+                {
+                    AllDep1.Add(dp);
+                }
+
+                foreach (DepPointer aa in AllDep1)
+                {
+                    q.Add(aa.ChildId);
+
+                }
+
+
 
             }
-            foreach (department dep in db.department)
-            {
-                
-            }
-            int p=0;int ch=0;int d = 0;
-        for(int i = 0; i < db.DepPointer.ToList().Count; i++)
-            {
 
-               
-            }
-           
+
+
+
+
+
             return deps;
         }
-       
+
     }
 }

@@ -124,69 +124,24 @@
       <DependentUpon>UMDataBase.mdf</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
-    <Content Include="Models\UserDB.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UserDB.edmx</DependentUpon>
-      <LastGenOutput>UserDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\UserDB.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>UserDB.edmx</DependentUpon>
-      <LastGenOutput>UserDB.cs</LastGenOutput>
-    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Auth.cs">
-      <DependentUpon>UserDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\department.cs">
-      <DependentUpon>UserDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DepPointer.cs">
-      <DependentUpon>UserDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\LogInRegistry.cs">
-      <DependentUpon>UserDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Org.cs">
-      <DependentUpon>UserDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Team.cs">
-      <DependentUpon>UserDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TeamMember.cs">
-      <DependentUpon>UserDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TeamPointer.cs">
-      <DependentUpon>UserDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\User.cs">
-      <DependentUpon>UserDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserDB.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserDB.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserDB.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserDB.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UserDB.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserInOrg.cs">
-      <DependentUpon>UserDB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Auth.cs" />
+    <Compile Include="Models\department.cs" />
+    <Compile Include="Models\DepPointer.cs" />
+    <Compile Include="Models\LogInRegistry.cs" />
+    <Compile Include="Models\Org.cs" />
+    <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\TeamMember.cs" />
+    <Compile Include="Models\TeamPointer.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserContext.cs" />
+    <Compile Include="Models\UserInOrg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SearchBasedUser.cs" />
     <Compile Include="Security\SearchDepTree.cs" />
@@ -196,13 +151,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\UserDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>UserDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\UserDB.edmx.diagram">
-      <DependentUpon>UserDB.edmx</DependentUpon>
-    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -210,7 +158,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
