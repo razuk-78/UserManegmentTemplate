@@ -9,7 +9,7 @@ namespace UserMangementTemplate.Models
     [Table("TeamPointer")]
     public partial class TeamPointer
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public int ChildId { get; set; }

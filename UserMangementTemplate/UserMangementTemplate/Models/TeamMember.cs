@@ -9,7 +9,7 @@ namespace UserMangementTemplate.Models
     [Table("TeamMember")]
     public partial class TeamMember
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public int UserInOrgId { get; set; }

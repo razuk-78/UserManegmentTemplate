@@ -18,7 +18,7 @@ namespace UserMangementTemplate.Models
             TeamMember = new HashSet<TeamMember>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public int UserId { get; set; }

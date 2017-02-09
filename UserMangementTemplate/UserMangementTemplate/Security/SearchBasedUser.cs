@@ -21,6 +21,7 @@ namespace UserMangementTemplate.Security
             public Org Org { get; set; }
             public User User { get; set; }
             public department Department { get; set; }
+            public int UserInOrgId { get; set; }
             public List<Team> Teams { get; set; }
             public List<Auth> Auth { get; set; }
             public List<LogInRegistry> LogInRegistry { get; set; }
@@ -43,24 +44,28 @@ namespace UserMangementTemplate.Security
 
         public List<UserDetails> searchOrg(UserContext db, int OrgId)
         {
-
-            List<UserDetails> LUserDetails = new List<UserDetails>();
-            List<UserInOrg> AllUserInOrg = new List<UserInOrg>();
-            foreach (UserInOrg Uig in AllUserInOrg)
-            {
-                UserDetails u = new UserDetails();
-                u.User = db.User.First(x => x.Id == Uig.UserId);
-                u.Department = db.department.First(x => x.Id == Uig.DepId);
-                u.Org = db.Org.First(x => x.Id == Uig.OrgId);
-                foreach (TeamMember Tm in db.TeamMember.Where(x => x.UserInOrgId == Uig.Id).ToList())
-                {
-                    u.Teams.Add(db.Team.First(x => x.Id == Tm.TeamId));
-                }
-                u.Auth = db.Auth.Where(x => x.UserInOrgId == Uig.Id).ToList();
-                u.LogInRegistry = db.LogInRegistry.Where(x => x.UserInOrgId == Uig.Id).ToList();
-                LUserDetails.Add(u);
-            }
-            return LUserDetails;
+            List<UserDetails> lu = new List<UserDetails>();
+            #region MyRegion
+            //List<UserDetails> LUserDetails = new List<UserDetails>();
+            //List<UserInOrg> AllUserInOrg = new List<UserInOrg>();
+            //foreach (UserInOrg Uig in AllUserInOrg)
+            //{
+            //    UserDetails u = new UserDetails();
+            //    u.User = db.User.First(x => x.Id == Uig.UserId);
+            //    u.Department = db.department.First(x => x.Id == Uig.DepId);
+            //    u.Org = db.Org.First(x => x.Id == Uig.OrgId);
+            //    foreach (TeamMember Tm in db.TeamMember.Where(x => x.UserInOrgId == Uig.Id).ToList())
+            //    {
+            //        u.Teams.Add(db.Team.First(x => x.Id == Tm.TeamId));
+            //    }
+            //    u.Auth = db.Auth.Where(x => x.UserInOrgId == Uig.Id).ToList();
+            //    u.LogInRegistry = db.LogInRegistry.Where(x => x.UserInOrgId == Uig.Id).ToList();
+            //    LUserDetails.Add(u);
+            //}
+            //return LUserDetails; 
+            #endregion
+            db.UserInOrg.Where(x => x.OrgId == OrgId).ToList().ForEach(x => lu.Add(new UserDetails { Auth = x.Auth.ToList(), Department = x.department1, LogInRegistry = x.LogInRegistry.ToList(), User = x.User, UserInOrgId = x.Id }));
+            return lu;
         }
 
         public List<UserDetails> searchDep(UserContext db, int DepId)

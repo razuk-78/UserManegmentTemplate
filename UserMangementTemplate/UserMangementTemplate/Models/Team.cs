@@ -17,7 +17,7 @@ namespace UserMangementTemplate.Models
             TeamPointer1 = new HashSet<TeamPointer>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]

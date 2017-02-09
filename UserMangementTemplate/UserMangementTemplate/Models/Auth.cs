@@ -1,5 +1,6 @@
 namespace UserMangementTemplate.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ namespace UserMangementTemplate.Models
     [Table("Auth")]
     public partial class Auth
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public int? UserInOrgId { get; set; }
@@ -19,9 +20,9 @@ namespace UserMangementTemplate.Models
         [Required]
         [StringLength(50)]
         public string Type { get; set; }
-
+        [JsonIgnore]
         public virtual UserInOrg UserInOrg { get; set; }
-
+        [JsonIgnore]
         public virtual department department { get; set; }
     }
 }

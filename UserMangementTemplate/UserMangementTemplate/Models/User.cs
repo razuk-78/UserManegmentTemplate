@@ -1,5 +1,6 @@
 namespace UserMangementTemplate.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -15,7 +16,7 @@ namespace UserMangementTemplate.Models
             UserInOrg = new HashSet<UserInOrg>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
@@ -55,7 +56,7 @@ namespace UserMangementTemplate.Models
         [Required]
         [StringLength(50)]
         public string Category { get; set; }
-
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserInOrg> UserInOrg { get; set; }
     }
