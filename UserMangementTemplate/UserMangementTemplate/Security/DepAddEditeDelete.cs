@@ -25,16 +25,16 @@ namespace UserMangementTemplate.Security
         public void AddDepartment(DepDetailes dep, UserContext db)
         {
            
-                db.department.Add(new department { Name=dep.Name,OrgId=dep.OrgId,AdminId=dep.AdminId});
+                db.department.Add(new department { Name = dep.Name, OrgId = dep.OrgId, AdminId =dep.AdminId});
                 db.SaveChanges();
-
+            
             if (dep.parentId > 0)
             {
                 department ch = db.department.First(x => x.Name == dep.Name && x.OrgId == dep.OrgId);
                 db.DepPointer.Add(new DepPointer { ChildId = ch.Id, ParentId = dep.parentId });
                 db.SaveChanges();
             }
-
+           
         }
         //Edit Dep ----- show Dep
         public DepDetailes OldDepartment(int depId, UserContext db)
