@@ -13,21 +13,19 @@ namespace UserMangementTemplate.Security
             {
                 AuthType = new List<string>();
             }
-            public int? Id { get; set; }
+            public int Id { get; set; }
             public string Name { get; set; }
             public int AdminId { get; set; }
             public int OrgId { get; set; }
             public int parentId { get; set; }
-
             public List<string> AuthType { get; set; }
 
         }
         public void AddDepartment(DepDetailes dep, UserContext db)
         {
-           
-                db.department.Add(new department { Name = dep.Name, OrgId = dep.OrgId, AdminId =dep.AdminId});
-                db.SaveChanges();
-            
+          
+            db.department.Add(new department { Name = dep.Name, OrgId = dep.OrgId });
+            db.SaveChanges();
             if (dep.parentId > 0)
             {
                 department ch = db.department.First(x => x.Name == dep.Name && x.OrgId == dep.OrgId);
@@ -64,7 +62,7 @@ namespace UserMangementTemplate.Security
             {
                 if (dep.parentId > 0)
                 {
-                    db.DepPointer.Add(new DepPointer { ChildId = dep.Id??0, ParentId = dep.parentId });
+                    db.DepPointer.Add(new DepPointer { ChildId = dep.Id, ParentId = dep.parentId });
                     db.SaveChanges();
                 }
             }
