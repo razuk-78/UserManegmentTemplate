@@ -129,22 +129,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AddUserController.cs" />
     <Compile Include="Controllers\departmentsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Auth.cs" />
-    <Compile Include="Models\department.cs" />
-    <Compile Include="Models\DepPointer.cs" />
-    <Compile Include="Models\LogInRegistry.cs" />
-    <Compile Include="Models\Org.cs" />
-    <Compile Include="Models\Team.cs" />
-    <Compile Include="Models\TeamMember.cs" />
-    <Compile Include="Models\TeamPointer.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserContext.cs" />
-    <Compile Include="Models\UserInOrg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AddEditDeleteUser.cs" />
     <Compile Include="Security\AuthCheck.cs" />
@@ -166,7 +156,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

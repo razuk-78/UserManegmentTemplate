@@ -31,9 +31,10 @@ namespace UserMangementTemplate.Security
          
            UserInOrg uio =db.UserInOrg.First(x => x.UserId == userid);
             
-            return new UserDetails { Auth = uio.Auth.ToList(), Department = uio.department1, LogInRegistry = uio.LogInRegistry.ToList(), Org = uio.Org,User=uio.User,UserInOrgId=uio.Id};
-        
-           
+           //return new UserDetails { Auth = uio.Auth.ToList(), Department = uio.department1, LogInRegistry = uio.LogInRegistry.ToList(), Org = uio.Org,User=uio.User,UserInOrgId=uio.Id};
+            return new UserDetails();
+
+
         }
 
         //public List<UserDetails> searchTeam(UserContext db, int TeamIid)
@@ -99,7 +100,7 @@ namespace UserMangementTemplate.Security
         {
 
             List<UserDetails> LUserDetails = new List<UserDetails>();
-            db.LogInRegistry.Where(x => x.TimeLogIn >= before&&x.TimeLogIn<=after&&x.UserInOrg.OrgId==orgid).ToList().ForEach(x => LUserDetails.Add(new UserDetails { User = x.UserInOrg.User, Auth = x.UserInOrg.Auth.ToList(), Department = x.UserInOrg.department1, LogInRegistry = x.UserInOrg.LogInRegistry.ToList(), Org = x.UserInOrg.Org ,UserInOrgId=x.UserInOrgId}));
+            //db.LogInRegistry.Where(x => x.TimeLogIn >= before&&x.TimeLogIn<=after&&x.UserInOrg.OrgId==orgid).ToList().ForEach(x => LUserDetails.Add(new UserDetails { User = x.UserInOrg.User, Auth = x.UserInOrg.Auth.ToList(), Department = x.UserInOrg.department1, LogInRegistry = x.UserInOrg.LogInRegistry.ToList(), Org = x.UserInOrg.Org ,UserInOrgId=x.UserInOrgId}));
             return LUserDetails;
         }
 
