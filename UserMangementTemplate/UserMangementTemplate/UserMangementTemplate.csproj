@@ -129,7 +129,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\departmentsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -150,7 +149,6 @@
     <Compile Include="Security\AuthCheck.cs" />
     <Compile Include="Security\AuthTypes.cs" />
     <Compile Include="Security\CommonFunctions.cs" />
-    <Compile Include="Security\DepAddEditeDelete.cs" />
     <Compile Include="Security\SearchBasedUser.cs" />
     <Compile Include="Security\SearchDepTree.cs" />
   </ItemGroup>

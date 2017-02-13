@@ -7,7 +7,6 @@ namespace UserMangementTemplate.Security
 {
     public class SearchDepTree
     {
-        List<Deps> deps;
         public class Deps
         {
             public Deps()
@@ -26,18 +25,29 @@ namespace UserMangementTemplate.Security
         public List<Deps> AllDepsTreeBasedOrg(UserContext db, int OrgId)
 
         {
-            List<int> l = db.UserInOrg.Where(x => x.OrgId == OrgId).Select(x => x.DepId).ToList();
-            recursive(l, db);
-            
+            List<Deps> deps = new List<Deps>();
+
+
+
+
+
+
+
+
             return deps;
         }
         public List<Deps> DepsTree(UserContext db, int depId,int OrgId)
 
         {
-            List<int> l = new List<int> { db.department.First(x=>x.Id==depId&&x.OrgId==OrgId).Id};
+            List<Deps> deps = new List<Deps>();
 
-            recursive(l, db);
-            
+           
+
+     
+
+
+
+
             return deps;
         }
 
@@ -56,12 +66,9 @@ namespace UserMangementTemplate.Security
             }
             if (TemIds.Count < 1)
             {
-               deps= output(FixedIds,db);
-            }else
-            {
-recursive1(TemIds,db);
+                output(FixedIds,db);
             }
-            
+            recursive1(TemIds,db);
 
         }
 
@@ -78,23 +85,19 @@ recursive1(TemIds,db);
             }
             if (TemIds.Count < 1)
             {
-               deps= output(FixedIds,db);
+                output(FixedIds,db);
             }
-            else
-            {
-recursive(TemIds,db);
-            }
-            
+            recursive(TemIds,db);
 
         }
        List<Deps> output(List<int> i,UserContext db)
         {
-            List<Deps> deps1 = new List<Deps>();
+            List<Deps> deps = new List<Deps>();
             foreach (int ii in i)
             {
-                deps1.Add(new Deps { Child = db.DepPointer.Where(x => x.ParentId == ii).Select(x => x.ChildId).ToList(),Dep=db.department.First(x=>x.Id==ii),Parent= db.department.First(x => x.Id == ii).DepPointer.First(x=>x.ChildId==ii).ParentId });
+                deps.Add(new Deps { Child = db.DepPointer.Where(x => x.ParentId == ii).Select(x => x.ChildId).ToList(),Dep=db.department.First(x=>x.Id==ii),Parent= db.department.First(x => x.Id == ii).DepPointer.First(x=>x.ChildId==ii).ParentId });
             }
-            return deps1;
+            return deps;
         } 
         #endregion
 

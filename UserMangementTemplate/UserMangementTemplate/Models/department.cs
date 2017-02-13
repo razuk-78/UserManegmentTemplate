@@ -31,7 +31,7 @@ namespace UserMangementTemplate.Models
         public int OrgId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        
+        [JsonIgnore]
         public virtual ICollection<Auth> Auth { get; set; }
         [JsonIgnore]
         public virtual UserInOrg UserInOrg { get; set; }
