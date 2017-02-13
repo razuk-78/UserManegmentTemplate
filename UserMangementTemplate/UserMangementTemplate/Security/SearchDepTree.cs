@@ -26,7 +26,7 @@ namespace UserMangementTemplate.Security
         public List<Deps> AllDepsTreeBasedOrg(UserContext db, int OrgId)
 
         {
-            List<int> l = db.UserInOrg.Where(x => x.OrgId == OrgId).Select(x => x.DepId).ToList();
+            List<int> l = db.department.Where(x => x.OrgId == OrgId).Select(x => x.Id).ToList();
             recursive(l, db);
             
             return deps;
@@ -82,7 +82,7 @@ recursive1(TemIds,db);
             }
             else
             {
-recursive(TemIds,db);
+              recursive(TemIds,db);
             }
             
 
@@ -90,7 +90,7 @@ recursive(TemIds,db);
        List<Deps> output(List<int> i,UserContext db)
         {
             List<Deps> deps1 = new List<Deps>();
-            foreach (int ii in i)
+            foreach (int ii in i.Distinct().ToList())
             {
                 deps1.Add(new Deps { Child = db.DepPointer.Where(x => x.ParentId == ii).Select(x => x.ChildId).ToList(),Dep=db.department.First(x=>x.Id==ii),Parent= db.department.First(x => x.Id == ii).DepPointer.First(x=>x.ChildId==ii).ParentId });
             }

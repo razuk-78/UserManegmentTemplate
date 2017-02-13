@@ -10,7 +10,7 @@ namespace UserMangementTemplate.Models
     [Table("department")]
     public partial class department
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+      
         public department()
         {
             Auth = new HashSet<Auth>();
@@ -27,26 +27,20 @@ namespace UserMangementTemplate.Models
         public string Name { get; set; }
 
         public int? AdminId { get; set; }
-
+        [Required]
         public int OrgId { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+      
         
         public virtual ICollection<Auth> Auth { get; set; }
-        [JsonIgnore]
-        public virtual UserInOrg UserInOrg { get; set; }
+        //[JsonIgnore]
+        //public virtual UserInOrg UserInOrg { get; set; }
         [JsonIgnore]
         public virtual Org Org { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
         public virtual ICollection<DepPointer> DepPointer { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
         public virtual ICollection<DepPointer> DepPointer1 { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         [JsonIgnore]
         public virtual ICollection<UserInOrg> UserInOrg1 { get; set; }
     }
