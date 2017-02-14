@@ -17,13 +17,55 @@ namespace UserMangementTemplate.Controllers
         private UserContext db = new UserContext();
 
         // GET: api/Users
-       
-        public IHttpActionResult GetUser(int t)
+
+        // GET: api/Users
+        public IHttpActionResult GetUsers(int a)
         {
-            return Ok(new SearchBasedUser().searchOrg(db,t));
+            return Ok(a);
         }
 
-   
+        public IHttpActionResult GetUser(int userid)
+        {
+            return Ok(new SearchBasedUser().searchUser(db, userid));
+        }
+
+        public IHttpActionResult GetDep(int DepId)
+        {
+            return Ok(new SearchBasedUser().searchDep(db, DepId));
+        }
+        public IHttpActionResult GetOrg(int OrgId)
+        {
+            return Ok(new SearchBasedUser().searchOrg(db, OrgId));
+        }
+        public IHttpActionResult GetAuth(string auth)
+        {
+            return Ok(new SearchBasedUser().searchAuth(db, auth));
+        }
+        public IHttpActionResult GetAuthOrg(string auth, int Orgid)
+        {
+            return Ok(new SearchBasedUser().searchAuthBasedOrg(db, auth, Orgid));
+        }
+        public IHttpActionResult GetAuthOrgDep(string auth, int Orgid, int Dep)
+        {
+            return Ok(new SearchBasedUser().searchAuthBasedDep(db, auth, Orgid, Dep));
+        }
+        public IHttpActionResult GetUserBasedDate(DateTime date)
+        {
+            return Ok(new SearchBasedUser().searchAllUserBasedDate(db, date));
+        }
+        public IHttpActionResult GetAllUserBasedRangeDate(DateTime before, DateTime after, int orgid)
+        {
+            return Ok(new SearchBasedUser().searchAllUserInOrgRangDate(db, before, after, orgid));
+        }
+        public IHttpActionResult GetUserBasedRangeDate(DateTime before, DateTime after, int userid)
+        {
+            return Ok(new SearchBasedUser().searchRangDateBasedUserId(db, before, after, userid));
+        }
+        public IHttpActionResult GetuserBasedUserIdDepId(int userid, int depid)
+        {
+            return Ok(new SearchBasedUser().SearchDetailsBasedUserIdDepId(db, userid, depid));
+        }
+
 
         protected override void Dispose(bool disposing)
         {
