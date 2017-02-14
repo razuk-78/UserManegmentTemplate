@@ -14,9 +14,9 @@ namespace UserMangementTemplate.Models
         public department()
         {
             Auth = new HashSet<Auth>();
-            DepPointer = new HashSet<DepPointer>();
-            DepPointer1 = new HashSet<DepPointer>();
-            UserInOrg1 = new HashSet<UserInOrg>();
+            //DepPointer = new HashSet<DepPointer>();
+            //DepPointer1 = new HashSet<DepPointer>();
+           
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -30,24 +30,11 @@ namespace UserMangementTemplate.Models
 
         public int OrgId { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        
         public virtual ICollection<Auth> Auth { get; set; }
-        [JsonIgnore]
-        public virtual UserInOrg UserInOrg { get; set; }
+       
         [JsonIgnore]
         public virtual Org Org { get; set; }
+     
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [JsonIgnore]
-        public virtual ICollection<DepPointer> DepPointer { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [JsonIgnore]
-        public virtual ICollection<DepPointer> DepPointer1 { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [JsonIgnore]
-        public virtual ICollection<UserInOrg> UserInOrg1 { get; set; }
     }
 }

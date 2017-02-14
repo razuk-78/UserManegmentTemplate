@@ -16,9 +16,6 @@ namespace UserMangementTemplate.Models
         public int ChildId { get; set; }
 
         public int ParentId { get; set; }
-        [JsonIgnore]
-        public virtual department department { get; set; }
-        [JsonIgnore]
-        public virtual department department1 { get; set; }
+     
     }
 }

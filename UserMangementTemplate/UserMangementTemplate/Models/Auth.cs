@@ -15,7 +15,7 @@ namespace UserMangementTemplate.Models
 
         public int? UserInOrgId { get; set; }
 
-        public int? DepId { get; set; }
+        public int? departmentId { get; set; }
 
         [Required]
         [StringLength(50)]

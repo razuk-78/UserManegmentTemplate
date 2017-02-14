@@ -13,7 +13,7 @@ namespace UserMangementTemplate.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            UserInOrg = new HashSet<UserInOrg>();
+            //UserInOrg = new HashSet<UserInOrg>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -56,8 +56,6 @@ namespace UserMangementTemplate.Models
         [Required]
         [StringLength(50)]
         public string Category { get; set; }
-        [JsonIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserInOrg> UserInOrg { get; set; }
+       
     }
 }

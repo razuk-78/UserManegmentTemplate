@@ -31,10 +31,10 @@ namespace UserMangementTemplate.Security
             
             return deps;
         }
-        public List<Deps> DepsTree(UserContext db, int depId,int OrgId)
+        public List<Deps> DepsTree(UserContext db, int departmentId,int OrgId)
 
         {
-            List<int> l = new List<int> { db.department.First(x=>x.Id==depId&&x.OrgId==OrgId).Id};
+            List<int> l = new List<int> { db.department.First(x=>x.Id==departmentId&&x.OrgId==OrgId).Id};
 
             recursive(l, db);
             
@@ -92,13 +92,14 @@ recursive(TemIds,db);
             List<Deps> deps1 = new List<Deps>();
             foreach (int ii in i.Distinct())
             {
-                deps1.Add(new Deps { Child = db.DepPointer.Where(x => x.ParentId == ii).Select(x => x.ChildId).ToList(),Dep=db.department.First(x=>x.Id==ii),Parent= db.department.First(x => x.Id == ii).DepPointer.First(x=>x.ChildId==ii).ParentId });
+                //deps1.Add(new Deps { Child = db.DepPointer.Where(x => x.ParentId == ii).Select(x => x.ChildId).ToList(), Dep = db.department.First(x => x.Id == ii), Parent = db.department.First(x => x.Id == ii).DepPointer.First(x => x.ChildId == ii).ParentId });
+                deps1.Add(new Deps { Child = db.DepPointer.Where(x => x.ParentId == ii).Select(x => x.ChildId).ToList(), Dep = db.department.First(x => x.Id == ii), Parent = db.DepPointer.First(x => x.ChildId == ii).ParentId });
             }
             return deps1;
         } 
         #endregion
 
-        //public List<Deps> DepsTree(UserContext db, List<int> depIds, int OrgId)
+        //public List<Deps> DepsTree(UserContext db, List<int> departmentIds, int OrgId)
         //{
         //    List<Deps> deps = new List<Deps>();
 

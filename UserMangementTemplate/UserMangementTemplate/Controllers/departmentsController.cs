@@ -22,11 +22,21 @@ namespace UserMangementTemplate.Controllers
             return Ok(new SearchDepTree().AllDepsTreeBasedOrg(db,orgid));
         }
 
-        public IHttpActionResult GetdepartmentBaseOrgIdDepId(int orgid,int depid)
+        public IHttpActionResult GetdepartmentBaseOrgIddepartmentId(int orgid,int departmentId)
         {
-            return Ok(new SearchDepTree().DepsTree(db,depid,orgid));
+            return Ok(new SearchDepTree().DepsTree(db,departmentId,orgid));
         }
 
+        public IHttpActionResult PutAddDep(DepAddEditeDelete.DepDetailes dep)
+        {
+            new DepAddEditeDelete().AddDepartment(dep, db);
+            return Ok();
+        }
+        public IHttpActionResult PostAddDep(department dep)
+        {
+            CommonFunctions.AddDep(db, dep);
+            return Ok();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

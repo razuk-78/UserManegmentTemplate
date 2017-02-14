@@ -17,15 +17,18 @@ namespace UserMangementTemplate.Controllers
         private UserContext db = new UserContext();
 
         // GET: api/Users
-       
+        public IHttpActionResult GetAllUser()
+        {
+            return Ok(db.Org.ToList());
+        }
         public IHttpActionResult GetUser(int userid)
         {
             return Ok(new SearchBasedUser().searchUser(db, userid));
         }
 
-        public IHttpActionResult GetDep(int DepId)
+        public IHttpActionResult GetDep(int departmentId)
         {
-            return Ok(new SearchBasedUser().searchDep(db, DepId));
+            return Ok(new SearchBasedUser().searchDep(db, departmentId));
         }
         public IHttpActionResult GetOrg(int OrgId)
         {
@@ -55,9 +58,9 @@ namespace UserMangementTemplate.Controllers
         {
             return Ok(new SearchBasedUser().searchRangDateBasedUserId(db, before, after, userid));
         }
-        public IHttpActionResult GetuserBasedUserIdDepId(int userid,int depid)
+        public IHttpActionResult GetuserBasedUserIddepartmentId(int userid,int departmentId)
         {
-            return Ok(new SearchBasedUser().SearchDetailsBasedUserIdDepId(db,userid,depid));
+            return Ok(new SearchBasedUser().SearchDetailsBasedUserIddepartmentId(db,userid,departmentId));
         }
         protected override void Dispose(bool disposing)
         {

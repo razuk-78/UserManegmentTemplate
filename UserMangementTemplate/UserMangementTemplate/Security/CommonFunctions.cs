@@ -31,5 +31,10 @@ namespace UserMangementTemplate.Security
         {
             db.User.Remove(db.User.Find(org.Id)); db.SaveChanges();
         }
+        public static void AddDep(UserContext db,department dep)
+        {
+            db.department.Add(dep);
+            db.SaveChanges();
+        }
     }
 }

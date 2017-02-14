@@ -35,12 +35,12 @@ namespace UserMangementTemplate.Security
            
         }
         //Edit Dep ----- show Dep
-        public DepDetailes OldDepartment(int depId, UserContext db)
+        public DepDetailes OldDepartment(int departmentId, UserContext db)
         {
-            if (depId > 0)
+            if (departmentId > 0)
             {
-                department Dep1 = db.department.First(x => x.Id == depId);
-                return new DepDetailes { Id = depId, Name = Dep1.Name, OrgId = Dep1.OrgId };
+                department Dep1 = db.department.First(x => x.Id == departmentId);
+                return new DepDetailes { Id = departmentId, Name = Dep1.Name, OrgId = Dep1.OrgId };
             }
             else
                 throw new Exception("the Department is not exist");
@@ -95,21 +95,21 @@ namespace UserMangementTemplate.Security
         {
             foreach (string s in AuthDep.AuthType.ToList())
             {
-                db.Auth.Add(new Auth { DepId = AuthDep.Id, Type = s });
+                db.Auth.Add(new Auth { departmentId = AuthDep.Id, Type = s });
                 db.SaveChanges();
             }
         }
         //Edit Auth To Dep ----- I Samma Org
         public void EditAuthToDep(DepDetailes AuthDep, UserContext db)
         {
-            foreach (Auth a in db.Auth.Where(x => x.DepId == AuthDep.Id).ToList())
+            foreach (Auth a in db.Auth.Where(x => x.departmentId == AuthDep.Id).ToList())
             {
                 db.Auth.Remove(a);
                 db.SaveChanges();
             }
             foreach (string s in AuthDep.AuthType.ToList())
             {
-                db.Auth.Add(new Auth { DepId = AuthDep.Id, Type = s });
+                db.Auth.Add(new Auth { departmentId = AuthDep.Id, Type = s });
                 db.SaveChanges();
             }
 

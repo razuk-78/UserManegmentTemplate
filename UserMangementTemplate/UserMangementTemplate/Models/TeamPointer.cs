@@ -16,8 +16,6 @@ namespace UserMangementTemplate.Models
 
         public int ParentId { get; set; }
 
-        public virtual Team Team { get; set; }
-
-        public virtual Team Team1 { get; set; }
+      
     }
 }

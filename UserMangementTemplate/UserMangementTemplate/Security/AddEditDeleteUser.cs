@@ -15,26 +15,26 @@ namespace UserMangementTemplate.Security
             }
             public int UserId { get; set; }
             public int OrgId { get; set; }
-            public int DepId { get; set; }
+            public int departmentId { get; set; }
             public int UserInOrgId { get; set; }
            public  List<string> Auth { get; set; }
 
         }
         public void AddUser(UserDetailes user,UserContext db) 
         {
-            UserInOrg uio = db.UserInOrg.FirstOrDefault(x => x.UserId == user.UserId && x.OrgId == user.OrgId && x.department1.Id == user.DepId);
+            //UserInOrg uio = db.UserInOrg.FirstOrDefault(x => x.UserId == user.UserId && x.OrgId == user.OrgId && x.department.Id == user.departmentId);
            
-            if (uio == null&&db.Org.FirstOrDefault(x=>x.Id==user.OrgId)!=null&& db.User.FirstOrDefault(x => x.Id == user.UserId) != null)
-            {
-                db.UserInOrg.Add(new UserInOrg { DepId = user.DepId, OrgId = user.OrgId, UserId = user.UserId });
+            //if (uio == null&&db.Org.FirstOrDefault(x=>x.Id==user.OrgId)!=null&& db.User.FirstOrDefault(x => x.Id == user.UserId) != null)
+            //{
+            //    db.UserInOrg.Add(new UserInOrg { departmentId = user.departmentId, OrgId = user.OrgId, UserId = user.UserId });
                 
-                db.SaveChanges();
-                user.Auth.ForEach(x => uio.Auth.Add(new Auth { Type = x }));
-                db.SaveChanges();
-            }else
-            {
-                throw new Exception("");
-            }
+            //    db.SaveChanges();
+            //    user.Auth.ForEach(x => uio.Auth.Add(new Auth { Type = x }));
+            //    db.SaveChanges();
+            //}else
+            //{
+            //    throw new Exception("");
+            //}
         }
         public void EditeUser(UserDetailes user,UserContext db)
         {

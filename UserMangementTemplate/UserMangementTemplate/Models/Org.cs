@@ -14,7 +14,7 @@ namespace UserMangementTemplate.Models
         public Org()
         {
             department = new HashSet<department>();
-            UserInOrg = new HashSet<UserInOrg>();
+            //UserInOrg = new HashSet<UserInOrg>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,12 +22,8 @@ namespace UserMangementTemplate.Models
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
-        [JsonIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public string Name { get; set; }    
         public virtual ICollection<department> department { get; set; }
-        [JsonIgnore]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserInOrg> UserInOrg { get; set; }
+      
     }
 }

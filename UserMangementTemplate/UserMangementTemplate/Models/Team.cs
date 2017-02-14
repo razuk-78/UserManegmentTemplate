@@ -13,8 +13,7 @@ namespace UserMangementTemplate.Models
         public Team()
         {
             TeamMember = new HashSet<TeamMember>();
-            TeamPointer = new HashSet<TeamPointer>();
-            TeamPointer1 = new HashSet<TeamPointer>();
+         
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -24,13 +23,10 @@ namespace UserMangementTemplate.Models
         [StringLength(50)]
         public string Name { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+  
         public virtual ICollection<TeamMember> TeamMember { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeamPointer> TeamPointer { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TeamPointer> TeamPointer1 { get; set; }
+   
+    
     }
 }
