@@ -22,7 +22,10 @@ namespace UserMangementTemplate.Controllers
             return Ok(new SearchDepTree().AllDepsTreeBasedOrg(db,orgid));
         }
 
-
+        public IHttpActionResult GetdepartmentBaseOrgIdDepId(int orgid,int depid)
+        {
+            return Ok(new SearchDepTree().DepsTree(db,depid,orgid));
+        }
 
         protected override void Dispose(bool disposing)
         {
