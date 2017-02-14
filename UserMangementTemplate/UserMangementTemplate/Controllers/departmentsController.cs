@@ -27,16 +27,22 @@ namespace UserMangementTemplate.Controllers
             return Ok(new SearchDepTree().DepsTree(db,departmentId,orgid));
         }
 
-        public IHttpActionResult PutAddDep(DepAddEditeDelete.DepDetailes dep)
+        public IHttpActionResult PostAddDep(DepAddEditeDelete.DepDetailes dep)
         {
             new DepAddEditeDelete().AddDepartment(dep, db);
             return Ok();
         }
-        public IHttpActionResult PostAddDep(department dep)
+
+        public IHttpActionResult PutPar(DepAddEditeDelete.DepDetailes dep)
         {
-            CommonFunctions.AddDep(db, dep);
+            new DepAddEditeDelete().EditDepartmentPosition(dep, db);
             return Ok();
         }
+        //public IHttpActionResult PostAddDep(department dep)
+        //{
+        //    CommonFunctions.AddDep(db, dep);
+        //    return Ok();
+        //}
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -23,34 +23,38 @@ namespace UserMangementTemplate.Security
         }
         public void AddDepartment(DepDetailes dep, UserContext db)
         {
-          
-            db.department.Add(new department { Name = dep.Name, OrgId = dep.OrgId });
-            db.SaveChanges();
-            if (dep.parentId > 0)
+
+            if (dep.parentId > 0 && db.department.FirstOrDefault(x => x.Id == dep.parentId) != null)
             {
-                department ch = db.department.First(x => x.Name == dep.Name && x.OrgId == dep.OrgId);
-                db.DepPointer.Add(new DepPointer { ChildId = ch.Id, ParentId = dep.parentId });
+                db.department.Add(new department { Name = dep.Name, OrgId = dep.OrgId });
+                db.SaveChanges();
+                if (dep.parentId > 0 && db.department.FirstOrDefault(x => x.Id == dep.parentId) != null)
+                {
+                    department ch = db.department.First(x => x.Name == dep.Name && x.OrgId == dep.OrgId);
+                    db.DepPointer.Add(new DepPointer { ChildId = ch.Id, ParentId = dep.parentId });
+                    db.SaveChanges();
+                }             
+            }
+           else
+            {
+                throw new Exception("this parent is not registred");
+            }
+
+            if (dep.parentId==0)
+            {
+                db.department.Add(new department { Name = dep.Name, OrgId = dep.OrgId });
                 db.SaveChanges();
             }
-           
+    
         }
-        //Edit Dep ----- show Dep
-        public DepDetailes OldDepartment(int departmentId, UserContext db)
-        {
-            if (departmentId > 0)
-            {
-                department Dep1 = db.department.First(x => x.Id == departmentId);
-                return new DepDetailes { Id = departmentId, Name = Dep1.Name, OrgId = Dep1.OrgId };
-            }
-            else
-                throw new Exception("the Department is not exist");
-        }
+
         //Edit Dep ----- I Samma Org
         public void EditDepartment(DepDetailes dep, UserContext db)
         {
             department Dep = db.department.First(x => x.Id == dep.Id);
             Dep.Name = dep.Name;
             Dep.AdminId = dep.AdminId;
+
             db.Entry(Dep).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
         }
@@ -58,7 +62,7 @@ namespace UserMangementTemplate.Security
         public void EditDepartmentPosition(DepDetailes dep, UserContext db)
         {
             department Dep = db.department.First(x => x.Id == dep.Id);
-            if (db.DepPointer.First(x => x.ChildId == dep.Id) == null) // Not Exist
+            if (db.DepPointer.FirstOrDefault(x => x.ChildId == dep.Id) == null) // Not Exist
             {
                 if (dep.parentId > 0)
                 {

@@ -20,10 +20,7 @@ namespace UserMangementTemplate.Security
             public department Dep { get; set; }
             
         }
-        public SearchDepTree()
-        {
-
-        }
+      
         public List<Deps> AllDepsTreeBasedOrg(UserContext db, int OrgId)
 
         {
