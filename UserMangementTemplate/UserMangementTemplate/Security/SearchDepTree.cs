@@ -28,6 +28,12 @@ namespace UserMangementTemplate.Security
             List<Deps> deps = new List<Deps>();
 
 
+
+
+
+
+
+
             return deps;
         }
         public List<Deps> DepsTree(UserContext db, int depId,int OrgId)
@@ -35,7 +41,12 @@ namespace UserMangementTemplate.Security
         {
             List<Deps> deps = new List<Deps>();
 
-       
+           
+
+     
+
+
+
 
             return deps;
         }
@@ -56,11 +67,8 @@ namespace UserMangementTemplate.Security
             if (TemIds.Count < 1)
             {
                 output(FixedIds,db);
-            }else
-            {
-recursive1(TemIds,db);
             }
-            
+            recursive1(TemIds,db);
 
         }
 
@@ -79,17 +87,13 @@ recursive1(TemIds,db);
             {
                 output(FixedIds,db);
             }
-            else
-            {
- recursive(TemIds,db);
-            }
-           
+            recursive(TemIds,db);
 
         }
        List<Deps> output(List<int> i,UserContext db)
         {
             List<Deps> deps = new List<Deps>();
-            foreach (int ii in i.Distinct())
+            foreach (int ii in i)
             {
                 deps.Add(new Deps { Child = db.DepPointer.Where(x => x.ParentId == ii).Select(x => x.ChildId).ToList(),Dep=db.department.First(x=>x.Id==ii),Parent= db.department.First(x => x.Id == ii).DepPointer.First(x=>x.ChildId==ii).ParentId });
             }
