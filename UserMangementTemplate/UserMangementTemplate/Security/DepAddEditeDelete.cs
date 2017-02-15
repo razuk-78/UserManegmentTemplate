@@ -19,8 +19,9 @@ namespace UserMangementTemplate.Security
             public int OrgId { get; set; }
             public int parentId { get; set; }
             public List<string> AuthType { get; set; }
-
         }
+
+        //Add Department + Parent
         public void AddDepartment(DepDetailes dep, UserContext db)
         {
 
@@ -28,14 +29,13 @@ namespace UserMangementTemplate.Security
             {
                 db.department.Add(new department { Name = dep.Name, OrgId = dep.OrgId });
                 db.SaveChanges();
-                if (dep.parentId > 0 && db.department.FirstOrDefault(x => x.Id == dep.parentId) != null)
-                {
-                    department ch = db.department.First(x => x.Name == dep.Name && x.OrgId == dep.OrgId);
-                    db.DepPointer.Add(new DepPointer { ChildId = ch.Id, ParentId = dep.parentId });
-                    db.SaveChanges();
-                }             
+               
+                department ch = db.department.First(x => x.Name == dep.Name && x.OrgId == dep.OrgId);
+                db.DepPointer.Add(new DepPointer { ChildId = ch.Id, ParentId = dep.parentId });
+                db.SaveChanges();
+                            
             }
-           else
+           else if(dep.parentId > 0 && db.department.FirstOrDefault(x => x.Id == dep.parentId) == null)
             {
                 throw new Exception("this parent is not registred");
             }
@@ -58,9 +58,23 @@ namespace UserMangementTemplate.Security
             db.Entry(Dep).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
         }
+
         //Edit Dep Position ----- I Samma Org
-        public void EditDepartmentPosition(DepDetailes dep, UserContext db)
+        public void EditDepartmentParent(DepDetailes dep, UserContext db)
         {
+            List<int> childrenIds = new List<int>();
+         foreach(SearchDepTree.Deps mbox in   new SearchDepTree().DepsTree(db, dep.Id, dep.OrgId))
+            {
+                childrenIds.Add(mbox.Dep.Id);
+                foreach(int i in mbox.Child)
+                {
+                    childrenIds.Add(i);
+                }
+            }
+            if (childrenIds.Where(x => x == dep.parentId).ToList().Count > 0)
+            {
+                throw new Exception("the parent is one of the children!");
+            }
             department Dep = db.department.First(x => x.Id == dep.Id);
             if (db.DepPointer.FirstOrDefault(x => x.ChildId == dep.Id) == null) // Not Exist
             {
@@ -87,33 +101,62 @@ namespace UserMangementTemplate.Security
                 }
             }
         }
+
         //Delete Dep  ----- I Samma Org
         public void DeleteDepartment(DepDetailes dep, UserContext db)
         {
-            department D = db.department.First(x => x.Id == dep.Id);
-            db.department.Remove(D);
+            if (db.department.FirstOrDefault(x => x.Id == dep.Id && x.OrgId == dep.OrgId) == null)
+            {
+                throw new Exception("the department not exsist");
+            }
+            List<int> Alldep = new List<int>();
+            foreach (SearchDepTree.Deps deps in new SearchDepTree().DepsTree(db, dep.Id, dep.OrgId))
+            {
+                Alldep.Add(deps.Dep.Id);
+                foreach(int id in deps.Child)
+                {
+                    Alldep.Add(id);
+                }
+            }
+           foreach(int i in Alldep.Distinct())
+            {
+          department Department = db.department.First(x => x.Id == i);
+            db.department.Remove(Department);
             db.SaveChanges();
+            }
+          
+         
+            foreach(int i in Alldep.Distinct())
+            {
+                DepPointer dp = db.DepPointer.First(x => x.ParentId == i || x.ChildId == i);
+                db.DepPointer.Remove(dp);
+                db.SaveChanges();
+            }
+
+  
         }
+
         //Add Auth To Dep ----- I Samma Org
         public void AddAuthToDep(DepDetailes AuthDep, UserContext db)
         {
-            foreach (string s in AuthDep.AuthType.ToList())
+            foreach (string typeAuth in AuthDep.AuthType.ToList())
             {
-                db.Auth.Add(new Auth { departmentId = AuthDep.Id, Type = s });
+                db.Auth.Add(new Auth { departmentId = AuthDep.Id, Type = typeAuth });
                 db.SaveChanges();
             }
         }
+
         //Edit Auth To Dep ----- I Samma Org
         public void EditAuthToDep(DepDetailes AuthDep, UserContext db)
         {
-            foreach (Auth a in db.Auth.Where(x => x.departmentId == AuthDep.Id).ToList())
+            foreach (Auth auth in db.Auth.Where(x => x.departmentId == AuthDep.Id).ToList())
             {
-                db.Auth.Remove(a);
+                db.Auth.Remove(auth);
                 db.SaveChanges();
             }
-            foreach (string s in AuthDep.AuthType.ToList())
+            foreach (string typeA in AuthDep.AuthType.ToList())
             {
-                db.Auth.Add(new Auth { departmentId = AuthDep.Id, Type = s });
+                db.Auth.Add(new Auth { departmentId = AuthDep.Id, Type = typeA });
                 db.SaveChanges();
             }
 

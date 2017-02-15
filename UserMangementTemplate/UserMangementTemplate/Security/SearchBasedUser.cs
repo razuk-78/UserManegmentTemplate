@@ -8,12 +8,10 @@ namespace UserMangementTemplate.Security
 
     public class SearchBasedUser
     {
-
         public class UserDetails
         {
             public UserDetails()
-            {
-                //Department = new department();
+            {      
                 Teams = new List<Team>();
                 Auth = new List<Models.Auth>();
                 LogInRegistry = new List<Models.LogInRegistry>();
@@ -36,8 +34,6 @@ namespace UserMangementTemplate.Security
            
         }
 
- 
-
         public List<UserDetails> searchOrg(UserContext db, int OrgId)
         {
             List<UserDetails> lu = new List<UserDetails>();
@@ -55,6 +51,7 @@ namespace UserMangementTemplate.Security
             }
             return users;
         }
+
 
         public List<UserDetails> searchAuth(UserContext db, string Auth)
         {
@@ -83,6 +80,8 @@ namespace UserMangementTemplate.Security
             return users;
          
         }
+
+
         //One day
         public List<UserDetails> searchAllUserBasedDate(UserContext db, DateTime DateDay)
         {
@@ -94,19 +93,15 @@ namespace UserMangementTemplate.Security
         //between Two Date Based OrgId
         public List<UserDetails> searchAllUserInOrgRangDate(UserContext db, DateTime before, DateTime after, int orgid)
         {
-
             List<UserDetails> LUserDetails = new List<UserDetails>();
-         db.LogInRegistry.Where(x => x.TimeLogIn >= before&&x.TimeLogIn<=after&&x.UserInOrg.OrgId==orgid).ToList().ForEach(x => LUserDetails.Add(new UserDetails { User =db.User.Find( x.UserInOrg.UserId), Auth = x.UserInOrg.Auth.ToList(), Department =db.department.Find( x.UserInOrg.departmentId), LogInRegistry = x.UserInOrg.LogInRegistry.ToList(), Org =db.Org.Find( x.UserInOrg.OrgId) ,UserInOrgId=x.UserInOrgId}));
+            db.LogInRegistry.Where(x => x.TimeLogIn >= before&&x.TimeLogIn<=after&&x.UserInOrg.OrgId==orgid).ToList().ForEach(x => LUserDetails.Add(new UserDetails { User =db.User.Find( x.UserInOrg.UserId), Auth = x.UserInOrg.Auth.ToList(), Department =db.department.Find( x.UserInOrg.departmentId), LogInRegistry = x.UserInOrg.LogInRegistry.ToList(), Org =db.Org.Find( x.UserInOrg.OrgId) ,UserInOrgId=x.UserInOrgId}));
             return LUserDetails;
         }
 
         //between Two Date Based UserId
         public UserDetails searchRangDateBasedUserId(UserContext db, DateTime before, DateTime after, int userId)
         {
-
           UserDetails LUserDetails = new UserDetails();
-
-
             db.LogInRegistry.Where(x => x.UserInOrg.UserId == userId && x.TimeLogIn <= after && x.TimeLogIn >= before).ToList().ForEach(x => LUserDetails.LogInRegistry.Add(new LogInRegistry { TimeLogIn = x.TimeLogIn }));
             return LUserDetails;
         }
@@ -114,17 +109,14 @@ namespace UserMangementTemplate.Security
 
         public UserDetails SearchDetailsBasedUserIdTeamId(UserContext db, int userId, int departmentId)
         {
-
-
             return null;
         }
 
         public UserDetails SearchDetailsBasedUserIddepartmentId(UserContext db, int userId, int departmentId)
         {
-
             UserInOrg u = db.UserInOrg.First(x => x.UserId == userId && x.departmentId == departmentId);
-            return new UserDetails { User =db.User.Find( u.UserId), Org =db.Org.Find( u.OrgId), Auth = u.Auth.ToList(), LogInRegistry = u.LogInRegistry.ToList(), UserInOrgId = u.Id }; ;
-           
+            return new UserDetails { User =db.User.Find( u.UserId), Org =db.Org.Find( u.OrgId), Auth = u.Auth.ToList(), LogInRegistry = u.LogInRegistry.ToList(), UserInOrgId = u.Id };
+         
         }
 
 

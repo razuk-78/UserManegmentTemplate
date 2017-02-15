@@ -17,32 +17,39 @@ namespace UserMangementTemplate.Controllers
         private UserContext db = new UserContext();
 
         // GET: api/departments
+        //Get Depatment Base OrgId
         public IHttpActionResult Getdepartment(int orgid)
         {
             return Ok(new SearchDepTree().AllDepsTreeBasedOrg(db,orgid));
         }
 
+        //Get Depatment Base OrgId + departmentId
         public IHttpActionResult GetdepartmentBaseOrgIddepartmentId(int orgid,int departmentId)
         {
             return Ok(new SearchDepTree().DepsTree(db,departmentId,orgid));
         }
 
+        //Add Department + Parent
         public IHttpActionResult PostAddDep(DepAddEditeDelete.DepDetailes dep)
         {
             new DepAddEditeDelete().AddDepartment(dep, db);
             return Ok();
         }
 
-        public IHttpActionResult PutPar(DepAddEditeDelete.DepDetailes dep)
-        {
-            new DepAddEditeDelete().EditDepartmentPosition(dep, db);
-            return Ok();
-        }
-        //public IHttpActionResult PostAddDep(department dep)
+        //Change parent
+        //public IHttpActionResult PutParent(DepAddEditeDelete.DepDetailes dep)
         //{
-        //    CommonFunctions.AddDep(db, dep);
+        //    new DepAddEditeDelete().EditDepartmentParent(dep, db);
         //    return Ok();
         //}
+
+        //Delete Department
+        public IHttpActionResult PutDep(DepAddEditeDelete.DepDetailes dep)
+        {
+            new DepAddEditeDelete().DeleteDepartment(dep, db);
+            return Ok();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
