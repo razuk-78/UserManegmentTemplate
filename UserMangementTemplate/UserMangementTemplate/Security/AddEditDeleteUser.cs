@@ -22,19 +22,20 @@ namespace UserMangementTemplate.Security
         }
         public void AddUser(UserDetailes user,UserContext db) 
         {
-            //UserInOrg uio = db.UserInOrg.FirstOrDefault(x => x.UserId == user.UserId && x.OrgId == user.OrgId && x.department.Id == user.departmentId);
-           
-            //if (uio == null&&db.Org.FirstOrDefault(x=>x.Id==user.OrgId)!=null&& db.User.FirstOrDefault(x => x.Id == user.UserId) != null)
-            //{
-            //    db.UserInOrg.Add(new UserInOrg { departmentId = user.departmentId, OrgId = user.OrgId, UserId = user.UserId });
-                
-            //    db.SaveChanges();
-            //    user.Auth.ForEach(x => uio.Auth.Add(new Auth { Type = x }));
-            //    db.SaveChanges();
-            //}else
-            //{
-            //    throw new Exception("");
-            //}
+            UserInOrg uio = db.UserInOrg.FirstOrDefault(x => x.UserId == user.UserId && x.OrgId == user.OrgId && x.departmentId == user.departmentId);
+
+            if (uio == null && db.Org.FirstOrDefault(x => x.Id == user.OrgId) != null && db.User.FirstOrDefault(x => x.Id == user.UserId) != null)
+            {
+                db.UserInOrg.Add(new UserInOrg { departmentId = user.departmentId, OrgId = user.OrgId, UserId = user.UserId });
+
+                db.SaveChanges();
+                user.Auth.ForEach(x => uio.Auth.Add(new Auth { Type = x }));
+                db.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("");
+            }
         }
         public void EditeUser(UserDetailes user,UserContext db)
         {

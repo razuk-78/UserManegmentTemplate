@@ -24,16 +24,19 @@ namespace UserMangementTemplate.Security
         //Add Department + Parent
         public void AddDepartment(DepDetailes dep, UserContext db)
         {
-
+            if (!AuthTypes.checkTypeExistence(dep.AuthType)) { throw new Exception("The AuthType Not Valid"); }
             if (dep.parentId > 0 && db.department.FirstOrDefault(x => x.Id == dep.parentId) != null)
             {
-                db.department.Add(new department { Name = dep.Name, OrgId = dep.OrgId });
+                db.department.Add(new department { Name = dep.Name, OrgId = dep.OrgId});
                 db.SaveChanges();
                
                 department ch = db.department.First(x => x.Name == dep.Name && x.OrgId == dep.OrgId);
                 db.DepPointer.Add(new DepPointer { ChildId = ch.Id, ParentId = dep.parentId });
                 db.SaveChanges();
-                            
+               
+                    dep.AuthType.ForEach(x => db.Auth.Add(new Auth { departmentId = ch.Id, Type = x }));
+                db.SaveChanges();
+
             }
            else if(dep.parentId > 0 && db.department.FirstOrDefault(x => x.Id == dep.parentId) == null)
             {
@@ -44,18 +47,27 @@ namespace UserMangementTemplate.Security
             {
                 db.department.Add(new department { Name = dep.Name, OrgId = dep.OrgId });
                 db.SaveChanges();
+                department ch = db.department.First(x => x.Name == dep.Name && x.OrgId == dep.OrgId);
+                dep.AuthType.ForEach(x => db.Auth.Add(new Auth { departmentId = ch.Id, Type = x }));
+                db.SaveChanges();
             }
-    
+
         }
 
         //Edit Dep ----- I Samma Org
         public void EditDepartment(DepDetailes dep, UserContext db)
         {
+            if (!AuthTypes.checkTypeExistence(dep.AuthType))
+           throw new Exception("this Authontication type is not exist");
             department Dep = db.department.First(x => x.Id == dep.Id);
             Dep.Name = dep.Name;
             Dep.AdminId = dep.AdminId;
 
             db.Entry(Dep).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            db.department.Find(dep.Id).Auth.ToList().ForEach(x => db.Auth.Remove(x) );
+            db.SaveChanges();
+            dep.AuthType.ForEach(x => db.department.Find(dep.Id).Auth.Add(new Auth { Type = x }));
             db.SaveChanges();
         }
 

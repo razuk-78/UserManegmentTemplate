@@ -36,6 +36,14 @@ namespace UserMangementTemplate.Controllers
             return Ok();
         }
 
+
+        public IHttpActionResult PuttAddDep(DepAddEditeDelete.DepDetailes dep)
+        {
+            new DepAddEditeDelete().EditDepartment(dep, db);
+            return Ok();
+        }
+
+
         //Change parent
         //public IHttpActionResult PutParent(DepAddEditeDelete.DepDetailes dep)
         //{
@@ -43,12 +51,12 @@ namespace UserMangementTemplate.Controllers
         //    return Ok();
         //}
 
-        //Delete Department
-        public IHttpActionResult PutDep(DepAddEditeDelete.DepDetailes dep)
-        {
-            new DepAddEditeDelete().DeleteDepartment(dep, db);
-            return Ok();
-        }
+        ////Delete Department
+        //public IHttpActionResult PutDep(DepAddEditeDelete.DepDetailes dep)
+        //{
+        //    new DepAddEditeDelete().DeleteDepartment(dep, db);
+        //    return Ok();
+        //}
 
         protected override void Dispose(bool disposing)
         {

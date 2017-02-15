@@ -36,5 +36,13 @@ namespace UserMangementTemplate.Security
             db.department.Add(dep);
             db.SaveChanges();
         }
+        public static void AddAuthToUser(UserContext db,int userInOrgId,string AuthType)
+        {
+       
+        }
+        public static void AddAuthToDep(UserContext db, int depid)
+        {
+
+        }
     }
 }
