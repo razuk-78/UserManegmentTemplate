@@ -20,13 +20,13 @@ namespace UserMangementTemplate.Security
            public  List<string> Auth { get; set; }
 
         }
-        public void AddUser(UserDetailes user,UserContext db) 
+        public void AddUserInOrg(UserDetailes user,UserContext db) 
         {
             UserInOrg uio = db.UserInOrg.FirstOrDefault(x => x.UserId == user.UserId && x.OrgId == user.OrgId && x.departmentId == user.departmentId);
 
             if (uio == null && db.Org.FirstOrDefault(x => x.Id == user.OrgId) != null && db.User.FirstOrDefault(x => x.Id == user.UserId) != null)
             {
-                db.UserInOrg.Add(new UserInOrg { departmentId = user.departmentId, OrgId = user.OrgId, UserId = user.UserId });
+                db.UserInOrg.Add(uio=new UserInOrg { departmentId = user.departmentId, OrgId = user.OrgId, UserId = user.UserId });
 
                 db.SaveChanges();
                 user.Auth.ForEach(x => uio.Auth.Add(new Auth { Type = x }));
@@ -37,10 +37,10 @@ namespace UserMangementTemplate.Security
                 throw new Exception("");
             }
         }
-        public void EditeUser(UserDetailes user,UserContext db)
+        public void EditeUserInOrgAuth(UserDetailes user,UserContext db)
         {
             UserInOrg uio=null;
-            if (user.UserInOrgId > 0 &&user.UserId>0&&user.OrgId>0) 
+            if (user.UserInOrgId > 0 ) 
             {
                 uio = db.UserInOrg.FirstOrDefault(x => x.Id == user.UserInOrgId);
             }
@@ -48,17 +48,15 @@ namespace UserMangementTemplate.Security
 
             if (uio != null)
             {
-                //uio.OrgId = user.OrgId;
-                //uio.UserId = user.UserId;
-                //db.Entry(uio).State = System.Data.Entity.EntityState.Modified;    
-                //db.SaveChanges();
+                if (!AuthTypes.checkTypeExistence(user.Auth))
+                    throw new Exception("");
                 uio.Auth.ToList().ForEach(x => uio.Auth.Remove(x));
                 db.SaveChanges();
                 user.Auth.ForEach(x => uio.Auth.Add(new Auth { Type = x }));
                 db.SaveChanges();
             }
         }
-        public void DeleteUser(UserDetailes user,UserContext db)
+        public void DeleteUserInOrg(UserDetailes user,UserContext db)
         {
             department dp = db.department.FirstOrDefault(x => x.AdminId == user.UserInOrgId);
             if (dp != null)
@@ -67,7 +65,7 @@ namespace UserMangementTemplate.Security
                 db.Entry(dp).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
-            db.UserInOrg.Remove(db.UserInOrg.Find(user.UserInOrgId));
+            db.UserInOrg.Remove(db.UserInOrg.Find(user.UserInOrgId)); db.SaveChanges();
             
         }
     }

@@ -17,6 +17,8 @@ namespace UserMangementTemplate.Controllers
         private UserContext db = new UserContext();
 
         // GET: api/Users
+        [DepAuthCheck("write")]
+        [UserAuthCheck("delete")]
         public IHttpActionResult GetAllUser()
         {
             return Ok(db.Org.ToList());

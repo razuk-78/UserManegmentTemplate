@@ -58,7 +58,7 @@ namespace UserMangementTemplate.Security
         public void EditDepartment(DepDetailes dep, UserContext db)
         {
             if (!AuthTypes.checkTypeExistence(dep.AuthType))
-           throw new Exception("this Authontication type is not exist");
+           throw new Exception("this Authentication type is not exist");
             department Dep = db.department.First(x => x.Id == dep.Id);
             Dep.Name = dep.Name;
             Dep.AdminId = dep.AdminId;

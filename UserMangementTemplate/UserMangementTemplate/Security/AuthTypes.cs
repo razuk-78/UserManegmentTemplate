@@ -12,11 +12,11 @@ namespace UserMangementTemplate.Security
         public static string Write { get { return "write"; } private set { } }
         public static string Dalete { get { return "delete"; } private set { } }
         public static string Edite { get { return "edite"; } private set { } }
-        public static bool checkTypeExistence(List<string> Types)
+        public static bool checkTypeExistence(List<string> RecievedTypes)
         {
-            if (Types.Count < 1)
+            if (RecievedTypes.Count < 1)
                 return true;
-            foreach(string s in Types)
+            foreach(string s in RecievedTypes)
             {
                 if (types.FirstOrDefault(x => x == s) == null)
                 {
