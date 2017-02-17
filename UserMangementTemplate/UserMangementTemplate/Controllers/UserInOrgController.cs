@@ -32,11 +32,9 @@ namespace UserMangementTemplate.Controllers
         }
 
     }
-    public class DeleteUserInOrgController : ApiController
+    public class DeletUserInOrgController : ApiController
     {
         UserContext db = new UserContext();
-
-  
 
         //Delete UserInOrg
         public IHttpActionResult PostDelteUserInOrg(Security.AddEditDeleteUser.UserDetailes u)

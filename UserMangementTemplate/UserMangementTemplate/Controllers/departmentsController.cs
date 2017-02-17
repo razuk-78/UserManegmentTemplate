@@ -51,12 +51,12 @@ namespace UserMangementTemplate.Controllers
         //    return Ok();
         //}
 
-        ////Delete Department
-        //public IHttpActionResult PutDep(DepAddEditeDelete.DepDetailes dep)
-        //{
-        //    new DepAddEditeDelete().DeleteDepartment(dep, db);
-        //    return Ok();
-        //}
+        //Delete Department
+        public IHttpActionResult PutDep(DepAddEditeDelete.DepDetailes dep)
+        {
+            new DepAddEditeDelete().DeleteDepartment(dep, db);
+            return Ok();
+        }
 
         protected override void Dispose(bool disposing)
         {

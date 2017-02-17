@@ -132,13 +132,19 @@ namespace UserMangementTemplate.Security
             }
            foreach(int i in Alldep.Distinct())
             {
-          department Department = db.department.First(x => x.Id == i);
+            department Department = db.department.First(x => x.Id == i);
             db.department.Remove(Department);
             db.SaveChanges();
             }
-          
-         
-            foreach(int i in Alldep.Distinct())
+           //delete all userinorg
+            foreach (int i in Alldep.Distinct())
+            {
+                UserInOrg dp = db.UserInOrg.First(x => x.departmentId == i);
+                db.UserInOrg.Remove(dp);
+                db.SaveChanges();
+            }
+
+            foreach (int i in Alldep.Distinct())
             {
                 DepPointer dp = db.DepPointer.First(x => x.ParentId == i || x.ChildId == i);
                 db.DepPointer.Remove(dp);

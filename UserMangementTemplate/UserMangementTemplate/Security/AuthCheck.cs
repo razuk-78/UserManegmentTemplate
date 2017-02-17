@@ -50,12 +50,12 @@ namespace UserMangementTemplate.Security
 
         UserContext db = new UserContext();
         //string user = "razuk1";string pass = "1234";
-        string DepType = null;
-        public DepAuthCheck(string Dep_type)
+       string DepType = null;
+       //static List<DepAuthCheck> DepAuthCheckList = new List<DepAuthCheck>();
+       public DepAuthCheck(string Dep_type)
         {
             DepType = Dep_type;
         }
-
 
         public override void OnAuthorization(HttpActionContext actionContext)
         {
@@ -66,7 +66,8 @@ namespace UserMangementTemplate.Security
 
             string[] userpass = actionContext.Request.Headers.Authorization.Parameter.Split(':');
             string u = userpass[0]; string p = userpass[1];
-            if (db.User.FirstOrDefault(x => x.Email == u && x.PassWord == p) == null)
+            
+            if (db.User.FirstOrDefault(x => x.Email ==u&&EncyptPassWord.Decrypt(x.PassWord)==p)==null)
             {
                 actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
             }

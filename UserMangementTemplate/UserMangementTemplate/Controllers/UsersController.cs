@@ -19,6 +19,7 @@ namespace UserMangementTemplate.Controllers
         // GET: api/Users
         [DepAuthCheck("write")]
         [UserAuthCheck("delete")]
+        [UserAuthCheck("write")]
         public IHttpActionResult GetAllUser()
         {
             return Ok(db.Org.ToList());
@@ -93,9 +94,6 @@ namespace UserMangementTemplate.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UserExists(int id)
-        {
-            return db.User.Count(e => e.Id == id) > 0;
-        }
+      
     }
 }
