@@ -17,12 +17,11 @@ namespace UserMangementTemplate.Controllers
         private UserContext db = new UserContext();
 
         // GET: api/Users
-        [DepAuthCheck("write")]
-        [UserAuthCheck("delete")]
-        [UserAuthCheck("write")]
+      
+        [UserAuthCheck("read")]
         public IHttpActionResult GetAllUser()
         {
-            return Ok(db.Org.ToList());
+            return Ok(db.User.ToList());
         }
 
         //Get user Based UserId

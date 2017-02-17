@@ -19,7 +19,7 @@ namespace UserMangementTemplate.Security
             {
             Usertype = User_type;
             }
-     
+        public static string username;
 
         public override void OnAuthorization(HttpActionContext actionContext)
             {
@@ -38,11 +38,11 @@ namespace UserMangementTemplate.Security
             {
                 actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
             }
- 
 
+            username = userpass[0];
            }
 
-             
+            
 
         }
     public class DepAuthCheck : AuthorizationFilterAttribute
@@ -51,12 +51,13 @@ namespace UserMangementTemplate.Security
         UserContext db = new UserContext();
         //string user = "razuk1";string pass = "1234";
        string DepType = null;
+       
        //static List<DepAuthCheck> DepAuthCheckList = new List<DepAuthCheck>();
        public DepAuthCheck(string Dep_type)
         {
             DepType = Dep_type;
         }
-
+      
         public override void OnAuthorization(HttpActionContext actionContext)
         {
             if (actionContext.Request.Headers.Authorization == null)
@@ -75,7 +76,7 @@ namespace UserMangementTemplate.Security
             {
                 actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
             }
-
+        
 
         }
 

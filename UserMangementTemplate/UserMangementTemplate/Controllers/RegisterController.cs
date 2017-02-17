@@ -17,7 +17,7 @@ namespace UserMangementTemplate.Controllers
     public class UserRegisterController : ApiController
     {
         UserContext db = new UserContext();
-        //[UserAuthCheck("admin")]
+      //[UserAuthCheck("admin")]
       public IHttpActionResult PostAddUser(User user)
         {
             user.PassWord = EncyptPassWord.Encrypt(user.PassWord);
@@ -39,7 +39,7 @@ namespace UserMangementTemplate.Controllers
     public class DepRegisterController : ApiController
     {
         UserContext db = new UserContext();
-        [UserAuthCheck("superadmin")]
+      
         public IHttpActionResult PostAddDep(DepAddEditeDelete.DepDetailes Dep)
         {
             new DepAddEditeDelete().AddDepartment(Dep, db);
