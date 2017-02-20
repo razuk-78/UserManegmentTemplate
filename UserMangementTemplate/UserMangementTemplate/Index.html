@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+
+    <title>Small Business - Start Bootstrap Template</title>
+
+    <![endif]-->
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
+</head>
+<body >
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li> <a href="#/OrganiztionList">Oranization</a></li>
+                    <li> <a href="#/DepartmentList">Department</a></li>
+                    <li> <a href="#/UserList">Users</a></li>
+
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container">
+        <br />
+        <h4>
+
+            Cybercom Company{{1+1}}
+            <a href="http://www.Cybercom.com">More info &raquo;</a>
+
+        </h4>
+        <br />
+        <div class="row" ng-view>
+            <div class="loading-dialog" data-loading>
+
+            </div>
+        </div>
+      
+     
+     
+    </div>
+   
+
+      
+    
+    
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+   
+
+ 
+    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="App/app.js"></script>
+    <script src="App/UserController.js"></script>
+
+    <script src="App/DepartmentController.js"></script>
+    <script src="App/AuthController.js"></script>
+    <!--<script src="App/Views/Login/modules/authentication/services.js"></script>
+    <script src="App/Views/Login/modules/home/HomeController.js"></script>
+
+    <script src="App/Views/Login/modules/authentication/LoginController.js"></script>
+    <script src="App/Views/Login/scripts/app.js"></script>-->
+
+
+</body>
+
+</html>

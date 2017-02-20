@@ -16,10 +16,10 @@ namespace UserMangementTemplate.Controllers
     {
         private UserContext db = new UserContext();
         #region GetDepartment
-        public IHttpActionResult GetAllDep()
-        {
-            return Ok(db.department.ToList());
-        }
+        //public IHttpActionResult GetAllDep()
+        //{
+        //    return Ok(db.department.ToList());
+        //}
 
         //Get Department Based DepId
         public IHttpActionResult GetDep(int departmentId)
@@ -39,10 +39,10 @@ namespace UserMangementTemplate.Controllers
         #endregion
 
         #region GetOrg
-        public IHttpActionResult GetAllOrg()
-        {
-            return Ok(db.Org.ToList());
-        }
+        //public IHttpActionResult GetAllOrg()
+        //{
+        //    return Ok(db.Org.ToList());
+        //}
         //Get Org Based OrgId
         public IHttpActionResult GetOrg(int OrgId)
         {
@@ -70,7 +70,6 @@ namespace UserMangementTemplate.Controllers
         #endregion
 
 
-        #region GetUsers
         //[UserAuthCheck("read")]
         public IHttpActionResult GetAllUser()
         {
@@ -104,7 +103,7 @@ namespace UserMangementTemplate.Controllers
         {
             return Ok(new SearchBasedUser().SearchDetailsBasedUserIddepartmentId(db, userid, departmentId));
         } 
-        #endregion
+      
 
 
 

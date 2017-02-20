@@ -22,7 +22,7 @@ namespace UserMangementTemplate.Controllers
         {
             user.PassWord = EncyptPassWord.Encrypt(user.PassWord);
             CommonFunctions.addUser(user, db);
-            return Ok();
+            return Ok(db.User.ToList());
         }
 
     }
