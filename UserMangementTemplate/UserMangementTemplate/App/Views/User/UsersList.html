@@ -1,0 +1,362 @@
+﻿
+<html>
+<head>
+    <!--<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="../../Content/Admin/NewFolder1/sb-admin.css" rel="stylesheet" />
+    <!-- Morris Charts CSS -->
+    <link href="../../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+
+    <link href="../../Content/Admin/NewFolder1/morris.css" rel="stylesheet" />
+    <link href="../../Content/Vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <style type="text/css">-->
+
+
+
+      
+          div.Outer { 
+
+
+        width: 100%;
+
+
+      
+
+
+        position: relative; 
+
+
+        clear: both; 
+
+
+        } 
+
+
+ 
+
+
+        div.InnerLeft { 
+
+
+        width: 30%; 
+
+
+        position: relative; 
+
+        float: left; 
+
+
+        } 
+
+        div.InnerRight { 
+
+
+        width: 69%; 
+        position: relative; 
+        float: right; 
+
+
+        } 
+
+
+
+
+        .input-xs {
+        height: 22px;
+        padding: 5px 5px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+        }
+
+#mydiv {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            background-color: grey;
+            opacity:8;
+        }
+
+        .ajax-loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -32px; /* -1 * image width / 2 */
+            margin-top: -32px; /* -1 * image height / 2 */
+            display: block;
+        }
+
+    </style>
+</head>
+
+
+<body>
+   
+
+    <!--<div class="alert alert-info">
+        <div>Sort By: {{sortBy}}</div>
+        <div>Descending: {{sortDescending}}</div>
+        <div>Search Text: {{searchText}}</div>
+    </div>-->
+
+  
+    <div data-ng-controller="UserController" class="container">
+    
+        <!--<div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li class="active">
+                    <a href="#/OrganiztionList"><i class="fa fa-fw fa-dashboard"></i> Orgazization Profile</a>
+                </li>
+                <li>
+                    <a href="#/AuthList"><i class="fa fa-fw fa-bar-chart-o"></i> authorization management</a>
+                </li>
+                <li>
+                    <a href="#/UsersList"><i class="fa fa-fw fa-table"></i> Manage Users</a>
+                </li>
+                <li>
+                    <a href="#/DepartmentList"><i class="fa fa-fw fa-edit"></i> Department Mangment</a>
+                </li>
+                <li>
+                    <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                </li>
+                <li>
+                    <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                </li>
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a href="#">Dropdown Item</a>
+                        </li>
+                        <li>
+                            <a href="#">Dropdown Item</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+                </li>
+                <li>
+                    <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                </li>
+            </ul>
+        </div>-->
+            <div class="row" >
+                <strong class="error">{{ error }}</strong>
+                <div class="col-lg-2">
+                   
+                    <p data-ng-hide="addMode">
+                    <b data-ng-click="toggleAdd()" href="javascript:;" class="btn btn-primary"  >Add New</b></p>
+                    </div>
+                    <form name="adduser" data-ng-show="addMode" style="width:800px;float:left; margin:0px auto;">
+
+                        <div class="form-group">
+                            <label for="First" class="col-lg-2 control-label">First Name:</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" id="First" placeholder="please enter your First Name" data-ng-model="newuser.FirstName" required />
+                            </div>
+                            <label for="LastName" class="col-xs-2 control-label">Last Name:</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" id="LastName" placeholder="please enter your Last Name" data-ng-model="newuser.LastName" required />
+                            </div>
+                        </div>
+
+                        <br />
+                        <br />
+                        <div class="form-group">
+
+                            <label for="Email" class="col-xs-2 control-label">Emial:</label>
+                            <div class="col-lg-4">
+                                <input type="email" class="form-control" id="Email" placeholder="please enter your Email" data-ng-model="newuser.Email" required />
+                            </div>
+                            <label for="PassWord" class="col-xs-2 control-label">PassWord:</label>
+                            <div class="col-lg-4">
+                                <input type="password" class="form-control" id="PassWord" placeholder="please enter your PassWord" data-ng-model="newuser.PassWord" required />
+                            </div>
+                        </div>
+
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label for="PersonalNumber" class="col-xs-2 control-label">PN:</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" id="PersonalNumber" placeholder="please enter your PersonalNumber" data-ng-model="newuser.PersonalNumber" required />
+                            </div>
+                            <label for="Address" class="col-xs-2 control-label">Address:</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" id="Address" placeholder="please enter your Address" data-ng-model="newuser.Address" required />
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label for="City" class="col-xs-2 control-label">City:</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" id="City" placeholder="please enter your City" data-ng-model="newuser.City" required />
+                            </div>
+                            <label for="CityCode" class="col-xs-2 form-control-static">CityCode:</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" id="CityCode" placeholder="please enter your CityCode" data-ng-model="newuser.CityCode" required />
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label for="Phone" class="col-xs-2 control-label">Phone:</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" id="Phone" placeholder="please enter your Phone" data-ng-model="newuser.Phone" required />
+                            </div>
+                            <label for="Category" class="col-xs-2 control-label">Category:</label>
+                            <div class="col-lg-4">
+                                <select class="form-control" name="opSelect" id="opSelect" ng-model="newuser.Category">
+                                    <option value="" selected>-- Select --</option>
+                                    <option ng-repeat="option in ListOfDepartment" value="{{option.Name}}">{{option.Name}}</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                     
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <input type="submit" value="Add" data-ng-click="add()" data-ng-disabled="!adduser.$valid" class="btn btn-primary" />
+                                <input type="button" value="Cancel" data-ng-click="toggleAdd()" class="btn btn-primary" />
+                            </div>
+                        </div>
+                        <br />
+                    </form>
+                </div>
+      
+        <div>
+            <div class="col-md-12">
+                <br />
+                <br />
+            </div>
+        </div>
+
+        <div class="input-group row">
+            <input ng-keyup="search(searchText)"  type="text"
+                   ng-model="searchText"
+                   class="form-control"
+                   placeholder="Enter search text">
+            <span class="input-group-addon" id="basic-addon1">
+                <i class="glyphicon glyphicon-search"></i>
+            </span>
+        </div>
+
+
+
+       
+            <div class="row">
+               
+
+                    <table class="table table-hover">
+                        <tr class="alert-success">
+                            <th>User No</th>
+                            <th>First Name</th>
+                            <th>First Name</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Personal No</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>City Code</th>
+                            <th>Phone</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                          
+                      
+                           
+                        </tr>
+                        <tr data-ng-repeat="user in ListOfUser" class="animate">
+                            <td><strong data-ng-hide="user.editMode">{{ user.Id }}</strong></td>
+                            <td>
+                                <p data-ng-hide="user.editMode">{{ user.FirstName }}</p>
+                                <input data-ng-show="user.editMode" type="text" data-ng-model="user.FirstName" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="user.editMode">{{ user.LastName }}</p>
+                                <input data-ng-show="user.editMode" type="text" data-ng-model="user.LastName" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="user.editMode">{{ user.Email }}</p>
+                                <input data-ng-show="user.editMode" type="text" data-ng-model="user.Email" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="user.editMode">{{ user.PassWord }}</p>
+                                <input data-ng-show="user.editMode" type="text" data-ng-model="user.PassWord" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="user.editMode">{{ user.PersonalNumber }}</p>
+                                <input data-ng-show="user.editMode" type="text" data-ng-model="user.PersonalNumber" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="user.editMode">{{ user.Address }}</p>
+                                <input data-ng-show="user.editMode" type="text" data-ng-model="user.Address" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="user.editMode">{{ user.City }}</p>
+                                <input data-ng-show="user.editMode" type="text" data-ng-model="user.City" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="user.editMode">{{ user.CityCode }}</p>
+                                <input data-ng-show="user.editMode" type="text" data-ng-model="user.CityCode" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="user.editMode">{{ user.Phone }}</p>
+                                <input data-ng-show="user.editMode" type="text" data-ng-model="user.Phone" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="user.editMode">{{ user.Category }}</p>
+                                <input data-ng-show="user.editMode" type="text" data-ng-model="user.Category" />
+                            </td>
+                            <!--<td>
+                                <p data-ng-hide="user.editMode">{{ user.LastName }}</p>
+                                <input data-ng-show="user.editMode" type="text" data-ng-model="user.LastName" />
+
+                            </td>-->
+                            <!--<td>
+                                <p data-ng-hide="organazition.editMode">{{ organazition.City }}</p>
+                                <input data-ng-show="organazition.editMode" type="text" data-ng-model="organazition.City" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="organazition.editMode">{{ organazition.Address }}</p>
+                                <input data-ng-show="organazition.editMode" type="text" data-ng-model="organazition.Address" />
+                            </td>-->
+
+                            <td>
+                                <p data-ng-hide="user.editMode"><a data-ng-click="toggleEdit(user)" href="javascript:;">Edit</a> | <a data-ng-click="deleteUser(user)" href="javascript:;">Delete</a></p>
+                                <p data-ng-show="user.editMode"><a data-ng-click="save(user)" href="javascript:;">Save</a> | <a data-ng-click="toggleEdit(user)" href="javascript:;">Cancel</a></p>
+
+                                <a class="btn btn-primary btn-xs" href="#/AddUserToDepartment{{item.Id}}">Add user to department<span class="glyphicon glyphicon-pencil"></span></a>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr />
+              
+            </div>
+       
+       
+    </div>
+    <!--<script src="../../Content/Vendor/jquery/jquery.js"></script>
+    <script src="../../Content/Vendor/jquery/jquery.min.js"></script>-->
+    <!-- Morris Charts JavaScript -->
+
+
+    <!--<script src="../../Content/Admin/morris-data.js"></script>
+    <script src="../../Content/Admin/flot-data.js"></script>
+    <script src="../../Content/Admin/morris.min.js"></script>
+    <script src="../../Content/Admin/raphael.min.js"></script>-->
+
+</body>
+</html>

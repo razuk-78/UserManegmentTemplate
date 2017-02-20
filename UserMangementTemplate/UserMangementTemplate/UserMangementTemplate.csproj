@@ -120,8 +120,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\app.js" />
+    <Content Include="App\Home.js" />
+    <Content Include="App\UserController.js" />
     <Content Include="App\Views\Home\Home.html" />
     <Content Include="App\Views\Home\Login.html" />
+    <Content Include="App\Views\User\UsersList.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -961,6 +964,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App\Views\Mangment\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>

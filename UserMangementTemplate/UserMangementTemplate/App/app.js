@@ -12,7 +12,12 @@ app.config(['$locationProvider', '$routeProvider', function ($locationProvider, 
         controller: ''
     })
     $routeProvider.when('/home', { //Routing for show list of employee
+
         templateUrl: 'App/Views/Home/Home.html',
         controller: ''
+    })
+    $routeProvider.when('/UsersList', { //Routing for show list of User
+        templateUrl: '/App/Views/User/UsersList.html',
+        controller: 'UserController'
     })
 }]);
