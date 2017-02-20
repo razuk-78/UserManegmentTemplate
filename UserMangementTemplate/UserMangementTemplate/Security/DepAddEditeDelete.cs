@@ -125,48 +125,52 @@ namespace UserMangementTemplate.Security
             foreach (SearchDepTree.Deps deps in new SearchDepTree().DepsTree(db, dep.Id, dep.OrgId))
             {
                 Alldep.Add(deps.Dep.Id);
+                
                 foreach(int id in deps.Child)
                 {
                     Alldep.Add(id);
                 }
             }
+
            foreach(int i in Alldep.Distinct())
             {
             department Department = db.department.First(x => x.Id == i);
             db.department.Remove(Department);
-            db.SaveChanges();
+                db.SaveChanges();
             }
            //delete all userinorg
             foreach (int i in Alldep.Distinct())
             {
-                UserInOrg dp = db.UserInOrg.First(x => x.departmentId == i);
+                UserInOrg dp = db.UserInOrg.FirstOrDefault(x => x.departmentId == i);
+                if (dp != null)
+                {
                 db.UserInOrg.Remove(dp);
-                db.SaveChanges();
+                    db.SaveChanges();
+                }
+
+                
             }
 
             foreach (int i in Alldep.Distinct())
             {
-                DepPointer dp = db.DepPointer.First(x => x.ParentId == i || x.ChildId == i);
-                db.DepPointer.Remove(dp);
-                db.SaveChanges();
+                DepPointer dp = db.DepPointer.FirstOrDefault(x => x.ChildId == i);
+                if (dp != null)
+                {
+                    db.DepPointer.Remove(dp);
+                    db.SaveChanges();
+                }
             }
 
   
         }
 
-        //Add Auth To Dep ----- I Samma Org
-        public void AddAuthToDep(DepDetailes AuthDep, UserContext db)
-        {
-            foreach (string typeAuth in AuthDep.AuthType.ToList())
-            {
-                db.Auth.Add(new Auth { departmentId = AuthDep.Id, Type = typeAuth });
-                db.SaveChanges();
-            }
-        }
+    
 
         //Edit Auth To Dep ----- I Samma Org
-        public void EditAuthToDep(DepDetailes AuthDep, UserContext db)
+        public void AddEditAuthToDep(DepDetailes AuthDep, UserContext db)
         {
+            if (!AuthTypes.checkTypeExistence(AuthDep.AuthType.ToList()))
+            throw new Exception("the authentication not exist");
             foreach (Auth auth in db.Auth.Where(x => x.departmentId == AuthDep.Id).ToList())
             {
                 db.Auth.Remove(auth);

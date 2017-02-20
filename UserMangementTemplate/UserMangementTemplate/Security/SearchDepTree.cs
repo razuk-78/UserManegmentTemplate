@@ -111,12 +111,6 @@ recursive(TemIds,db);
         } 
         #endregion
 
-        //public List<Deps> DepsTree(UserContext db, List<int> departmentIds, int OrgId)
-        //{
-        //    List<Deps> deps = new List<Deps>();
-
-
-        //    return deps;
-        //}
+    
     }
 }

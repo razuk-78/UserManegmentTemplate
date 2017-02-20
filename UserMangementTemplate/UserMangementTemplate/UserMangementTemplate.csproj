@@ -133,11 +133,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\departmentsController.cs" />
     <Compile Include="Controllers\LogInController.cs" />
-    <Compile Include="Controllers\UserInOrgController.cs" />
-    <Compile Include="Controllers\RegisterController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\AddEditDeleteController.cs" />
+    <Compile Include="Controllers\UDOGetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

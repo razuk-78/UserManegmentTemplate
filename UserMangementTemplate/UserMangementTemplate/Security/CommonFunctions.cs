@@ -38,6 +38,7 @@ namespace UserMangementTemplate.Security
         }
         public static void DeleteUser(User user, UserContext db)
         {
+            db.UserInOrg.Remove(db.UserInOrg.FirstOrDefault(x => x.UserId == user.Id)); db.SaveChanges();
             db.User.Remove(db.User.Find(user.Id));db.SaveChanges();            
         }
         public static void AddOrg(Org org, UserContext db)
@@ -55,8 +56,10 @@ namespace UserMangementTemplate.Security
         }
         public static void DeleteOrg(Org org, UserContext db)
         {
-            db.User.Remove(db.User.Find(org.Id)); db.SaveChanges();
+            db.UserInOrg.Where(x => x.OrgId == org.Id).ToList().ForEach(x => db.UserInOrg.Remove(x)); db.SaveChanges();
+            db.Org.Remove(db.Org.Find(org.Id)); db.SaveChanges();
         }
+        //Add Dep Without Parent
         public static void AddDep(UserContext db,department dep)
         {
             db.department.Add(dep);

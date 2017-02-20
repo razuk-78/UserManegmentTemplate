@@ -13,8 +13,8 @@ using UserMangementTemplate.Security;
 
 namespace UserMangementTemplate.Controllers
 {
-    //Register User + Org + Dep + UserInOrg
-    public class UserRegisterController : ApiController
+    //Add User + Org + Dep + UserInOrg
+    public class AddUserController : ApiController
     {
         UserContext db = new UserContext();
       //[UserAuthCheck("admin")]
@@ -26,17 +26,17 @@ namespace UserMangementTemplate.Controllers
         }
 
     }
-    public class OrgRegisterController : ApiController
+    public class AddOrgController : ApiController
     {
         UserContext db = new UserContext();
-        [UserAuthCheck("superadmin")]
+        //[UserAuthCheck("superadmin")]
         public IHttpActionResult PostAddorg(Org org)
         {
             CommonFunctions.AddOrg(org, db);
             return Ok();
         }
     }
-    public class DepRegisterController : ApiController
+    public class AddDepController : ApiController
     {
         UserContext db = new UserContext();
       
@@ -46,13 +46,33 @@ namespace UserMangementTemplate.Controllers
             return Ok();
         }
     }
-    public class UserInOrgRegisterController : ApiController
+    public class AddDepWithoutParentController : ApiController
     {
         UserContext db = new UserContext();
-        [UserAuthCheck("superadmin")]
+        //Add Dep Without Parent
+        public IHttpActionResult PostAddDepWithoutParent(department dep)
+        {
+            CommonFunctions.AddDep(db, dep);
+            return Ok();
+        }
+    }
+    public class AddUserInOrgController : ApiController
+    {
+        UserContext db = new UserContext();
+        //[UserAuthCheck("superadmin")]
         public IHttpActionResult PostAddUserInOrg(AddEditDeleteUser.UserDetailes User)
         {
             new AddEditDeleteUser().AddUserInOrg(User, db);
+            return Ok();
+        }
+    }
+    public class AddAuthToDepController : ApiController
+    {
+        UserContext db = new UserContext();
+        //Add Auth To Dep
+        public IHttpActionResult PostAddAuthToDep(DepAddEditeDelete.DepDetailes Dep)
+        {
+            new DepAddEditeDelete().AddEditAuthToDep(Dep, db);
             return Ok();
         }
     }
@@ -87,6 +107,26 @@ namespace UserMangementTemplate.Controllers
             return Ok();
         }
     }
+    public class EditDepParentController : ApiController
+    {
+        UserContext db = new UserContext();
+        //Edit Dep Position
+        public IHttpActionResult PutEditDepParint(DepAddEditeDelete.DepDetailes Dep)
+        {
+            new DepAddEditeDelete().EditDepartmentParent(Dep, db);
+            return Ok();
+        }
+    }
+    public class EditAuthToDepController : ApiController
+    {
+        UserContext db = new UserContext();
+        //Edit Auth To Dep
+        public IHttpActionResult PutEditAuthToDep(DepAddEditeDelete.DepDetailes Dep)
+        {
+            new DepAddEditeDelete().AddEditAuthToDep(Dep, db);
+            return Ok();
+        }
+    }
     public class EditUserInOrgController : ApiController
     {
         UserContext db = new UserContext();
@@ -117,6 +157,8 @@ namespace UserMangementTemplate.Controllers
             return Ok();
         }
     }
+
+
     public class DeleteDepController : ApiController
     {
         UserContext db = new UserContext();
