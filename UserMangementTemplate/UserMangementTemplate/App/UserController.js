@@ -4,20 +4,25 @@
         $scope.Status;
       
         $scope.Close = function () {
-            $location.path('/User/UsersList');
+            $location.path('/UsersList');
         }
 
 
     //angularjs controller method
         $scope.loading = true;
         $scope.addMode = false;
+
+
+
+
+
         $scope.search = function (m) {
             $http.get('/api/user/GetSearchUsers?searchtext=' + m).success(function (data) {
                 $scope.ListOfUser = data;
                 $scope.loading = false;
             })
       .error(function () {
-          $scope.error = "An Error has occured while loading posts!";
+          $scope.error = "An Error has occured while loading !";
           $scope.loading = false;
       });
         }

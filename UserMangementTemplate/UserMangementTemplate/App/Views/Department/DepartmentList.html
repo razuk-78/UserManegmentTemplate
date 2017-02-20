@@ -1,0 +1,212 @@
+﻿
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <style>
+        @import url('../../Content/Site.css');
+        
+        .input-xs {
+            height: 22px;
+            padding: 5px 5px;
+            font-size: 12px;
+            line-height: 1.5;
+            border-radius: 3px;
+        }
+
+        #mydiv {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            background-color: grey;
+            opacity: 8;
+        }
+
+        .ajax-loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -32px; /* -1 * image width / 2 */
+            margin-top: -32px; /* -1 * image height / 2 */
+            display: block;
+        }
+    </style>
+</head>
+
+
+<body>
+    <h1>Departments Page</h1>
+    <div  class="container">
+        <!--<div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li class="active">
+                    <a href="#/OrganiztionList"><i class="fa fa-fw fa-dashboard"></i> Orgazization Profile</a>
+                </li>
+                <li>
+                    <a href="#/AuthList"><i class="fa fa-fw fa-bar-chart-o"></i> authorization management</a>
+                </li>
+                <li>
+                    <a href="#/UsersList"><i class="fa fa-fw fa-table"></i> Manage Users</a>
+                </li>
+                <li>
+                    <a href="#/DepartmentList"><i class="fa fa-fw fa-edit"></i> Department Mangment</a>
+                </li>
+                <li>
+                    <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                </li>
+                <li>
+                    <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                </li>
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a href="#">Dropdown Item</a>
+                        </li>
+                        <li>
+                            <a href="#">Dropdown Item</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+                </li>
+                <li>
+                    <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                </li>
+            </ul>
+        </div>-->
+        <div class="row">
+            <div class="col-md-12">
+                <strong class="error">{{ error }}</strong>
+                <p data-ng-hide="addMode"><a data-ng-click="toggleAdd()" href="javascript:;" class="btn btn-primary">Add New</a></p>
+                <form name="adddepartment" data-ng-show="addMode" style="width:600px;margin:0px auto;">
+                 
+                    <div class="form-group">
+                        <!--<label for="First" class="col-sm-2 control-label">First Name:</label>-->
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="Name" placeholder="please enter your Department Name" data-ng-model="newdepartment.Name" required />
+                        </div>
+                    </div>
+                    <br />
+                   
+                    <div class="form-group">
+                        <!--<label for="LastName" class="col-sm-2 control-label">Last Name:</label>-->
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="AdminId" placeholder="please enter your Admin " data-ng-model="newdepartment.AdminId" required />
+                        </div>
+                    </div>
+                    <br />
+                   
+                    <div class="form-group">
+                        <!--<label for="Emial" class="col-sm-2 control-label">Emial:</label>-->
+                        <div class="col-sm-10">
+                            <select class="form-control" name="opSelect" id="opSelect" data-ng-model="newdepartment.ParentId">
+                                <option value="" selected>-- Select --</option>
+                                <option value="*">*</option>
+                                <option ng-repeat="option in ListOfDepartment" value="{{option.Name}}">{{option.Name}}</option>
+
+                            </select>
+                        </div>
+                        </div>
+                    <div class="form-group">
+                        <!--<label for="add-dob1" class="col-sm-2 danger">Auth</label>-->
+                        <div class="col-sm-10">
+                            <select class="form-control" name="opSelect1" id="opSelect1" data-ng-model="newdepartment.Authas">
+                                <option value="" selected>-- Select --</option>
+                                <option ng-repeat="option in ListOfAuth" value="{{option.Name}}">{{option.Name}}</option>
+
+                            </select>
+                        </div>
+                    </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <input type="submit" value="Add" data-ng-click="add()" data-ng-disabled="!adddepartment.$valid" class="btn btn-primary" />
+                                <input type="button" value="Cancel" data-ng-click="toggleAdd()" class="btn btn-primary" />
+                            </div>
+                        </div>
+                        <br />
+</form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <br />
+                <br />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div  class="table-responsive">
+                    <table class="table table-bordered table-hover" style="width:800px">
+                        <tr class="serif">
+                            <th>Department Id</th>
+                            <th>Department Name</th>
+                            <th>Admin Id</th>
+                            <th>Parent Id</th>
+
+                            <th>Action</th>
+
+
+
+                        </tr>
+                        <tr dir-paginate="department in ListOfDepartment |itemsPerPage:3" >
+                            <td><strong data-ng-hide="department.editMode">{{ department.Id }}</strong></td>
+                            <td>
+                                <p data-ng-hide="department.editMode">{{ department.Name }}</p>
+                                <input data-ng-show="department.editMode" type="text" data-ng-model="department.Name" />
+                            </td>
+                            <td>
+                                <p data-ng-hide="department.editMode">{{ department.AdminId }}</p>
+                                <input data-ng-show="department.editMode" type="text" data-ng-model="department.AdminId" />
+                            </td>
+
+                            <!--<td>
+                                <p data-ng-hide="department.editMode">{{ department.ParentId }}</p>
+                               
+                                <input data-ng-show="department.editMode" type="text" data-ng-model="department.Email" />
+                            </td>-->
+                         
+                            <TD ALIGN="center" >
+                                <select ng-disabled=Check class="form-control"  name="opSelect2" id="opSelect2" data-ng-model="newdepartment.ParentId1">
+                                    <option  value="" selected>{{ department.ParentId }}</option>
+                                    
+                                    <option  ng-repeat="option in ListOfDepartment"  value="{{option.Name}}">{{option.Name}}</option>
+
+                                </select>
+                            </TD>
+
+                      
+
+                            <td>
+                                <p data-ng-hide="department.editMode"><a data-ng-click="toggleEdit(department)" href="javascript:;">Edit</a> | <a data-ng-click="deleteDepartment(department)" href="javascript:;">Delete</a></p>
+                                <p data-ng-show="department.editMode"><a data-ng-click="save(department)" href="javascript:;">Save</a> | <a data-ng-click="toggleEdit(department)" href="javascript:;">Cancel</a></p>
+                            </td>
+                        </tr>
+                      
+                    </table>
+                   
+                    <hr />
+                </div>
+          
+            </div>
+          
+
+        </div>
+            </div>
+   
+
+</body>
+</html>
+
+
+
