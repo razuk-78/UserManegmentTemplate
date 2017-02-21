@@ -14,7 +14,9 @@
 
         //get all users information$http
       
-        $http.get('http://localhost:64492/api/UDOGet').then(function (mm) {
+        $http.get('/api/UDOGet').then(function (mm) {
+
+                $scope.ListOfUser = [{}];
                 $scope.ListOfUser = mm.data;
 
                 $scope.loading = false;

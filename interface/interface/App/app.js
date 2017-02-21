@@ -34,6 +34,10 @@ app.config(['$locationProvider', '$routeProvider', function ($locationProvider, 
         templateUrl: '/App/Views/Department/AuthList.html',
         controller: 'AuthController'
     })
+    $routeProvider.when('/Admin', { //Routing for show list of DepartmentList
+        templateUrl: '/App/Views/Mangment/AdminBoard.html',
+       
+    })
 //    $routeProvider
 //       .when('/login', {
 //           controller: 'LoginController',

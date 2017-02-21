@@ -146,6 +146,7 @@
     <Content Include="App\Views\Home\Home.html" />
     <Content Include="App\Views\Home\Login.html" />
     <Content Include="App\Views\Mangment\AddOrganiztion.html" />
+    <Content Include="App\Views\Mangment\AdminBoard.html" />
     <Content Include="App\Views\Mangment\DeleteOrganiztion.html" />
     <Content Include="App\Views\Mangment\EditOrganiztion.html" />
     <Content Include="App\Views\Mangment\OrganiztionList.html" />
@@ -175,6 +176,20 @@
     <Content Include="Content\Vendor\jquery\bootstrap.min.js" />
     <Content Include="Content\Vendor\jquery\jquery.js" />
     <Content Include="Content\Vendor\jquery\jquery.min.js" />
+    <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\B1.png" />
+    <Content Include="Images\B2.png" />
+    <Content Include="Images\B3.png" />
+    <Content Include="Images\B4.png" />
+    <Content Include="Images\blank.gif" />
+    <Content Include="Images\cybercom.jpg" />
+    <Content Include="Images\cybercomLogo1.jpg" />
+    <Content Include="Images\delete.gif" />
+    <Content Include="Images\edit.gif" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\logo15050.jpg" />
+    <Content Include="Images\R1.png" />
+    <Content Include="Images\R2.png" />
     <Content Include="Index.html" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -938,6 +953,7 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <Content Include="Images\Thumbs.db" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
