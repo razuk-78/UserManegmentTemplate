@@ -24,6 +24,14 @@ namespace UserMangementTemplate.Controllers
             CommonFunctions.addUser(user, db);
             return Ok(db.User.ToList());
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
     }
     public class AddOrgController : ApiController
@@ -35,6 +43,14 @@ namespace UserMangementTemplate.Controllers
             CommonFunctions.AddOrg(org, db);
             return Ok();
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
     public class AddDepController : ApiController
     {
@@ -44,6 +60,14 @@ namespace UserMangementTemplate.Controllers
         {
             new DepAddEditeDelete().AddDepartment(Dep, db);
             return Ok();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
     public class AddDepWithoutParentController : ApiController
@@ -55,6 +79,14 @@ namespace UserMangementTemplate.Controllers
             CommonFunctions.AddDep(db, dep);
             return Ok();
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
     public class AddUserInOrgController : ApiController
     {
@@ -65,6 +97,14 @@ namespace UserMangementTemplate.Controllers
             new AddEditDeleteUser().AddUserInOrg(User, db);
             return Ok();
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
     public class AddAuthToDepController : ApiController
     {
@@ -74,6 +114,14 @@ namespace UserMangementTemplate.Controllers
         {
             new DepAddEditeDelete().AddEditAuthToDep(Dep, db);
             return Ok();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 
@@ -87,6 +135,14 @@ namespace UserMangementTemplate.Controllers
             CommonFunctions.EditeUser(user, db);
             return Ok();
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
     }
     public class EditOrgController : ApiController
@@ -97,6 +153,14 @@ namespace UserMangementTemplate.Controllers
             CommonFunctions.EditeOrg(org, db);
             return Ok();
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
     public class EditDepController : ApiController
     {
@@ -105,6 +169,14 @@ namespace UserMangementTemplate.Controllers
         {
             new DepAddEditeDelete().EditDepartment(Dep, db);
             return Ok();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
     public class EditDepParentController : ApiController
@@ -116,6 +188,14 @@ namespace UserMangementTemplate.Controllers
             new DepAddEditeDelete().EditDepartmentParent(Dep, db);
             return Ok();
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
     public class EditAuthToDepController : ApiController
     {
@@ -126,6 +206,14 @@ namespace UserMangementTemplate.Controllers
             new DepAddEditeDelete().AddEditAuthToDep(Dep, db);
             return Ok();
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
     public class EditUserInOrgController : ApiController
     {
@@ -134,6 +222,14 @@ namespace UserMangementTemplate.Controllers
         {
             new AddEditDeleteUser().EditeUserInOrgAuth(User, db);
             return Ok();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 
@@ -146,6 +242,14 @@ namespace UserMangementTemplate.Controllers
             CommonFunctions.DeleteUser(user, db);
             return Ok();
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
     }
     public class DeleteOrgController : ApiController
@@ -155,6 +259,14 @@ namespace UserMangementTemplate.Controllers
         {
             CommonFunctions.DeleteOrg(org, db);
             return Ok();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 
@@ -167,6 +279,14 @@ namespace UserMangementTemplate.Controllers
             new DepAddEditeDelete().DeleteDepartment(Dep, db);
             return Ok();
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
     public class DeleteUserInOrgController : ApiController
     {
@@ -175,6 +295,14 @@ namespace UserMangementTemplate.Controllers
         {
             new AddEditDeleteUser().DeleteUserInOrg(User, db);
             return Ok();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

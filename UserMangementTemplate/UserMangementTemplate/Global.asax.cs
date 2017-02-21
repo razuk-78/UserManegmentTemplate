@@ -12,6 +12,7 @@ namespace UserMangementTemplate
         protected void Application_Start()
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            // Show result Json i Webb 
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings
             .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             GlobalConfiguration.Configuration.Formatters

@@ -18,5 +18,13 @@ namespace UserMangementTemplate.Controllers
         {
             return Ok(new LogIn().GetuserLogInIfo(db, username));
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
 }

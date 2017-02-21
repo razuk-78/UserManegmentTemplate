@@ -22,7 +22,8 @@ namespace UserMangementTemplate.Models
 
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }    
+        public string Name { get; set; }   
+        [JsonIgnore] 
         public virtual ICollection<department> department { get; set; }
       
     }

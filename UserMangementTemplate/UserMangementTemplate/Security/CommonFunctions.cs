@@ -65,6 +65,6 @@ namespace UserMangementTemplate.Security
             db.department.Add(dep);
             db.SaveChanges();
         }
-
+    
     }
 }

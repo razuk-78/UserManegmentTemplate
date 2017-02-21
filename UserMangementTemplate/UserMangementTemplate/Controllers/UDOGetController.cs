@@ -12,15 +12,13 @@ using UserMangementTemplate.Models;
 using UserMangementTemplate.Security;
 namespace UserMangementTemplate.Controllers
 {
-    public class UDOGetController : ApiController
+    public class GetBasedDepController:ApiController
     {
         private UserContext db = new UserContext();
-        #region GetDepartment
-        //public IHttpActionResult GetAllDep()
-        //{
-        //    return Ok(db.department.ToList());
-        //}
-
+        public IHttpActionResult GetAllDep()
+        {
+            return Ok(db.department.ToList());
+        }
         //Get Department Based DepId
         public IHttpActionResult GetDep(int departmentId)
         {
@@ -36,22 +34,48 @@ namespace UserMangementTemplate.Controllers
         {
             return Ok(new SearchDepTree().DepsTree(db, departmentId, orgid));
         }
-        #endregion
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
 
-        #region GetOrg
-        //public IHttpActionResult GetAllOrg()
-        //{
-        //    return Ok(db.Org.ToList());
-        //}
+
+    public class GetBasedOrgController : ApiController
+    {
+        private UserContext db = new UserContext();
+
+    public IHttpActionResult GetAllOrg()
+        {
+            return Ok(db.Org.ToList());
+        }
         //Get Org Based OrgId
         public IHttpActionResult GetOrg(int OrgId)
         {
             return Ok(new SearchBasedUser().searchOrg(db, OrgId));
         }
-        #endregion
 
 
-        #region GetAuth
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+    }
+
+
+    public class GetBasedAuthController : ApiController
+    {
+        private UserContext db = new UserContext();
         //Get Auth Based TypeAuth + OrgId
         public IHttpActionResult GetAuthOrg(string auth, int Orgid)
         {
@@ -67,8 +91,21 @@ namespace UserMangementTemplate.Controllers
         {
             return Ok(new SearchBasedUser().searchAuthBasedDep(db, auth, Orgid, Dep));
         }
-        #endregion
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
+    }
+
+
+    public class GetBaesdUsersController : ApiController
+    {
+        private UserContext db = new UserContext();
 
         //[UserAuthCheck("read")]
         public IHttpActionResult GetAllUser()
