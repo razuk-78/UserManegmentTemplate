@@ -18,14 +18,15 @@
                 $scope.ListOfUser = mm.data;
 
                 $scope.loading = false;
-            });
-                //.error(function () {
+            },
+            function () {
                    
-                //$scope.error = "An Error has occured while loading posts!";
-                //              $scope.loading = false;
+                $scope.error = "An Error has occured while loading posts!";
+               $scope.loading = false;
 
 
-                //          });
+                });
+          
 
      
     
@@ -33,16 +34,16 @@
 
     
 
-      //  $scope.search = function (m) {
-      //      $http.get('/api/user/GetSearchUsers?searchtext=' + m).success(function (data) {
-      //          $scope.ListOfUser = data;
-      //          $scope.loading = false;
-      //      })
-      //.error(function () {
-      //    $scope.error = "An Error has occured while loading !";
-      //    $scope.loading = false;
-      //});
-      //  }
+        $scope.search = function (m) {
+            $http.get('/api/user/GetSearchUsers?searchtext=' + m).then(function (data) {
+                $scope.ListOfUser = data;
+                $scope.loading = false;
+            }, function () {
+                $scope.error = "An Error has occured while loading !";
+                $scope.loading = false;
+            })
+      
+        }
 
      
         
