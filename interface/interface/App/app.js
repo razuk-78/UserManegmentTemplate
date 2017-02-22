@@ -38,6 +38,20 @@ app.config(['$locationProvider', '$routeProvider', function ($locationProvider, 
         templateUrl: '/App/Views/Mangment/AdminBoard.html',
        
     })
+    $routeProvider.when('/AddUserToDepartment', { //Routing for show list of DepartmentList
+        templateUrl: '/App/Views/Department/AddUserToDepartment.html',
+
+    })
+  
+    $routeProvider.when('/OrganiztionList', { //Routing for show list of DepartmentList
+        templateUrl: '/App/Views/Mangment/OrganiztionList.html',
+        controller: 'OrganiztionController'
+
+    })
+    .when('/AddOrganiztion', { //Routing for add Organiztion
+        templateUrl: '/App/Views/Mangment/AddOrganiztion.html',
+        controller: 'OrganiztionController'
+    })
 //    $routeProvider
 //       .when('/login', {
 //           controller: 'LoginController',

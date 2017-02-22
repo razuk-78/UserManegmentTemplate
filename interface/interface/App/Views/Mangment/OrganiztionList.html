@@ -8,8 +8,7 @@
         <thead>
         <th>Organztion ID</th>
         <th>Registertion No</th>
-        <th>Descrption</th>
-        <th>Address</th>
+       
         <th>Edit</th>
         <th>Delete</th>
 
@@ -20,14 +19,13 @@
         <tbody>
             <tr ng-repeat="item in ListOfOrganiztion">
                 
-                <td>{{item.OrganiztionID}}</td>
-                <td>{{item.RegisterionNo}}</td>
-                <td>{{item.Description}}</td>
-                <td>{{item.Address}}</td>
+                <td>{{item.Id}}</td>
+                <td>{{item.Name}}</td>
+              
               
                 <!--<td>{{item.DepartmentName}}</td>-->
-                <td><a class="btn btn-primary btn-xs" href="#/EditOrganiztion/{{item.OrganiztionID}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                <td><a class="btn btn-danger btn-xs" href="#/DeleteOrganiztion/{{item.OrganiztionID}}"><span class="glyphicon glyphicon-trash"></span></a></td>
+                <td><a class="btn btn-primary btn-xs" href="#/EditOrganiztion/{{item.Id}}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                <td><a class="btn btn-danger btn-xs" href="#/DeleteOrganiztion/{{item.Id}}"><span class="glyphicon glyphicon-trash"></span></a></td>
             </tr>
         </tbody>
     </table>

@@ -1,23 +1,21 @@
-﻿app.controller("DepartmentController", ['$scope', '$http', '$location', '$routeParams', function ($scope, $http, $location, $routeParams) {
+﻿app.controller("DepartmentController",  function ($scope, $http, $location, $routeParams) {
     $scope.ListOfDepartment;
    
     $scope.Status;
     $scope.Check=true;
     $scope.Close = function () {
-        $location.path('/Department/DepartmentList');
+        $location.path('/DepartmentList');
          $scope.Check=true;
     }
 
    
     //angularjs controller method
-    $http.get('/api/Auth/GetAllAuth').success(function (data) {
+    $http.get('/api/Auth/GetAllAuth').then(function (data) {
 
-        $scope.ListOfAuth = data;
+        $scope.ListOfAuth = data.data;
         $scope.loading = false;
     })
-.error(function () {
-    $scope.error = "An Error has occured while loading posts!";
-});
+
 
 
     //declare variable for mainain ajax load and entry or edit mode

@@ -14,9 +14,9 @@
 
         //get all users information$http
       
-        $http.get('/api/UDOGet').then(function (mm) {
+        $http.get('http://localhost:64492/api/GetBaesdUsers').then(function (mm) {
 
-                $scope.ListOfUser = [{}];
+               
                 $scope.ListOfUser = mm.data;
 
                 $scope.loading = false;
@@ -132,33 +132,30 @@
             $scope.loading = true;
             var frien = this.user;
             alert(frien);
-            $http.put('http://localhost:64492/api/EditUser' + frien).then(function (data) {
+            $http.put('http://localhost:64492/api/EditUser', this.user).then(function (data) {
                 alert("Saved Successfully!!");
                 frien.editMode = false;
                 $scope.loading = false;
+            })
+        };
+
+        //////Delete Organization
+        $scope.deleteUser = function () {
+            $scope.loading = true;
+            var Id = this.user.Id;
+            $http.put('http://localhost:64492/api/DeleteUser', this.user).then(function (data) {
+                alert("Deleted Successfully!!");
+                //$.each($scope.ListOfUser, function (i) {
+                //    if ($scope.ListOfUser[i].Id === Id) {
+                //        $scope.ListOfUser.splice(i, 1);
+                //        return false;
+                //    }
+                });
+                $scope.loading = false;
             }).error(function (data) {
-                $scope.error = "An Error has occured while Saving customer! " + data;
+                $scope.error = "An Error has occured while Saving Organization! " + data;
                 $scope.loading = false;
             });
         };
-
-        ////////Delete Organization
-        //$scope.deleteUser = function () {
-        //    $scope.loading = true;
-        //    var Id = this.user.Id;
-        //    $http.delete('/api/User/Delete/' + Id).success(function (data) {
-        //        alert("Deleted Successfully!!");
-        //        $.each($scope.ListOfUser, function (i) {
-        //            if ($scope.ListOfUser[i].Id === Id) {
-        //                $scope.ListOfUser.splice(i, 1);
-        //                return false;
-        //            }
-        //        });
-        //        $scope.loading = false;
-        //    }).error(function (data) {
-        //        $scope.error = "An Error has occured while Saving Organization! " + data;
-        //        $scope.loading = false;
-        //    });
-        //};
    
 });
