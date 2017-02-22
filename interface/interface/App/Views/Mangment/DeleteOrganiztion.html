@@ -7,11 +7,11 @@
             </div>
             <div class="modal-body">
 
-                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete Record for <b>{{RegisterionNo + " "+Description}}</b>?</div>
+                <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete Record for <b>{{Name}}</b>?</div>
 
             </div>
             <div class="modal-footer ">
-                <button type="submit" class="btn btn-success" ng-click="Delete()"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                <button type="submit" class="btn btn-success" ng-model="msn" ng-click="Delete(msn)"><span class="glyphicon glyphicon-ok-sign"></span> Yes + msn.Id</button>
                 <button type="button" class="btn btn-default" ng-click="Close()"><span class="glyphicon glyphicon-remove"></span> No</button>
             </div>
         </div>

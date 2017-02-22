@@ -41,7 +41,7 @@ namespace UserMangementTemplate.Controllers
         public IHttpActionResult PostAddorg(Org org)
         {
             CommonFunctions.AddOrg(org, db);
-            return Ok();
+            return Ok(db.Org.ToList());
         }
         protected override void Dispose(bool disposing)
         {
@@ -59,7 +59,7 @@ namespace UserMangementTemplate.Controllers
         public IHttpActionResult PostAddDep(DepAddEditeDelete.DepDetailes Dep)
         {
             new DepAddEditeDelete().AddDepartment(Dep, db);
-            return Ok();
+            return Ok(db.department.ToList());
         }
         protected override void Dispose(bool disposing)
         {
@@ -77,7 +77,7 @@ namespace UserMangementTemplate.Controllers
         public IHttpActionResult PostAddDepWithoutParent(department dep)
         {
             CommonFunctions.AddDep(db, dep);
-            return Ok();
+            return Ok(db.department.ToList());
         }
         protected override void Dispose(bool disposing)
         {
@@ -95,7 +95,7 @@ namespace UserMangementTemplate.Controllers
         public IHttpActionResult PostAddUserInOrg(AddEditDeleteUser.UserDetailes User)
         {
             new AddEditDeleteUser().AddUserInOrg(User, db);
-            return Ok();
+            return Ok(db.UserInOrg.ToList());
         }
         protected override void Dispose(bool disposing)
         {
@@ -113,7 +113,7 @@ namespace UserMangementTemplate.Controllers
         public IHttpActionResult PostAddAuthToDep(DepAddEditeDelete.DepDetailes Dep)
         {
             new DepAddEditeDelete().AddEditAuthToDep(Dep, db);
-            return Ok();
+            return Ok(db.Auth.ToList());
         }
         protected override void Dispose(bool disposing)
         {
@@ -240,7 +240,7 @@ namespace UserMangementTemplate.Controllers
         public IHttpActionResult PutUserDelete(User user)
         {
             CommonFunctions.DeleteUser(user, db);
-            return Ok();
+            return Ok(db.User.ToList());
         }
         protected override void Dispose(bool disposing)
         {
@@ -258,7 +258,7 @@ namespace UserMangementTemplate.Controllers
         public IHttpActionResult PutorgDelete(Org org)
         {
             CommonFunctions.DeleteOrg(org, db);
-            return Ok();
+            return Ok(db.Org.ToList());
         }
         protected override void Dispose(bool disposing)
         {
@@ -277,7 +277,7 @@ namespace UserMangementTemplate.Controllers
         public IHttpActionResult PutDepDelete(DepAddEditeDelete.DepDetailes Dep)
         {
             new DepAddEditeDelete().DeleteDepartment(Dep, db);
-            return Ok();
+            return Ok(db.department.ToList());
         }
         protected override void Dispose(bool disposing)
         {
@@ -294,7 +294,7 @@ namespace UserMangementTemplate.Controllers
         public IHttpActionResult PutUserInOrgDelete(AddEditDeleteUser.UserDetailes User)
         {
             new AddEditDeleteUser().DeleteUserInOrg(User, db);
-            return Ok();
+            return Ok(db.UserInOrg.ToList());
         }
         protected override void Dispose(bool disposing)
         {

@@ -4,6 +4,20 @@ var app = angular.module('myApp', ['ngRoute']);
 //angular.module('Authentication', []);
 //angular.module('Home', []);
 
+app.factory('msng', function () {
+    var m ={};
+    return {
+        setv: function (mm) {
+            m = mm;
+        }, getv: function () {
+            return m;
+        }
+
+
+    }
+
+});
+
 app.config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
 
     
@@ -52,6 +66,10 @@ app.config(['$locationProvider', '$routeProvider', function ($locationProvider, 
         templateUrl: '/App/Views/Mangment/AddOrganiztion.html',
         controller: 'OrganiztionController'
     })
+     .when('/DeleteOrganiztion/', { //Routing for add Organiztion
+         templateUrl: '/App/Views/Mangment/DeleteOrganiztion.html',
+         controller: 'OrganiztionController'
+     })
 //    $routeProvider
 //       .when('/login', {
 //           controller: 'LoginController',

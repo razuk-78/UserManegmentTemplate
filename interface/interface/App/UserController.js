@@ -145,6 +145,7 @@
             var Id = this.user.Id;
             $http.put('http://localhost:64492/api/DeleteUser', this.user).then(function (data) {
                 alert("Deleted Successfully!!");
+                $scope.ListOfUser = data.data;
                 //$.each($scope.ListOfUser, function (i) {
                 //    if ($scope.ListOfUser[i].Id === Id) {
                 //        $scope.ListOfUser.splice(i, 1);
@@ -152,10 +153,10 @@
                 //    }
                 });
                 $scope.loading = false;
-            }).error(function (data) {
-                $scope.error = "An Error has occured while Saving Organization! " + data;
-                $scope.loading = false;
-            });
-        };
+        },function (data) {
+            $scope.error = "An Error has occured while Saving Organization! " + data;
+            $scope.loading = false;
+        }
+   
    
 });

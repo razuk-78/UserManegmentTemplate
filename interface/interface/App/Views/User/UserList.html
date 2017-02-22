@@ -193,21 +193,36 @@
             </div>
         </div>
 
-        <div class="input-group row">
-            <input ng-keyup="search(searchText)"  type="text"
-                   ng-model="searchText"
-                   class="form-control"
-                   placeholder="Enter search text">
-            <span class="input-group-addon" id="basic-addon1">
-                <i class="glyphicon glyphicon-search"></i>
-            </span>
-        </div>
-
+      
 
 
        
             <div class="row">
-               
+                <div class="form-group">
+                    <!--<input ng-keyup="search(searchText)"  type="text"
+               ng-model="searchText"
+               class="form-control"
+               placeholder="Enter search text">
+        <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+        </span>-->
+
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" id="Search" placeholder="Typing " data-ng-model="searchText" required />
+                    </div>
+                    <label for="Search" class="col-xs-1 control-label">Search By:</label>
+                    <div class="col-lg-3">
+                        <select class="form-control" name="opSelect1" id="opSelect1" ng-model="SearchSlected">
+                            <option value="" selected>-- Select --</option>
+                            <option value="">Name</option>
+                            <option value="">Email</option>
+                            <option value="">City</option>
+
+
+                        </select>
+                    </div>
+                </div>
+
 
                     <table class="table table-hover">
                         <tr class="alert-success">
