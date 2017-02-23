@@ -38,8 +38,16 @@ namespace UserMangementTemplate.Security
         }
         public static void DeleteUser(User user, UserContext db)
         {
-            db.UserInOrg.Remove(db.UserInOrg.FirstOrDefault(x => x.UserId == user.Id)); db.SaveChanges();
-            db.User.Remove(db.User.Find(user.Id));db.SaveChanges();            
+            UserInOrg u;
+            if ((u = db.UserInOrg.FirstOrDefault(x => x.UserId == user.Id)) != null)
+            {
+                db.UserInOrg.Remove(u);
+                db.SaveChanges();
+            }
+
+            db.User.Remove(db.User.Find(user.Id)); db.SaveChanges();
+
+                  
         }
         public static void AddOrg(Org org, UserContext db)
         {

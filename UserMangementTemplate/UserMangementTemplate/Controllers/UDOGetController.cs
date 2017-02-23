@@ -49,7 +49,7 @@ namespace UserMangementTemplate.Controllers
     {
         private UserContext db = new UserContext();
 
-    public IHttpActionResult GetAllOrg()
+        public IHttpActionResult GetAllOrg()
         {
             return Ok(db.Org.ToList());
         }

@@ -4,6 +4,20 @@ var app = angular.module('myApp', ['ngRoute']);
 //angular.module('Authentication', []);
 //angular.module('Home', []);
 
+app.factory('msng', function () {
+    var m ={};
+    return {
+        setv: function (mm) {
+            m = mm;
+        }, getv: function () {
+            return m;
+        }
+
+
+    }
+
+});
+
 app.config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
 
     
@@ -34,6 +48,28 @@ app.config(['$locationProvider', '$routeProvider', function ($locationProvider, 
         templateUrl: '/App/Views/Department/AuthList.html',
         controller: 'AuthController'
     })
+    $routeProvider.when('/Admin', { //Routing for show list of DepartmentList
+        templateUrl: '/App/Views/Mangment/AdminBoard.html',
+       
+    })
+    $routeProvider.when('/AddUserToDepartment', { //Routing for show list of DepartmentList
+        templateUrl: '/App/Views/Department/AddUserToDepartment.html',
+
+    })
+  
+    $routeProvider.when('/OrganiztionList', { //Routing for show list of DepartmentList
+        templateUrl: '/App/Views/Mangment/OrganiztionList.html',
+        controller: 'OrganiztionController'
+
+    })
+    .when('/AddOrganiztion', { //Routing for add Organiztion
+        templateUrl: '/App/Views/Mangment/AddOrganiztion.html',
+        controller: 'OrganiztionController'
+    })
+     .when('/DeleteOrganiztion/', { //Routing for add Organiztion
+         templateUrl: '/App/Views/Mangment/DeleteOrganiztion.html',
+         controller: 'OrganiztionController'
+     })
 //    $routeProvider
 //       .when('/login', {
 //           controller: 'LoginController',

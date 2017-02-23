@@ -1,8 +1,22 @@
-﻿
+﻿<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="../../Content/Admin/NewFolder1/sb-admin.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
 
+    <link href="../../Content/Admin/NewFolder1/morris.css" rel="stylesheet" />
+    <link href="../../Content/Vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+</head>
 
 
     <style type="text/css">
+
         .input-xs {
             height: 22px;
             padding: 5px 5px;
@@ -40,7 +54,45 @@
 
   
     <div class="container">
-   
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav side-nav">
+                <li class="active">
+                    <a href="#/OrganiztionList"><i class="fa fa-fw fa-dashboard"></i> Orgazization Profile</a>
+                </li>
+                <li>
+                    <a href="#/AuthList"><i class="fa fa-fw fa-bar-chart-o"></i> authorization management</a>
+                </li>
+                <li>
+                    <a href="#/UserList"><i class="fa fa-fw fa-table"></i> Manage Users</a>
+                </li>
+                <li>
+                    <a href="#/DepartmentList"><i class="fa fa-fw fa-edit"></i> Department Mangment</a>
+                </li>
+                <li>
+                    <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                </li>
+                <li>
+                    <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                </li>
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="demo" class="collapse">
+                        <li>
+                            <a href="#">Dropdown Item</a>
+                        </li>
+                        <li>
+                            <a href="#">Dropdown Item</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+                </li>
+                <li>
+                    <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                </li>
+            </ul>
+        </div>
    
             <div class="row" >
                 <!--<strong class="error">{{ error }}</strong>-->
@@ -141,21 +193,36 @@
             </div>
         </div>
 
-        <div class="input-group row">
-            <input ng-keyup="search(searchText)"  type="text"
-                   ng-model="searchText"
-                   class="form-control"
-                   placeholder="Enter search text">
-            <span class="input-group-addon" id="basic-addon1">
-                <i class="glyphicon glyphicon-search"></i>
-            </span>
-        </div>
-
+      
 
 
        
             <div class="row">
-               
+                <div class="form-group">
+                    <!--<input ng-keyup="search(searchText)"  type="text"
+               ng-model="searchText"
+               class="form-control"
+               placeholder="Enter search text">
+        <span class="input-group-addon" id="basic-addon1">
+            <i class="glyphicon glyphicon-search"></i>
+        </span>-->
+
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" id="Search" placeholder="Typing " data-ng-model="searchText" required />
+                    </div>
+                    <label for="Search" class="col-xs-1 control-label">Search By:</label>
+                    <div class="col-lg-3">
+                        <select class="form-control" name="opSelect1" id="opSelect1" ng-model="SearchSlected">
+                            <option value="" selected>-- Select --</option>
+                            <option value="">Name</option>
+                            <option value="">Email</option>
+                            <option value="">City</option>
+
+
+                        </select>
+                    </div>
+                </div>
+
 
                     <table class="table table-hover">
                         <tr class="alert-success">
@@ -248,4 +315,12 @@
 
 
 
+<script src="../../Content/Vendor/jquery/jquery.js"></script>
+<script src="../../Content/Vendor/jquery/jquery.min.js"></script>
+<!-- Morris Charts JavaScript -->
+<script src="../../Scripts/angularUtils-pagination-master/dirPagination.js"></script>
 
+<script src="../../Content/Admin/morris-data.js"></script>
+<script src="../../Content/Admin/flot-data.js"></script>
+<script src="../../Content/Admin/morris.min.js"></script>
+<script src="../../Content/Admin/raphael.min.js"></script>

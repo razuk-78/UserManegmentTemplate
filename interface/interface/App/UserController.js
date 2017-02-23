@@ -13,7 +13,9 @@
 
         //get all users information$http
       
-            $http.get('/api/UDOGet').then(function (mm) {
+        $http.get('http://localhost:64492/api/GetBaesdUsers').then(function (mm) {
+
+               
                 $scope.ListOfUser = mm.data;
 
                 $scope.loading = false;
@@ -34,7 +36,7 @@
     
 
         $scope.search = function (m) {
-            $http.get('/api/user/GetSearchUsers?searchtext=' + m).then(function (data) {
+            $http.get('http://localhost:64492/api/user/GetSearchUsers?searchtext=' + m).then(function (data) {
                 $scope.ListOfUser = data;
                 $scope.loading = false;
               
@@ -113,7 +115,7 @@
         ////Inser user
         $scope.add = function () {
             $scope.loading = true;
-            $http.post('/api/AddUser', this.newuser).then(function (nn) {
+            $http.post('http://localhost:64492/api/AddUser', this.newuser).then(function (nn) {
                 alert("Added Successfully!!");
                 $scope.addMode = false;
                $scope.ListOfUser = [{}];
@@ -125,38 +127,36 @@
         
 
    
-        //$scope.save = function () {
-        //    alert("Edit");
-        //    $scope.loading = true;
-        //    var frien = this.user;
-        //    alert(frien);
-        //    $http.put('/api/User/Put/'+ frien.Id, frien).success(function (data) {
-        //        alert("Saved Successfully!!");
-        //        frien.editMode = false;
-        //        $scope.loading = false;
-        //    }).error(function (data) {
-        //        $scope.error = "An Error has occured while Saving customer! " + data;
-        //        $scope.loading = false;
-        //    });
-        //};
+        $scope.save = function () {
+            alert("Edit");
+            $scope.loading = true;
+            var frien = this.user;
+            alert(frien);
+            $http.put('http://localhost:64492/api/EditUser', this.user).then(function (data) {
+                alert("Saved Successfully!!");
+                frien.editMode = false;
+                $scope.loading = false;
+            })
+        };
 
-        ////////Delete Organization
-        //$scope.deleteUser = function () {
-        //    $scope.loading = true;
-        //    var Id = this.user.Id;
-        //    $http.delete('/api/User/Delete/' + Id).success(function (data) {
-        //        alert("Deleted Successfully!!");
-        //        $.each($scope.ListOfUser, function (i) {
-        //            if ($scope.ListOfUser[i].Id === Id) {
-        //                $scope.ListOfUser.splice(i, 1);
-        //                return false;
-        //            }
-        //        });
-        //        $scope.loading = false;
-        //    }).error(function (data) {
-        //        $scope.error = "An Error has occured while Saving Organization! " + data;
-        //        $scope.loading = false;
-        //    });
-        //};
+        //////Delete Organization
+        $scope.deleteUser = function () {
+            $scope.loading = true;
+            var Id = this.user.Id;
+            $http.put('http://localhost:64492/api/DeleteUser', this.user).then(function (data) {
+                alert("Deleted Successfully!!");
+                $scope.ListOfUser = data.data;
+                //$.each($scope.ListOfUser, function (i) {
+                //    if ($scope.ListOfUser[i].Id === Id) {
+                //        $scope.ListOfUser.splice(i, 1);
+                //        return false;
+                //    }
+                });
+                $scope.loading = false;
+        },function (data) {
+            $scope.error = "An Error has occured while Saving Organization! " + data;
+            $scope.loading = false;
+        }
+   
    
 });
