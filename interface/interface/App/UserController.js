@@ -1,10 +1,9 @@
 ﻿    app.controller("UserController",  function ($scope, $http, $location, $routeParams) {
         $scope.ListOfUser;
-   
+ 
         $scope.Status;
-      
         $scope.Close = function () {
-            $location.path('/UsersList');
+        $location.path('/UsersList');
         }
 
 
@@ -38,6 +37,7 @@
             $http.get('/api/user/GetSearchUsers?searchtext=' + m).then(function (data) {
                 $scope.ListOfUser = data;
                 $scope.loading = false;
+              
             }, function () {
                 $scope.error = "An Error has occured while loading !";
                 $scope.loading = false;
