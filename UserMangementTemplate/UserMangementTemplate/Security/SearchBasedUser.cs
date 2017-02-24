@@ -24,6 +24,16 @@ namespace UserMangementTemplate.Security
             public List<Auth> Auth { get; set; }
             public List<LogInRegistry> LogInRegistry { get; set; }
         }
+        public List<UserDetails> SearchBasedFirstName(UserContext db, string firstName)
+        {
+            List<UserDetails> u = new List<UserDetails>();
+            var users = db.User.Where(x => x.FirstName.Contains(firstName)).ToList();
+            foreach(User user in users)
+            {
+
+            }
+            return u;
+        }
         public UserDetails searchUser(UserContext db, int userid)
         {
          
@@ -37,8 +47,8 @@ namespace UserMangementTemplate.Security
         public List<UserDetails> searchOrg(UserContext db, int OrgId)
         {
             List<UserDetails> lu = new List<UserDetails>();
-        
-          db.UserInOrg.Where(x => x.OrgId == OrgId).ToList().ForEach(x => lu.Add(new UserDetails { Auth = x.Auth.ToList(), Department =db.department.Find(x.departmentId), LogInRegistry = x.LogInRegistry.ToList(), User = db.User.Find(x.UserId), UserInOrgId = x.Id }));
+
+            db.UserInOrg.Where(x => x.OrgId == OrgId).ToList().ForEach(x => lu.Add(new UserDetails { Auth = x.Auth.ToList(), Department = db.department.Find(x.departmentId), LogInRegistry = x.LogInRegistry.ToList(), User = db.User.Find(x.UserId), UserInOrgId = x.Id }));
             return lu;
         }
 

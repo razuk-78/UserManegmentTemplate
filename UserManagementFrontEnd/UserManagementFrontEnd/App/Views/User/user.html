@@ -1,7 +1,73 @@
 ﻿<div ng-controller="userCtrl">
     <h1>{{1+2}}user</h1>
-    <button ng-click="searchAllUsers()" >search</button>
-    <ul>
-        <li ng-repeat="user in userList">{{user.FirstName}}</li>
-    </ul>
+    <input ng-model="name" ng-keyup="search(name)" />
+
+    <div style="position:relative; height:400px;width:400px;">
+        <table>
+            <tr>
+                <td><button ng-click="add()"> add new user</button></td>
+            </tr>
+            <tr>
+
+
+                <td><label>FirstName</label><input ng-model="user.FirstName" /></td>
+                <td><label>LastName</label><input ng-model="user.LastName" /></td>
+            </tr>
+            <tr>
+                <td><label>Email</label><input ng-model="user.Email" /></td>
+                <td><label>PassWord</label><input ng-model="user.PassWord" /></td>
+            </tr>
+
+            <tr>
+                <td><label>PersonalNumber</label><input ng-model="user.PersonalNumber" /></td>
+                <td><label>Adderss</label><input ng-model="user.Address" /></td>
+            </tr>
+            <tr>
+                <td><label>CityCode</label><input ng-model="user.CityCode" /></td>
+                <td><label>City</label><input ng-model="user.City" /></td>
+            </tr>
+
+            <tr>
+                <td><label>Phone</label><input ng-model="user.Phone" /></td>
+                <td><label>Category</label><input ng-model="user.Category" /></td>
+            </tr>
+
+
+
+        </table>
+    </div>
+    
+    <br />
+    <br /><br />
+    <div style="position:relative; height:500px;width:500px;overflow:scroll">
+        <ul>
+            <li ng-repeat="user in userList">
+                <label>Id</label> <input type="text" ng-model="user.Id" value="{{user.Id}}" />
+                <br />
+                <label>firstName</label> <input type="text" ng-model="user.FirstName" value="{{user.FirstName}}" />
+                <br />
+                <label>Lastname</label> <input type="text" ng-model="user.LastName" value="{{user.LastName}}" />
+                <br />
+                <label>Email</label> <input type="text" ng-model="user.Email" value="{{user.Email}}" />
+                <br />
+                <label>PassWord</label> <input type="text" ng-model="user.PassWord" value="{{user.PassWord}}" />
+                <br />
+                <label>PN</label> <input type="text" ng-model="user.PersonalNumber" value="{{user.PersonalNumber}}" />
+                <br />
+                <label>Adderss</label> <input type="text" ng-model="user.Address" value="{{user.Adderss}}" />
+                <br />
+                <label>City</label> <input type="text" ng-model="user.City" value="{{user.City}}" />
+                <br />
+                <label>CityCode</label> <input type="text" ng-model="user.CityCode" value="{{user.CityCode}}" />
+                <br />
+                <label>Phone</label> <input type="text" ng-model="user.Phone" value="{{user.Phone}}" />
+                <br />
+                <label>Category</label> <input type="text" ng-model="user.Category" value="{{user.Category}}" />
+                <br />
+                <button ng-click="edite(user)">Edit</button> <button ng-click="delete(user)">Delete</button>
+            </li>
+
+        </ul>
+    </div>
+    
 </div>

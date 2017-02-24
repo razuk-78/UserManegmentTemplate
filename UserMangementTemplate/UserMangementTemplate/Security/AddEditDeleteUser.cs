@@ -50,8 +50,14 @@ namespace UserMangementTemplate.Security
             {
                 if (!AuthTypes.checkTypeExistence(user.Auth))
                     throw new Exception("");
-                uio.Auth.ToList().ForEach(x => uio.Auth.Remove(x));
-                db.SaveChanges();
+                //uio.Auth.ToList().ForEach(x => uio.Auth.Remove(x));
+                //db.SaveChanges();
+                foreach(Auth auth in uio.Auth.ToList())
+                {
+
+                    db.Auth.Remove(auth);
+                    db.SaveChanges();
+                }
                 user.Auth.ForEach(x => uio.Auth.Add(new Auth { Type = x }));
                 db.SaveChanges();
             }

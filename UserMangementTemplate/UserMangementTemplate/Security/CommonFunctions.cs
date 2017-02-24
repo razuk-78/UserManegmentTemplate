@@ -65,6 +65,14 @@ namespace UserMangementTemplate.Security
         public static void DeleteOrg(Org org, UserContext db)
         {
             db.UserInOrg.Where(x => x.OrgId == org.Id).ToList().ForEach(x => db.UserInOrg.Remove(x)); db.SaveChanges();
+        foreach(department d in db.Org.Find(org.Id).department.ToList())
+            {
+                DepPointer dd=null;
+               if((dd=db.DepPointer.FirstOrDefault(x => x.ChildId == d.Id)) != null)
+                {
+                    db.DepPointer.Remove(dd);
+                }
+            }
             db.Org.Remove(db.Org.Find(org.Id)); db.SaveChanges();
         }
         //Add Dep Without Parent
@@ -73,6 +81,16 @@ namespace UserMangementTemplate.Security
             db.department.Add(dep);
             db.SaveChanges();
         }
-    
+
+        //Search user by FirstName
+        public List<User> SearchBasedFirstName(UserContext db, string firstName)
+        {
+            List<User> u = new List<User>();
+
+            u = db.User.Where(x => x.FirstName.Contains(firstName)).ToList();
+
+            return u;
+        }
+
     }
 }

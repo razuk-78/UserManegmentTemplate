@@ -3,25 +3,35 @@
 /// <reference path="../mainApp/App.js" />
 
 // get all users in one org
-app.factory('userLogIn', function () {
-    var orgId;
-    var userl = [{username:0,passWord:0}];
-    return {
-        
-        set: function (user,pass) {
-            userl.username = user;
-            userl.passWord = pass;
-        },
-    get:function () {
-        return  userl;
-    }
-}
 
-});
-app.factory('org', function () {
-    var orgid;
+app.factory('getAllUsers', function ($http,webAddress,header) {
     return {
-        set: function (id) {orgid=id},
-        get:function(){return orgid}
+        get: function () { return $http.get(webAddress.get() + 'GetBaesdUsers', { headers: header.get() }).then(function (users) { return users.data }) }
+           }
+});
+
+app.factory('editUser', function ($http, webAddress, header) {
+    return {
+        get: function (user) { return $http.put(webAddress.get() + 'EditUser', user, { headers: header.get() }).then(function (users) { return users.data }) }
     }
 });
+app.factory('deleteUser', function ($http, webAddress, header) {
+    return {
+        get: function (user) { return $http.put(webAddress.get() + 'DeleteUser', user, { headers: header.get() }).then(function (users) { return users.data }) }
+    }
+});
+app.factory('addUser', function ($http, webAddress, header) {
+    return {
+        get: function (user) { return $http.post(webAddress.get() + 'AddUser', user, { headers: header.get() }).then(function (users) { return users.data }) }
+    }
+});
+
+app.factory('searchUser', function ($http, webAddress, header) {
+    return {
+        get: function (name) { return $http.get(webAddress.get() + 'GetBaesdUsers?name='+name , { headers: header.get() }).then(function (users) { return users.data }) }
+    }
+});
+
+
+
+

@@ -108,13 +108,16 @@
   <ItemGroup>
     <Content Include="App\Controller\authenticationCtrl.js" />
     <Content Include="App\Controller\department.js" />
+    <Content Include="App\Controller\logInCtrl.js" />
     <Content Include="App\Controller\Orgctrl.js" />
     <Content Include="App\Controller\userCtrl.js" />
     <Content Include="App\mainApp\App.js" />
     <Content Include="App\Router\Router.js" />
     <Content Include="App\Services\ConnectionServices.js" />
+    <Content Include="App\Services\ConstantServices.js" />
     <Content Include="App\Views\Auth\Authentication.html" />
     <Content Include="App\Views\Department\Department.html" />
+    <Content Include="App\Views\LogIn\LogIn.html" />
     <Content Include="App\Views\Org\Org.html" />
     <Content Include="App\Views\User\user.html" />
     <Content Include="BootStrap\bootstrap.css" />

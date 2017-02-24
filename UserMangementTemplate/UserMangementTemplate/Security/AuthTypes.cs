@@ -15,7 +15,7 @@ namespace UserMangementTemplate.Security
         //public static const  string Admin = "admin";
         public static bool checkTypeExistence(List<string> RecievedTypes)
         {
-            if (RecievedTypes.Count < 1)
+            if (RecievedTypes.Count < 1|| RecievedTypes==null)
                 return true;
             foreach(string s in RecievedTypes)
             {

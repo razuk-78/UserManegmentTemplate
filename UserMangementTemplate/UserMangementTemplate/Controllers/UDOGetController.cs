@@ -117,6 +117,11 @@ namespace UserMangementTemplate.Controllers
         {
             return Ok(new SearchBasedUser().searchUser(db, userid));
         }
+        //Get user Based FirstName
+        public IHttpActionResult GetUsersByFirstName(string name)
+        {
+            return Ok(new CommonFunctions().SearchBasedFirstName(db, name));
+        }
         //Get AllUser Based Oneday
         public IHttpActionResult GetUserBasedDate(DateTime date)
         {

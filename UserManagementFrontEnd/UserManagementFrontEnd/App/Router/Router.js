@@ -17,6 +17,9 @@ app.config(function ($routeProvider, $locationProvider) {
     }).when('/authentication', {
         templateUrl: "/app/Views/auth/authentication.html",
         controller: "authCtrl"
+    }).when('/logIn', {
+        templateUrl: "/app/Views/LogIn/LogIn.html",
+        controller: "logInCtrl"
     })
 
 
