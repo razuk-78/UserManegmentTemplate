@@ -20,13 +20,13 @@ namespace UserMangementTemplate.Security
            public  List<string> Auth { get; set; }
 
         }
-        public void AddUserInOrg(UserDetailes user,UserContext db) 
+        public void AddUserInOrg(UserDetailes user, UserContext db)
         {
             UserInOrg uio = db.UserInOrg.FirstOrDefault(x => x.UserId == user.UserId && x.OrgId == user.OrgId && x.departmentId == user.departmentId);
 
             if (uio == null && db.Org.FirstOrDefault(x => x.Id == user.OrgId) != null && db.User.FirstOrDefault(x => x.Id == user.UserId) != null)
             {
-                db.UserInOrg.Add(uio=new UserInOrg { departmentId = user.departmentId, OrgId = user.OrgId, UserId = user.UserId });
+                db.UserInOrg.Add(uio = new UserInOrg { departmentId = user.departmentId, OrgId = user.OrgId, UserId = user.UserId });
 
                 db.SaveChanges();
                 user.Auth.ForEach(x => uio.Auth.Add(new Auth { Type = x }));
@@ -37,6 +37,9 @@ namespace UserMangementTemplate.Security
                 throw new Exception("");
             }
         }
+
+
+
         public void EditeUserInOrgAuth(UserDetailes user,UserContext db)
         {
             UserInOrg uio=null;
@@ -62,7 +65,7 @@ namespace UserMangementTemplate.Security
                 db.SaveChanges();
             }
         }
-        public void DeleteUserInOrg(UserDetailes user,UserContext db)
+    public void DeleteUserInOrg(UserDetailes user,UserContext db)
         {
             department dp = db.department.FirstOrDefault(x => x.AdminId == user.UserInOrgId);
             if (dp != null)
@@ -74,5 +77,30 @@ namespace UserMangementTemplate.Security
             db.UserInOrg.Remove(db.UserInOrg.Find(user.UserInOrgId)); db.SaveChanges();
             
         }
+
+
+        // if user register in UserInOrg previously => error
+        //public void AddUserInOrg(UserDetailes user, UserContext db)
+        //{
+        //    UserInOrg uio = db.UserInOrg.FirstOrDefault(x => x.UserId == user.UserId && x.OrgId == user.OrgId && x.departmentId == user.departmentId);
+        //    if (uio != null)
+        //    {
+        //        throw new Exception("The user has been registered previously!");
+        //    }
+        //    if (uio == null && db.Org.FirstOrDefault(x => x.Id == user.OrgId) != null && db.User.FirstOrDefault(x => x.Id == user.UserId) != null)
+        //    {
+        //        db.UserInOrg.Add(uio = new UserInOrg { departmentId = user.departmentId, OrgId = user.OrgId, UserId = user.UserId });
+
+        //        db.SaveChanges();
+        //        user.Auth.ForEach(x => uio.Auth.Add(new Auth { Type = x }));
+        //        db.SaveChanges();
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("");
+        //    }
+        //}
+
+
     }
 }
