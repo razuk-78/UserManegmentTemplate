@@ -183,7 +183,7 @@ namespace UserMangementTemplate.Controllers
     {
         UserContext db = new UserContext();
         //Edit Dep Position
-        public IHttpActionResult PutEditDepParint(DepAddEditeDelete.DepDetailes Dep)
+        public IHttpActionResult PutEditDepParent(DepAddEditeDelete.DepDetailes Dep)
         {
             new DepAddEditeDelete().EditDepartmentParent(Dep, db);
             return Ok();

@@ -19,8 +19,8 @@ namespace UserMangementTemplate.Controllers
         {
             return Ok(db.department.ToList());
         }
-        //Get Department Based DepId
-        public IHttpActionResult GetDep(int departmentId)
+        //Get user Based DepId
+        public IHttpActionResult GetUserBasedDepId(int departmentId)
         {
             return Ok(new SearchBasedUser().searchDep(db, departmentId));
         }
@@ -53,8 +53,8 @@ namespace UserMangementTemplate.Controllers
         {
             return Ok(db.Org.ToList());
         }
-        //Get Org Based OrgId
-        public IHttpActionResult GetOrg(int OrgId)
+        //Get list of userinorg Based OrgId
+        public IHttpActionResult GetUserBasedOrgId(int OrgId)
         {
             return Ok(new SearchBasedUser().searchOrg(db, OrgId));
         }
