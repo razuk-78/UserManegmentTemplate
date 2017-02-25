@@ -7,19 +7,19 @@ app.config(function ($routeProvider, $locationProvider) {
      templateUrl: "index.html",
     }).when('/user', { 
        templateUrl: '/app/Views/User/user.html',
-       controller:'userCtrl'
+       
     }).when('/org', {
         templateUrl: "/app/Views/Org/Org.html",
-        controller: "orgCtrl"
+      
     }).when('/department', {
         templateUrl: "/app/Views/Department/Department.html",
-        controller: "departmentCtrl"
+        
     }).when('/authentication', {
         templateUrl: "/app/Views/auth/authentication.html",
-        controller: "authCtrl"
-    }).when('/logIn', {
+        
+    }).when('/login', {
         templateUrl: "/app/Views/LogIn/LogIn.html",
-        controller: "logInCtrl"
+       
     })
 
 

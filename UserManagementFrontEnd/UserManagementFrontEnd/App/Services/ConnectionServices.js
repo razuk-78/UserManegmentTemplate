@@ -1,7 +1,7 @@
 ﻿/// <reference path="C:\Users\raeli1\Desktop\UserManegmentTemplate\UserManagementFrontEnd\UserManagementFrontEnd\Script/angular.js" />
 /// <reference path="C:\Users\raeli1\Desktop\UserManegmentTemplate\UserManagementFrontEnd\UserManagementFrontEnd\Script/angularRout.js" />
 /// <reference path="../mainApp/App.js" />
-
+ 
 // get all users in one org
 (function myfunction() {
     //get 
@@ -45,7 +45,7 @@
 
 
 //get add edite department department Functions
-(function () {
+(function(){
     //get
     //getAllDepBasedOrgId.get(orgid).then(function(users){},function(response){return response})
     app.factory('getAllDepBasedOrgId', function ($http, webAddress, header) {
@@ -105,12 +105,12 @@
             put: function (dep) { return $http.put(webAddress.get() + 'DeleteDep', dep, { headers: header.get() }).then(function (dep) { return dep.data }) }
         }
     });
+
 })();
 
-
 //get add edite userInOrg
-(function () {
 
+(function () {
     //put
     //editUserInOrg.put(user).then(function(user){},function(response){return response})
     app.factory('editUserInOrg', function ($http, webAddress, header) {
@@ -136,8 +136,8 @@
         }
     });
     //get
-    //getBasedOrg.post(OrgId).then(function(user){},function(response){return response})
-    app.factory('getBasedOrg', function ($http, webAddress, header) {
+    //getUIOBasedOrg.get(OrgId).then(function(user){},function(response){return response})
+    app.factory('getUIOBasedOrg', function ($http, webAddress, header) {
         return {
             //parameter: int orgid
             //GetUserBasedOrgId
@@ -160,7 +160,50 @@
             get: function (OrgId, auth, Dep) { return $http.get(webAddress.get() + 'GetBasedAuth?OrgId=' + OrgId + '&auth=' + auth + '&Dep=' + Dep, { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
         }
     });
-  
+
 })();
+//get add edite Org
+(function () {
+    //get
+    //getAllOrg.get().then(function(orgs){},function(response){return response})
+    app.factory('getAllOrg', function ($http, webAddress, header) {
+        return {
 
-
+            get: function () { return $http.get(webAddress.get() + 'GetBasedOrg', { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
+        }
+    });
+    //post
+    //addOrg.post(org).then(function(orgs){},function(response){return response})
+    app.factory('addOrg', function ($http, webAddress, header) {
+        return {
+            //parameter: org
+            Post: function (org) { return $http.get(webAddress.get() + 'GetBasedOrg', org, { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
+        }
+    });
+    //put
+    //editOrg.put(org).then(function(orgs){},function(response){return response})
+    app.factory('editOrg', function ($http, webAddress, header) {
+        return {
+            //parameter: org
+            put: function (org) { return $http.get(webAddress.get() + 'EditOrg', org, { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
+        }
+    });
+    //put
+    //deleteOrg.put(org).then(function(orgs){},function(response){return response})
+    app.factory('deleteOrg', function ($http, webAddress, header) {
+        return {
+            //parameter: org
+            put: function (org) { return $http.get(webAddress.get() + 'deleteOrg', org, { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
+        }
+    });
+})();
+//get log in
+(function () {
+    //get
+    //getLogIn.get().then(function(username,orgid){},function(response){return response})
+    app.factory('getLogIn', function ($http, webAddress, header) {
+        return {
+            get: function (username, orgid) { return $http.get(webAddress.get() + 'GetLogIn', { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
+        }
+    });
+})();

@@ -51,7 +51,7 @@ namespace UserMangementTemplate.Controllers
 
         public IHttpActionResult GetAllOrg()
         {
-            return Ok(db.Org.ToList());
+            return Ok(CommonFunctions.SeachAllOrg(db));
         }
         //Get list of userinorg Based OrgId
         public IHttpActionResult GetUserBasedOrgId(int OrgId)
@@ -120,7 +120,7 @@ namespace UserMangementTemplate.Controllers
         //Get user Based FirstName
         public IHttpActionResult GetUsersByFirstName(string name)
         {
-            return Ok(new CommonFunctions().SearchBasedFirstName(db, name));
+            return Ok(CommonFunctions.SearchBasedFirstName(db, name));
         }
         //Get AllUser Based Oneday
         public IHttpActionResult GetUserBasedDate(DateTime date)

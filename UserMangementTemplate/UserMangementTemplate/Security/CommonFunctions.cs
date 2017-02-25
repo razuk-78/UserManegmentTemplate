@@ -16,7 +16,15 @@ namespace UserMangementTemplate.Security
             }
             db.User.Add(user);db.SaveChanges();
         }
+        //get users by name
+        public static List<User> SearchBasedFirstName(UserContext db, string firstName)
+        {
+            List<User> u = new List<User>();
 
+            u = db.User.Where(x => x.FirstName.Contains(firstName)).ToList();
+
+            return u;
+        }
         //Edit User
         public static void EditeUser(User user, UserContext db)
         {
@@ -48,6 +56,10 @@ namespace UserMangementTemplate.Security
             db.User.Remove(db.User.Find(user.Id)); db.SaveChanges();
 
                   
+        }
+        public static List<Org> SeachAllOrg(UserContext db)
+        {
+            return db.Org.ToList();
         }
         public static void AddOrg(Org org, UserContext db)
         {
@@ -83,14 +95,7 @@ namespace UserMangementTemplate.Security
         }
 
         //Search user by FirstName
-        public List<User> SearchBasedFirstName(UserContext db, string firstName)
-        {
-            List<User> u = new List<User>();
-
-            u = db.User.Where(x => x.FirstName.Contains(firstName)).ToList();
-
-            return u;
-        }
+      
 
     }
 }

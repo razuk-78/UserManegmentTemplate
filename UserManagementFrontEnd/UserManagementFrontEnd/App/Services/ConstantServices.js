@@ -1,19 +1,9 @@
-﻿
+﻿/// <reference path="C:\Users\razuk\Desktop\github\UserManegmentTemplate2\UserManagementFrontEnd\UserManagementFrontEnd\Script/angular.js" />
+/// <reference path="C:\Users\razuk\Desktop\github\UserManegmentTemplate2\UserManagementFrontEnd\UserManagementFrontEnd\Script/angularRout.js" />
+/// <reference path="C:\Users\razuk\Desktop\github\UserManegmentTemplate2\UserManagementFrontEnd\UserManagementFrontEnd\Script/jquery-3.1.1.js" />
+/// <reference path="Objects.js" />
 
-app.factory('header', function (userLogIn) {
-    var header = {};
-    return {
-        
-        get:function(){
-            header = { 'Authorization': 'Basic ' + userLogIn.userName + ':' + userLogIn.passWord }
-           return header;
-         
-     
-    }
-    }
-   
 
-});
 app.factory('userLogIn', function () {
     var orgId;
     var userl = { userName: 0, passWord: 0 };
@@ -29,8 +19,20 @@ app.factory('userLogIn', function () {
     }
 
 });
+app.factory('header', function (userLogIn) {
+    var header = {};
+    return {
+        
+        get:function(){
+            header = { 'Authorization': 'Basic ' + userLogIn.userName + ':' + userLogIn.passWord }
+           return header;
+         
+     
+    }
+    }
+   
 
-
+});
 app.factory('org', function () {
     var orgid;
     return {
@@ -38,7 +40,6 @@ app.factory('org', function () {
         get: function () { return orgid }
     }
 });
-
 app.factory('webAddress', function () {
     var address ='http://localhost:64492/api/';
     return {
@@ -48,3 +49,34 @@ app.factory('webAddress', function () {
     }
 
 });
+app.factory('userAuth',function (){
+               var auth="";
+               return {
+                   set: function (ath) { auth = ath; },
+                   get: function () { return auth;}
+               }
+});
+app.service('authCheck', function () {
+    
+    
+       this.check= function (type, auth, T, E) {
+            var b = false;
+            if (auth) {
+                for (var i = 0; i < auth.length; i++) {
+                    if (auth[0] == type) {
+                        T();
+                        return;
+                    }
+
+                }
+                if (!b) { E(); return; }
+            } else {
+               E();
+               return;
+            }
+
+            
+        }
+   
+    
+})

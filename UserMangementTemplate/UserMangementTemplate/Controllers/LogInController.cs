@@ -8,15 +8,15 @@ using UserMangementTemplate.Security;
 
 namespace UserMangementTemplate.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")] // tune to your needs
-    [RoutePrefix("")]
+   
+    
     public class LogInController : ApiController
     {
         UserContext db = new UserContext();
         [UserAuthCheck("read")]
-        public IHttpActionResult GetLogIn(string username)
+        public IHttpActionResult GetLogIn(string username,int orgid)
         {
-            return Ok(new LogIn().GetuserLogInIfo(db, username));
+            return Ok(new LogIn().GetuserLogInIfo(db, username,orgid));
         }
         protected override void Dispose(bool disposing)
         {

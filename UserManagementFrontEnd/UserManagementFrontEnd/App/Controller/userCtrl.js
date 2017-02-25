@@ -1,13 +1,13 @@
-﻿/// <reference path="C:\Users\raeli1\Desktop\UserManegmentTemplate\UserManagementFrontEnd\UserManagementFrontEnd\Script/angular.js" />
-/// <reference path="C:\Users\raeli1\Desktop\UserManegmentTemplate\UserManagementFrontEnd\UserManagementFrontEnd\Script/angularRout.js" />
+﻿/////// <reference path="C:\Users\razuk\Desktop\github\UserManegmentTemplate2\UserManagementFrontEnd\UserManagementFrontEnd\Script/angular.js" />
+/// <reference path="C:\Users\razuk\Desktop\github\UserManegmentTemplate2\UserManagementFrontEnd\UserManagementFrontEnd\Script/jquery-3.1.1.js" />
 /// <reference path="../mainApp/App.js" />
 app.controller('userCtrl', function ($scope, $http, userLogIn, getAllUsers, editUser, deleteUser, addUser, $location, searchUser) {
     $scope.userList;
-    $scope.user={};
+    $scope.user="";
     getAllUsers.get().then(function (m) { $scope.userList = m });
-    $scope.edite = function (user) { editUser.get(user).then(function () { $location.path("/org"); }); }
+    $scope.edite = function (user) { editUser.put(user).then(function () { }); }
     $scope.delete = function (user) {
-        deleteUser.get(user).then(function (user) {
+        deleteUser.put(user).then(function (user) {
             $scope.userList = user;
         });
     }
