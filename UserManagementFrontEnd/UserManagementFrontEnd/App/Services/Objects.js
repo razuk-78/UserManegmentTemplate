@@ -1,4 +1,5 @@
-﻿var auth = {
+﻿var $scope={
+ auth : {
     id: 0,
     UserInOrgId: null,
     departmentId: null,
@@ -30,9 +31,9 @@
         AdminId: null,
         OrgId: 0
     }
-}
+},
 
-var user = {
+ user : {
     Id: 0,
     FirstName: null,
     LastName: null,
@@ -44,24 +45,24 @@ var user = {
     CityCode: 0,
     Phone: null,
     Category: null
-};
-var dep = {
+},
+ dep : {
     Id: 0,
     Name: null,
     AdminId: null,
     OrgId: 0
-};
-var LogReg = {
+},
+ LogReg :{
     Id: 0,
     UserInOrgId: 0,
     TimeLogIn: "0001-01-01T00:00:00"
-}
-var org = {
+},
+ org : {
     Id: 0,
     Name: null
-}
+},
 
-var SearchDepTreeDeps = {
+ SearchDepTreeDeps : {
     Parent: 0,
     Child: [],
     Dep: {
@@ -70,8 +71,8 @@ var SearchDepTreeDeps = {
         AdminId: null,
         OrgId: 0
     }
-}
-var userDtails = {
+},
+ userDtails : {
     Org: {
         Id: 0,
         Name: null
@@ -135,9 +136,9 @@ var userDtails = {
         UserInOrgId: 0,
         TimeLogIn: "0001-01-01T00:00:00"
     }]
-}
+},
 
-var userinorg = {
+ userinorg : {
     Id: 0,
     UserId: 0,
     OrgId: 0,
@@ -157,28 +158,29 @@ var userinorg = {
             OrgId: 0
         }
     }]
-}
+},
 
 
-var adduserDetails = {
+ adduserDetails : {
     UserId: 0,
     OrgId: 0,
     departmentId: 0,
     UserInOrgId: 0,
     Auth: []
-}
+},
 
-var addDepDetails = {
+ addDepDetails : {
     Id: 0,
     Name: null,
     AdminId: 0,
     OrgId: 0,
     parentId: 0,
     AuthType: null
-}
+},
 
-var logIn = {
+ logIn :{
     UserName: null,
     DepartmentName: null,
     Auth: null
+}
 }

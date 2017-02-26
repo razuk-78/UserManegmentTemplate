@@ -59,7 +59,7 @@ app.factory('userAuth',function (){
 app.service('authCheck', function () {
     
     
-       this.check= function (type, auth, T, E) {
+   this.check= function (type, auth, T, E) {
             var b = false;
             if (auth) {
                 for (var i = 0; i < auth.length; i++) {

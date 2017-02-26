@@ -151,7 +151,7 @@ namespace UserMangementTemplate.Controllers
         public IHttpActionResult PutEditorg(Org org)
         {
             CommonFunctions.EditeOrg(org, db);
-            return Ok();
+            return Ok(db.Org.ToList());
         }
         protected override void Dispose(bool disposing)
         {

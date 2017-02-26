@@ -132,7 +132,7 @@
     app.factory('addUserInOrg', function ($http, webAddress, header) {
         return {
             //parameter: AddEditDeleteUser.UserDetailes User
-            post: function (user) { return $http.post(webAddress.get() + 'DeleteUserInOrg', user, { headers: header.get() }).then(function (user) { return user.data }) }
+            post: function (user) { return $http.post(webAddress.get() + 'addUserInOrg', user, { headers: header.get() }).then(function (user) { return user.data }) }
         }
     });
     //get
@@ -157,7 +157,7 @@
         return {
             //parameter: string auth, int Orgid
             //function : GetAuthOrgDep(string auth, int Orgid, int Dep)
-            get: function (OrgId, auth, Dep) { return $http.get(webAddress.get() + 'GetBasedAuth?OrgId=' + OrgId + '&auth=' + auth + '&Dep=' + Dep, { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
+            get: function (OrgId, auth, Depid) { return $http.get(webAddress.get() + 'GetBasedAuth?OrgId=' + OrgId + '&auth=' + auth + '&Dep=' + Depid, { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
         }
     });
 
@@ -177,7 +177,7 @@
     app.factory('addOrg', function ($http, webAddress, header) {
         return {
             //parameter: org
-            Post: function (org) { return $http.get(webAddress.get() + 'GetBasedOrg', org, { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
+            post: function (org) { return $http.post(webAddress.get() + 'AddOrg', org, { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
         }
     });
     //put
@@ -185,7 +185,7 @@
     app.factory('editOrg', function ($http, webAddress, header) {
         return {
             //parameter: org
-            put: function (org) { return $http.get(webAddress.get() + 'EditOrg', org, { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
+            put: function (org) { return $http.put(webAddress.get() + 'EditOrg', org, { headers: header.get() }).then(function (org) { return org.data }, function (response) { return response }) }
         }
     });
     //put
@@ -193,7 +193,7 @@
     app.factory('deleteOrg', function ($http, webAddress, header) {
         return {
             //parameter: org
-            put: function (org) { return $http.get(webAddress.get() + 'deleteOrg', org, { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
+            put: function (org) { return $http.put(webAddress.get() + 'deleteOrg', org, { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
         }
     });
 })();

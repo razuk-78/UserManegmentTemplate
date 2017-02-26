@@ -1,7 +1,7 @@
-﻿/////// <reference path="C:\Users\razuk\Desktop\github\UserManegmentTemplate2\UserManagementFrontEnd\UserManagementFrontEnd\Script/angular.js" />
+﻿/// <reference path="C:\Users\razuk\Desktop\github\UserManegmentTemplate2\UserManagementFrontEnd\UserManagementFrontEnd\Script/angular.js" />
 /// <reference path="C:\Users\razuk\Desktop\github\UserManegmentTemplate2\UserManagementFrontEnd\UserManagementFrontEnd\Script/jquery-3.1.1.js" />
 /// <reference path="../mainApp/App.js" />
-app.controller('userCtrl', function ($scope, $http, userLogIn, getAllUsers, editUser, deleteUser, addUser, $location, searchUser) {
+app.controller('userCtrl', function ($scope, userLogIn, getAllUsers, editUser, deleteUser, addUser, $location, searchUser) {
     $scope.userList;
     $scope.user="";
     getAllUsers.get().then(function (m) { $scope.userList = m });

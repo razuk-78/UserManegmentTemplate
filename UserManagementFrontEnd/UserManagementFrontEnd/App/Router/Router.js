@@ -4,22 +4,25 @@
 app.config(function ($routeProvider, $locationProvider) {
     $locationProvider.hashPrefix('');
     $routeProvider.when('/index', {
-     templateUrl: "index.html",
+        templateUrl: "index.html", caseInsensitiveMatch: false
     }).when('/user', { 
-       templateUrl: '/app/Views/User/user.html',
+        templateUrl: '/app/Views/User/user.html', caseInsensitiveMatch: false
        
     }).when('/org', {
-        templateUrl: "/app/Views/Org/Org.html",
+        templateUrl: "/app/Views/Org/Org.html", caseInsensitiveMatch: false
       
     }).when('/department', {
-        templateUrl: "/app/Views/Department/Department.html",
+        templateUrl: "/app/Views/Department/Department.html", caseInsensitiveMatch: false
         
     }).when('/authentication', {
-        templateUrl: "/app/Views/auth/authentication.html",
+        templateUrl: "/app/Views/auth/authentication.html", caseInsensitiveMatch: false
         
     }).when('/login', {
-        templateUrl: "/app/Views/LogIn/LogIn.html",
+        templateUrl: "/app/Views/LogIn/LogIn.html", caseInsensitiveMatch: false
        
+    }).when('/userinorg', {
+        templateUrl: "/app/Views/userinorg/userinorg.html", caseInsensitiveMatch: false
+
     })
 
 
