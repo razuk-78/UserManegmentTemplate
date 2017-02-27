@@ -1,4 +1,4 @@
-﻿var $scope={
+﻿var objects={
  auth : {
     id: 0,
     UserInOrgId: null,

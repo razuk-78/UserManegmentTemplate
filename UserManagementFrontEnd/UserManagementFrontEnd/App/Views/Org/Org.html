@@ -1,47 +1,27 @@
 ﻿
 <div ng-controller='orgCtrl' >    
-    <h1>{{"Org"}}</h1>
-    <table>
-        <tr>
-            <td>
-                <button ng-click="add(org)">addOrg</button>
-            </td>
-            <td>
-                <label>orgName</label><input ng-model='org.name' />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <br /><br /><br />
-            </td>
-        </tr>
-        <tr>
-                  <td>
-                <button ng-click="getOrgs()">getAllOrg</button>
-                  </td>
-          
-            <td>
-                
-            </td>
-         </tr>
-        <tr ng-repeat="m in orgs">
-            <td>
-              <label>orgName</label><input ng-model="m.Name" value="m.Name">
-            </td>
-            <td>
-                <label>Id</label><input type="text" ng-model="m.Id" value="m.Id">
-            </td>
-            <td>
-               <button ng-click="edite(m)">edite</button>
-            </td>
-            <td>
-                <button ng-click="delete(m)">delete</button>
-            </td>
-        </tr>
-    </table>
-  
+ <h1>{{"Org"}}</h1>
+    <div class="container">      
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
 
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="org in orgs">
+                    <td><label>{{org.Id}}</label></td>
+                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="org.Name"/></td>
+                    <td><button class="btn btn-active" ng-model="chk" ng-click="edite(chk,$index)">Edite</button></td>
+                    <td><button ng-hide="(!active[$index])?true:false" class="btn btn-success" ng-click="saveEdite(org)">save</button></td>
+                    
+                    <td><button class="btn btn-danger" ng-click="delete(org)">Delete</button></td>
+                </tr>
 
-
+            </tbody>
+        </table>
+    </div>
 </div>
 

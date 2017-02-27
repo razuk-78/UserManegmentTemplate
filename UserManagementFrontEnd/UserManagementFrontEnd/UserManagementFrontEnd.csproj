@@ -97,6 +97,7 @@
     <Content Include="App\Controller\userInOrg.js" />
     <Content Include="App\Services\Objects.js" />
     <Content Include="App\Views\UserInOrg\userinorg.html" />
+    <Content Include="BootStrap\Site.css" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

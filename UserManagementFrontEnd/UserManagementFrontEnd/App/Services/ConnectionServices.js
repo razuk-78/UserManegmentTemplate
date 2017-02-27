@@ -40,10 +40,6 @@
         }
     });
 })();
-
-
-
-
 //get add edite department department Functions
 (function(){
     //get
@@ -107,7 +103,6 @@
     });
 
 })();
-
 //get add edite userInOrg
 
 (function () {

@@ -14,11 +14,12 @@ using UserMangementTemplate.Security;
 namespace UserMangementTemplate.Controllers
 {
     //Add User + Org + Dep + UserInOrg
+    #region add User + Org + Dep + UserInOrg
     public class AddUserController : ApiController
     {
         UserContext db = new UserContext();
-      //[UserAuthCheck("admin")]
-      public IHttpActionResult PostAddUser(User user)
+        //[UserAuthCheck("admin")]
+        public IHttpActionResult PostAddUser(User user)
         {
             user.PassWord = EncyptPassWord.Encrypt(user.PassWord);
             CommonFunctions.addUser(user, db);
@@ -55,7 +56,7 @@ namespace UserMangementTemplate.Controllers
     public class AddDepController : ApiController
     {
         UserContext db = new UserContext();
-      
+
         public IHttpActionResult PostAddDep(DepAddEditeDelete.DepDetailes Dep)
         {
             new DepAddEditeDelete().AddDepartment(Dep, db);
@@ -125,15 +126,17 @@ namespace UserMangementTemplate.Controllers
         }
     }
 
+    #endregion
 
     //Edit User + Org + Dep + UserInOrg
+    #region Edit User + Org + Dep + UserInOrg
     public class EditUserController : ApiController
     {
         UserContext db = new UserContext();
         public IHttpActionResult PutEditUser(User user)
         {
             CommonFunctions.EditeUser(user, db);
-            return Ok();
+            return Ok(db.User.ToList());
         }
         protected override void Dispose(bool disposing)
         {
@@ -232,8 +235,10 @@ namespace UserMangementTemplate.Controllers
             base.Dispose(disposing);
         }
     }
+    #endregion
 
     //Delete User + Org + Dep + UserInOrg
+    #region delete User + Org + Dep + UserInOrg
     public class DeleteUserController : ApiController
     {
         UserContext db = new UserContext();
@@ -304,5 +309,6 @@ namespace UserMangementTemplate.Controllers
             }
             base.Dispose(disposing);
         }
-    }
+    } 
+    #endregion
 }

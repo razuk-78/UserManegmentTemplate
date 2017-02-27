@@ -1,8 +1,9 @@
-﻿<div ng-controller="userCtrl">
-    <h1>{{1+2}}user</h1>
-    <input ng-model="name" ng-keyup="search(name)" />
-
-    <div style="position:relative; height:400px;width:400px;">
+﻿<!--<link href="../../../BootStrap/bootstrap.css" rel="stylesheet" />-->
+<div ng-controller="userCtrl">
+    <h1>{{"user"}}</h1>
+   
+   
+    <!--<div style="position:relative; height:400px;width:400px;">
         <table>
             <tr>
                 <td><button ng-click="add()"> add new user</button></td>
@@ -10,26 +11,26 @@
             <tr>
 
 
-                <td><label>FirstName</label><input ng-model="user.FirstName" /></td>
-                <td><label>LastName</label><input ng-model="user.LastName" /></td>
+                <td><label>FirstName</label><input ng-model="usera.FirstName" /></td>
+                <td><label>LastName</label><input ng-model="usera.LastName" /></td>
             </tr>
             <tr>
-                <td><label>Email</label><input ng-model="user.Email" /></td>
-                <td><label>PassWord</label><input ng-model="user.PassWord" /></td>
-            </tr>
-
-            <tr>
-                <td><label>PersonalNumber</label><input ng-model="user.PersonalNumber" /></td>
-                <td><label>Adderss</label><input ng-model="user.Address" /></td>
-            </tr>
-            <tr>
-                <td><label>CityCode</label><input ng-model="user.CityCode" /></td>
-                <td><label>City</label><input ng-model="user.City" /></td>
+                <td><label>Email</label><input ng-model="usera.Email" /></td>
+                <td><label>PassWord</label><input ng-model="usera.PassWord" /></td>
             </tr>
 
             <tr>
-                <td><label>Phone</label><input ng-model="user.Phone" /></td>
-                <td><label>Category</label><input ng-model="user.Category" /></td>
+                <td><label>PersonalNumber</label><input ng-model="usera.PersonalNumber" /></td>
+                <td><label>Adderss</label><input ng-model="usera.Address" /></td>
+            </tr>
+            <tr>
+                <td><label>CityCode</label><input ng-model="usera.CityCode" /></td>
+                <td><label>City</label><input ng-model="usera.City" /></td>
+            </tr>
+
+            <tr>
+                <td><label>Phone</label><input ng-model="usera.Phone" /></td>
+                <td><label>Category</label><input ng-model="usera.Category" /></td>
             </tr>
 
 
@@ -42,32 +43,102 @@
     <div style="position:relative; height:500px;width:500px;overflow:scroll">
         <ul>
             <li ng-repeat="user in userList">
-                <label>Id</label> <input type="text" ng-model="user.Id" value="{{user.Id}}" />
+                <label>Id</label> <input type="text" ng-model="user.Id" value="user.Id" />
                 <br />
-                <label>firstName</label> <input type="text" ng-model="user.FirstName" value="{{user.FirstName}}" />
+                <label>firstName</label> <input type="text" ng-model="user.FirstName" value="user.FirstName" />
                 <br />
-                <label>Lastname</label> <input type="text" ng-model="user.LastName" value="{{user.LastName}}" />
+                <label>Lastname</label> <input type="text" ng-model="user.LastName" value="user.LastName" />
                 <br />
-                <label>Email</label> <input type="text" ng-model="user.Email" value="{{user.Email}}" />
+                <label>Email</label> <input type="text" ng-model="user.Email" value="user.Email" />
                 <br />
-                <label>PassWord</label> <input type="text" ng-model="user.PassWord" value="{{user.PassWord}}" />
+                <label>PassWord</label> <input type="text" ng-model="user.PassWord" value="user.PassWord" />
                 <br />
-                <label>PN</label> <input type="text" ng-model="user.PersonalNumber" value="{{user.PersonalNumber}}" />
+                <label>PN</label> <input type="text" ng-model="user.PersonalNumber" value="user.PersonalNumber" />
                 <br />
-                <label>Adderss</label> <input type="text" ng-model="user.Address" value="{{user.Adderss}}" />
+                <label>Adderss</label> <input type="text" ng-model="user.Address" value="user.Adderss" />
                 <br />
-                <label>City</label> <input type="text" ng-model="user.City" value="{{user.City}}" />
+                <label>City</label> <input type="text" ng-model="user.City" value="user.City" />
                 <br />
-                <label>CityCode</label> <input type="text" ng-model="user.CityCode" value="{{user.CityCode}}" />
+                <label>CityCode</label> <input type="text" ng-model="user.CityCode" value="user.CityCode" />
                 <br />
-                <label>Phone</label> <input type="text" ng-model="user.Phone" value="{{user.Phone}}" />
+                <label>Phone</label> <input type="text" ng-model="user.Phone" value="user.Phone" />
                 <br />
-                <label>Category</label> <input type="text" ng-model="user.Category" value="{{user.Category}}" />
+                <label>Category</label> <input type="text" ng-model="user.Category" value="user.Category" />
                 <br />
                 <button ng-click="edite(user)">Edit</button> <button ng-click="delete(user)">Delete</button>
             </li>
 
         </ul>
-    </div>
+    </div>-->
     
+
+
+
+
+    <div class="container">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                <td><label>Search User</label></td>
+                    
+                  <td><input ng-model="name" ng-keyup="search(name)" /></td>
+                </tr>
+                <tr >
+                    <th>FirstName</th>
+                    <th>Lastname</th>
+                    <th>Email</th>                   
+                    <th>PN</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>City Code</th>
+                    <th>Phone</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr ng-repeat="user in userList">
+                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.FirstName" value="user.FirstName"/></td>
+                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.LastName" value="user.LastName" /></td>
+                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.Email" value="user.Email" /></td>
+                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.PersonalNumber" value="user.PersonalNumber" /></td>
+                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.Address" value="user.Address" /></td>
+                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.City" value="user.City" /></td>
+                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.CityCode" value="user.CityCode" /></td>
+                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.Phone" value="user.Phone" /></td>
+                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.Category" value="user.Category" /></td>
+                    <td><button class="btn btn-active" ng-model="chk" ng-click="edite(chk,$index)">Edite</button></td>
+                    <td><button ng-hide="(!active[$index])?true:false" class="btn btn-success" ng-click="saveEdite(user)">save</button></td>
+                    <td><button class="btn btn-danger" ng-click="delete(user)">Delete</button></td>
+                </tr>
+               
+            </tbody>
+        </table>
+    </div>
+
+
+
+  
+
+
+    <div class="modal fade" id="Error" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
