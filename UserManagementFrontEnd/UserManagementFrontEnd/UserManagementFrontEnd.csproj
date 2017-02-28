@@ -96,6 +96,7 @@
   <ItemGroup>
     <Content Include="App\Controller\userInOrg.js" />
     <Content Include="App\Services\Objects.js" />
+    <Content Include="App\Views\Department\tree.html" />
     <Content Include="App\Views\UserInOrg\userinorg.html" />
     <Content Include="BootStrap\Site.css" />
     <Content Include="packages.config" />
