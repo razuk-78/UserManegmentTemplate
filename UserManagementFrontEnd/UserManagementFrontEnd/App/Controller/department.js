@@ -16,11 +16,11 @@ app.controller('departmentCtrl', function ($scope, $location, getAllDepBasedOrgI
 
 });
 
-app.directive('tree', function ($compile,$timeout) {
+app.directive('tree', function ($timeout) {
 
     return {
 
-        scope: { obj: '=' },
+        scope: { obj: '=',parentId:'=' },
         templateUrl: 'App/views/department/tree.html',
 
         link: function (s, el, attr) {
@@ -28,15 +28,16 @@ app.directive('tree', function ($compile,$timeout) {
 
             s.snd = function (m) { };
 
-
+            //gather tree elements
             $.each(s.obj, function (index, value) {
                 var m = $('ul[data-id=0]').clone();
                 m.attr('data-id', value.id);
                 m.attr('data-p', value.p);
                 m.children('li').attr('data-id', value.id);
-                m.children('li').addClass('glyphicon glyphicon-minus');
+                m.children('li').children('span[data-id]').attr('data-id', value.id);
+                m.children('li').children('span[show]').html(value.id);
 
-                m.children('li').append(value.id);
+                //m.children('li').append(value.id);
 
 
                 $('#cont').append(m);
@@ -44,6 +45,11 @@ app.directive('tree', function ($compile,$timeout) {
             });
             //show pop massege
             //$('#cont >ul >li ').on('click', 'span', function (e) {
+            //create tree
+            $('#cont >ul').each(function (i, v) {
+                $(this).appendTo($('li[data-id=' + $(this).attr('data-p') + ']'));
+            });
+
 
             //    $('#myModal').modal('show')
 
@@ -51,95 +57,80 @@ app.directive('tree', function ($compile,$timeout) {
             //});
             //show hide tree
 
-            $('#cont >ul').on('click', 'li', function () {
+           
+            
+            $(document).ready(function () {
+             var ids = [];
+             
+                $timeout(function () {
+                    $('span[show]').click(function () {
 
 
-                if ($(this).children('ul').css('display') !== "none" && $(this).children('ul').length > 0) {
-                    $(this).removeClass('glyphicon glyphicon-minus');
-                    $(this).addClass('glyphicon glyphicon-plus');
-                    $(this).children('ul').css('display', 'none');
+                        if ($(this).parent('li').children('ul').css('display') !== "none" && $(this).parent('li').children('ul').length > 0) {
+                            $(this).removeClass('glyphicon glyphicon-minus');
+                            $(this).addClass('glyphicon glyphicon-plus');
+                            $(this).parent('li').children('ul').css('display', 'none');
 
-                } else {
-                    $(this).children('ul').css('display', 'block');
-                    $(this).removeClass('glyphicon glyphicon-plus');
-                    $(this).addClass('glyphicon glyphicon-minus');
-
-                }
-
-
-                return false;
-            });
-
-
-            $('#cont >ul').each(function (i, v) {
-                //console.log($(this).html());
-                $(this).appendTo($('li[data-id=' + $(this).attr('data-p') + ']'));
-            });
-            function a(obj, l) {
-                var s = { id: 1, ch: [2, 3, 4], p: 0 };
-                var all = [{ id: 1, ch: [2, 3, 4], p: 0 }, { id: 2, ch: [13, 14], p: 1 }, { id: 3, ch: [40], p: 1 }, { id: 4, ch: [16, 15], p: 1 }, { id: 13, ch: [130], p: 2 }, { id: 14, ch: [140], p: 2 }, { id: 40, ch: [], p: 3 }, { id: 15, ch: [], p: 4 }, { id: 16, ch: [], p: 4 }, { id: 130, ch: [], p: 13 }, { id: 140, ch: [222], p: 14 }, { id: 111, ch: [666, 333, 444], p: 0 }, { id: 222, ch: [], p: 140 }];
-                var ch = all;
-                return {
-                    search: function () {
-                        var b = true;
-                        var i = 0;
-                        while (b) {
-
-                            if (all[i] == l) {
-                                b = false;
-                                ch.push(all[i]);
-                                this.rec(ch);
-
-                            }
-                            if (!b || i == all.length - 1)
-                                break;
-                            i++;
-
-
-                        }
-                    },
-                    rec: function (ss) {
-                        if (ch.length > 0) {
-                            for (var i = 0; i < ch.length; i++) {
-                                for (var ii = 0; ii < ch[i].ch.length; ii++) {
-                                    for (var iii = 0; iii < all.length; ii++) {
-                                        if (all[iii] == ch[i].ch[ii])
-                                            ch.push(all[iii]);
-                                        all.splice(iii, 1);
-                                    }
-                                }
-                            }
-                            var mch = ch;
-                            this.rec1(mch);
-                            ch = "";
+                        } else {
+                            $(this).parent('li').children('ul').css('display', 'block');
+                            $(this).removeClass('glyphicon glyphicon-plus');
+                            $(this).addClass('glyphicon glyphicon-minus');
 
                         }
 
 
+                        return false;
+                    });
+                }, 1000);
+                $timeout(function () {
+                    
+                    $('span[parent]').click(function () {
+                      s.parents = s.obj;
+                       
+                        var ids = [];
+                        var c = 0;
+                        var vb;
+                        $('#sec').html($(this).parent('li').parent('ul').clone());
+
+                        $(document).ready(function () {
+                            $timeout(function () {
+                                ids = [];
+                                $('#sec li').each(function () {
+                                  //console.log($(this).attr('data-id') + 'vv');
+                                  ids.push($(this).attr('data-id'))
+                                });
+                                fillParent(ids);
+                            }, 1000);
+                        });
+                    })
+                }, 300);
 
 
-                    },
-                    rec1: function (ss) {
-                        if (ch.length > 0) {
-                            for (var i = 0; i < ch.length; i++) {
-                                for (var ii = 0; ii < ch[i].ch.length; ii++) {
-                                    for (var iii = 0; iii < all.length; ii++) {
-                                        if (all[iii] == ch[i].ch[ii])
-                                            ch.push(all[iii]);
-                                        all.splice(iii, 1);
-                                    }
-                                }
+                function fillParent(a) {
+                    for (var i = 0; i < s.obj.length; i++) {
+                        for (let ii = 0; ii < a.length; ii++) {
+                            //console.log(a[ii] + 'aaa');
+                           
+                            if (s.obj[i].id == a[ii]) {
+                               console.log(s.obj[i].id + 'ppp');
+                                s.parents.splice(i, 1);
                             }
                         }
                     }
+                    $.each(s.parents, function (i,v) {console.log(v.id+'ssss') })
                 }
-            }
+            });
+            
+            
+
+
+
+
+
+
+
+
+
         }
-                        //$('#cont >ul').each(function () { console.log($(this).html()); $(this).children('ul').css('display', 'none'); });
-
-                    
-                    
-                    
-
     }
 });
