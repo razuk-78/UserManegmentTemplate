@@ -133,8 +133,8 @@ app.directive('tree', function ($timeout) {
                     }
                      $.each(s.parents, function (i, v) { console.log(v.Id + 'parent') })
                     }
-                $('#cont >ul >li[data-id=0] >div >span').hide();
-                
+                $('ul >li[data-id=0]  >div').hide();
+                $('ul >li[data-id=0]  >span[show]').hide();
             });
 
 
