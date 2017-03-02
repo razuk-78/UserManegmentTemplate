@@ -1,26 +1,43 @@
-﻿/// <reference path="C:\Users\raeli1\Desktop\UserManegmentTemplate\UserManagementFrontEnd\UserManagementFrontEnd\Script/angular.js" />
+/// <reference path="C:\Users\raeli1\Desktop\UserManegmentTemplate\UserManagementFrontEnd\UserManagementFrontEnd\Script/angular.js" />
 /// <reference path="C:\Users\raeli1\Desktop\UserManegmentTemplate\UserManagementFrontEnd\UserManagementFrontEnd\Script/jquery-3.1.1.js" />
 
 
 app.controller('departmentCtrl', function ($scope, $location, getAllDepBasedOrgId, getAllDepBasedOrgIdDepId, addDep, editDep, editDepParent, editAuthToDep, deleteDep) {
-
-    //check ?!
+    //public int Id { get; set; }
+    //public string Name { get; set; }
+    //public int AdminId { get; set; }
+    //public int OrgId { get; set; }
+    //public int parentId { get; set; }
+    //public List<string> AuthType { get; set; }
+   //check ?!
     $scope.edite = function (dep) { editDep.put(dep).then(function (deps) { }, function (response) { return response }) }
     $scope.editeParent = function (dep) { editDepParent.put(dep).then(function (deps) { }, function (response) { return response }) }
     $scope.add = function (dep) { addDep.post(dep).then(function (deps) { }, function (response) { return response }) }
     $scope.delete = function (dep) { deleteDep.put(dep).then(function (deps) { }, function (response) { return response }) }
-    $scope.getAllDepBasedOrgId = function (orgid) { getAllDepBasedOrgId.get(orgid).then(function (users) { }, function (response) { return response }) }
-    $scope.getAllDepBasedOrgIdDepId = function (orgid, depid) { getAllDepBasedOrgIdDepId.get(orgid, depid).then(function (users) { }, function (response) { return response }) }
-
-    $scope.obj = [{ id: 1, ch: [2, 3, 4], p: 0 }, { id: 2, ch: [13, 14], p: 1 }, { id: 3, ch: [40], p: 1 }, { id: 4, ch: [16, 15], p: 1 }, { id: 13, ch: [130], p: 2 }, { id: 14, ch: [140], p: 2 }, { id: 40, ch: [], p: 3 }, { id: 15, ch: [], p: 4 }, { id: 16, ch: [], p: 4 }, { id: 130, ch: [], p: 13 }, { id: 140, ch: [222], p: 14 }, { id: 111, ch: [666, 333, 444], p: 0 }, { id: 222, ch: [], p: 140 }];
-
+    $scope.getAllDepBasedOrgId = function (orgId) { getAllDepBasedOrgId.get(orgId).then(function (users) { }, function (response) { return response }) }
+    $scope.getAllDepBasedOrgIdDepId = function (orgId, depId) { getAllDepBasedOrgIdDepId.get(orgId, depId).then(function (users) { }, function (response) { return response }) }
+   
+    $scope.obj = [{ Id: 1, ch: [2, 3, 4], parentId: 0 },
+        { Id: 2, ch: [13, 14], parentId: 1 },
+        { Id: 3, ch: [40], parentId: 1 },
+        { Id: 4, ch: [16, 15], parentId: 1 },
+        { Id: 13, ch: [130], parentId: 2 },
+        { Id: 14, ch: [140], parentId: 2 },
+        { Id: 40, ch: [], parentId: 3 },
+        { Id: 15, ch: [], parentId: 4 },
+        { Id: 16, ch: [], parentId: 4 },
+        { Id: 130, ch: [], parentId: 13 },
+        { Id: 140, ch: [222], parentId: 14 },
+        { Id: 111, ch: [666, 333, 444], parentId: 0 },
+        { Id: 222, ch: [], parentId: 140 }];
+    $scope.dep = [{Id: 0, Name:'', AdminId:0, OrgId:0, parentId:0, AuthType:[]}];
 });
 
 app.directive('tree', function ($timeout) {
 
     return {
 
-        scope: { obj: '=', parentId: '=' },
+        scope: { obj: '=',parentId:'=' },
         templateUrl: 'App/views/department/tree.html',
 
         link: function (s, el, attr) {
@@ -30,14 +47,14 @@ app.directive('tree', function ($timeout) {
 
             //gather tree elements
             $.each(s.obj, function (index, value) {
-                var m = $('ul[data-id=0]').clone();
-                m.attr('data-id', value.id);
-                m.attr('data-p', value.p);
-                m.children('li').attr('data-id', value.id);
-                m.children('li').children('span[data-id]').attr('data-id', value.id);
-                m.children('li').children('span[show]').html(value.id);
+                var m = $('ul[data-Id=0]').clone();
+                m.attr('data-Id', value.Id);
+              m.attr('data-p', value.parentId);
+                m.children('li').attr('data-Id', value.Id);
+                m.children('li').children('span[data-Id]').attr('data-Id', value.Id);
+                m.children('li').children('span[show]').html(value.Id);
 
-                //m.children('li').append(value.id);
+                //m.children('li').append(value.Id);
 
 
                 $('#cont').append(m);
@@ -47,7 +64,7 @@ app.directive('tree', function ($timeout) {
             //$('#cont >ul >li ').on('click', 'span', function (e) {
             //create tree
             $('#cont >ul').each(function (i, v) {
-                $(this).appendTo($('li[data-id=' + $(this).attr('data-p') + ']'));
+                $(this).appendTo($('li[data-Id=' + $(this).attr('data-p') + ']'));
             });
 
 
@@ -55,13 +72,13 @@ app.directive('tree', function ($timeout) {
 
             //    return false;
             //});
-            //show hide tree
+            //show hIde tree
 
-
-
+           
+            
             $(document).ready(function () {
-                var ids = [];
-
+             var Ids = [];
+             
                 $timeout(function () {
                     $('span[show]').click(function () {
 
@@ -83,24 +100,23 @@ app.directive('tree', function ($timeout) {
                     });
                 }, 1000);
                 $timeout(function () {
-
+                    
                     $('span[parent]').click(function () {
-                        s.parents=[];
-                        $.each(s.obj, function (i, v) { s.parents.push(v); });
-                        //s.parents.reverse();
-                        var ids = [];
+                      s.parents = s.obj;
+                       
+                        var Ids = [];
                         var c = 0;
                         var vb;
                         $('#sec').html($(this).parent('li').parent('ul').clone());
 
                         $(document).ready(function () {
                             $timeout(function () {
-                                ids = [];
+                                Ids = [];
                                 $('#sec li').each(function () {
-                                    console.log($(this).attr('data-id') + 'vv');
-                                    ids.push($(this).attr('data-id'))
+                                  //console.log($(this).attr('data-Id') + 'vv');
+                                  Ids.push($(this).attr('data-Id'))
                                 });
-                                fillParent(ids);
+                                fillParent(Ids);
                             }, 10);
                         });
                     })
@@ -108,28 +124,21 @@ app.directive('tree', function ($timeout) {
 
 
                 function fillParent(a) {
-                   
-                    if (a.length == s.obj.length) {
-
-                    } else {
-                        for (var i = 0; i < s.obj.length; i++) {
-                        for (var ii = 0; ii < a.length; ii++) {
+                    for (var i = 0; i < s.obj.length; i++) {
+                        for (let ii = 0; ii < a.length; ii++) {
                             //console.log(a[ii] + 'aaa');
-
-                            if (s.obj[i].id == a[ii]) {
-                                console.log(s.obj[i].id + 'ppp');
-                                
+                           
+                            if (s.obj[i].Id == a[ii]) {
+                               console.log(s.obj[i].Id + 'ppp');
                                 s.parents.splice(i, 1);
                             }
                         }
                     }
-                    $.each(s.parents, function (i, v) { console.log(v.id + 'ssss') })
-                    }
-                   
+                    $.each(s.parents, function (i,v) {console.log(v.Id+'ssss') })
                 }
             });
-
-
+            
+            
 
 
 
