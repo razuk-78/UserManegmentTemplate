@@ -1,6 +1,6 @@
 ﻿
 
-<div class="modal fade" id="changeparent" tabindex="-1" role="dialog" aria-labelledby="changeparent">
+<div  class="modal fade" id="changeparent" tabindex="-1" role="dialog" aria-labelledby="changeparent">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,11 +9,8 @@
             </div>
             <div class="modal-body">
                 <ul class="nav nav-stack">
-                    <li role="presentation" class="active"><a href="#">Go to user</a></li>
-                    <li role="presentation"><a href="#">go to department</a></li>
-                    <li role="presentation"><a href="#">go to auth</a></li>
-                    <li role="presentation"><a href="#">add dep</a></li>
-                    <li role="presentation"><a href="#">add dep</a></li>
+                    <li role="presentation" class="active" ng-repeat="p in parents"><span ng-click="changeParent(p.Id)" class="btn btn-danger">{{p.Name}}</span></li>
+                 
                 </ul>
             </div>
             <div class="modal-footer">
@@ -26,20 +23,58 @@
 
 <!-- adduser -->
 <div class="modal fade" id="adduser" tabindex="-1" role="dialog" aria-labelledby="adduser">
-    <div class="modal-dialog" role="document">
+   
+    <div class="modal-dialog" role="document"style="max-width:100%;max-height:100%;width:75%">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
             </div>
-            <div class="modal-body">
-                <ul class="nav nav-stack">
-                    <li role="presentation" class="active"><a href="#">Go to user</a></li>
-                    <li role="presentation"><a href="#">go to department</a></li>
-                    <li role="presentation"><a href="#">go to auth</a></li>
-                    <li role="presentation"><a href="#">add dep</a></li>
-                    <li role="presentation"><a href="#">add dep</a></li>
-                </ul>
+            <div class="modal-body" >
+                <div class="container">
+<div class="row">
+    <div class="colmd-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td><label>Search User</label></td>
+
+                    <td><input ng-model="name" ng-keyup="search(name)" /></td>
+                </tr>
+                <tr>
+                    <th>FirstName</th>
+                    <th>Lastname</th>
+                    <th>Email</th>
+                    <th>PN</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>City Code</th>
+                    <th>Phone</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr ng-repeat="user in users">
+                    <td><label>{{user.FirstName}}</label></td>
+                    <td><label >{{user.LastName}}</label></td>
+                    <td><label  >{{user.Email}}</label></td>
+                    <td><label   >{{user.PersonalNumber}}</label></td>
+                    <td><label  >{{user.Address}}</label></td>
+                    <td><label >{{user.City}}</label></td>
+                    <td><label  >{{user.CityCode}}</label></td>
+                    <td><label >{{user.Phone}}</label></td>
+                    <td><label >{{user.Category}}</label></td>
+                    <td><button class="btn btn-danger" ng-click="addUser(user.Id)">Add To Department</button></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+                    
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -57,17 +92,11 @@
                 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                <ul class="nav nav-stack">
-                    <li role="presentation" class="active"><a href="#">Go to user</a></li>
-                    <li role="presentation"><a href="#">go to department</a></li>
-                    <li role="presentation"><a href="#">go to auth</a></li>
-                    <li role="presentation"><a href="#">add dep</a></li>
-                    <li role="presentation"><a href="#">add dep</a></li>
-                </ul>
+              <lable>Name</lable><input ng-model="Name" />
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
+                <button adddep ng-click="addDep()" type="button" class="btn btn-success" data-dismiss="modal">Add Dep</button>
             </div>
         </div>
     </div>
@@ -130,7 +159,7 @@
     
             </span>
        <div style="width:100%;background-color:gray;height:35px;position:absolute">-->
-            <span data-id="0" parent style="" class="btn btn-danger">change parent</span><span data-id="0"  type="button" class="btn btn-primary">add user</span><span data-id="0" type="button" class="btn btn-danger">add department</span><span data-id="0" type="button" class="btn btn-primary">Go To Users</span><span data-id="0" type="button" class="btn btn-danger">Delete Department</span><span data-id="0" type="button" class="btn btn-danger">Edite Authentication</span>
+            <span data-id="0" parent style="" class="btn btn-danger">change parent</span><span ng-click="getUsers()" addUser data-id="0"  type="button" class="btn btn-primary">add user</span><span adddep data-id="0" type="button" class="btn btn-danger">add department</span><span data-id="0" type="button" class="btn btn-primary">Go To Users</span><span data-id="0" type="button" class="btn btn-danger">Delete Department</span><span data-id="0" type="button" class="btn btn-danger">Edite Authentication</span>
        </div>
        
         </li>

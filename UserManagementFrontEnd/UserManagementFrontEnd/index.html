@@ -5,6 +5,7 @@
 	<meta charset="utf-8" />
     <!-- main scripts -->
     <script src="Script/angular.js"></script>
+    
     <script src="Script/angularRout.js"></script>
     <script src="App/mainApp/App.js"></script>
     <script src="App/Router/Router.js"></script>
@@ -21,9 +22,11 @@
     <script src="App/Controller/authenticationCtrl.js"></script>
     <script src="App/Controller/logInCtrl.js"></script>
     <script src="App/Controller/userInOrg.js"></script>
+    <script src="App/Controller/mainCtrl.js"></script>
 
 </head>
 <body>
+    <div ng-controller="mainCtrl"></div>
     <h1>{{"index"}}</h1>
     <a href="#/user">go to user</a>
     <br />

@@ -94,6 +94,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\Controller\mainCtrl.js" />
     <Content Include="App\Controller\userInOrg.js" />
     <Content Include="App\new.txt" />
     <Content Include="App\old.txt" />

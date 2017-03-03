@@ -1,4 +1,4 @@
-﻿app.controller('userInOrgCtrl', function ($timeout, $scope, deleteUserInOrg, editUserInOrg, addUserInOrg, getUIOBasedOrg, getUserBasedAuthOrgId, getBasedAuth) {
+﻿app.controller('userInOrgCtrl', function ($timeout, $scope, deleteUserInOrg, editUserInOrg, addUserInOrg,org, getUIOBasedOrg, getUserBasedAuthOrgId, getBasedAuth) {
     //Load All UserInOrg for one Org
     $scope.userInOrgList;
     $scope.userInOrg = {
@@ -9,7 +9,7 @@
     $scope.authType = ['read', 'write', 'delete', 'edite'];
      
     var getallusers = function () {
-        getUIOBasedOrg.get(1)
+        getUIOBasedOrg.get(org.get())
                  .then(function (m) {
                      $scope.userInOrgList = m;
                  }, function (response)
@@ -21,7 +21,7 @@
         deleteUserInOrg.put(useriorg)
             .then(function (u) {
                 $scope.userInOrgList = "";
-                $scope.userInOrgList = getUIOBasedOrg.get(1)
+                $scope.userInOrgList = getUIOBasedOrg.get(org.get())
         .then(function (m) {
             $scope.userInOrgList = m;
         }, function (response)

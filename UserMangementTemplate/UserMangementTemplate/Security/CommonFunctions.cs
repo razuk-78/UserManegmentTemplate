@@ -93,9 +93,23 @@ namespace UserMangementTemplate.Security
             db.department.Add(dep);
             db.SaveChanges();
         }
+        //Search all the users who do not register in UserInOrg
+        public static List<User> SearchUnregisterdUsers(UserContext db)
+        {
+            List<User> AllUser = new List<User>();
 
+            foreach (User u in db.User.ToList())
+            {
+                if (db.UserInOrg.FirstOrDefault(x => x.UserId == u.Id) == null)
+                {
+                    AllUser.Add(u);
+                }
+            }
+
+            return AllUser;
+        }
         //Search user by FirstName
-      
+
 
     }
 }

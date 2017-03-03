@@ -6,48 +6,8 @@
     <button ng-click="delete({})">delete</button>
     <button ng-click="getAllDepBasedOrgId(1)">getAllDepBasedOrgId</button>
     <button ng-click="getAllDepBasedOrgIdDepId(1,1)">getAllDepBasedOrgIdDepId</button>
-    <tree obj="obj"></tree>
-    <div class="container">
-        
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <td><label>Search User</label></td>
+    <tree obj="obj" parents="parents"></tree>
 
-                    <td><input ng-model="name" ng-keyup="search(name)" /></td>
-                </tr>
-                <tr>
-                    <th>FirstName</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
-                    <th>PN</th>
-                    <th>Address</th>
-                    <th>City</th>
-                    <th>City Code</th>
-                    <th>Phone</th>
-                    <th>Category</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr ng-repeat="user in userList">
-                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.FirstName" value="user.FirstName" /></td>
-                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.LastName" value="user.LastName" /></td>
-                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.Email" value="user.Email" /></td>
-                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.PersonalNumber" value="user.PersonalNumber" /></td>
-                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.Address" value="user.Address" /></td>
-                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.City" value="user.City" /></td>
-                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.CityCode" value="user.CityCode" /></td>
-                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.Phone" value="user.Phone" /></td>
-                    <td><input ng-disabled="(!active[$index])?true:false" ng-model="user.Category" value="user.Category" /></td>
-                    <td><button class="btn btn-active" ng-model="chk" ng-click="edite(chk,$index)">Edite</button></td>
-                    <td><button ng-hide="(!active[$index])?true:false" class="btn btn-success" ng-click="saveEdite(user)">save</button></td>
-                    <td><button class="btn btn-danger" ng-click="delete(user)">Delete</button></td>
-                </tr>
-
-            </tbody>
-        </table>
-    </div>
 
 </div>
 

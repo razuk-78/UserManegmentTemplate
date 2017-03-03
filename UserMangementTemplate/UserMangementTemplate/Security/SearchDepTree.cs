@@ -18,7 +18,7 @@ namespace UserMangementTemplate.Security
             public int? Parent { get; set; }
             public List<int> Child { get; set; }
             public department Dep { get; set; }
-            public List<int> parents { get; set; }
+      
         }
       
         public List<Deps> AllDepsTreeBasedOrg(UserContext db, int OrgId)
@@ -108,7 +108,7 @@ recursive(TemIds,db);
                 foreach (int ii in i.Distinct())
             {
                 //deps1.Add(new Deps { Child = db.DepPointer.Where(x => x.ParentId == ii).Select(x => x.ChildId).ToList(), Dep = db.department.First(x => x.Id == ii), Parent = db.department.First(x => x.Id == ii).DepPointer.First(x => x.ChildId == ii).ParentId });
-                deps1.Add(new Deps { Child = db.DepPointer.Where(x => x.ParentId == ii).Select(x => x.ChildId).ToList(), Dep = db.department.First(x => x.Id == ii), Parent = db.DepPointer.First(x => x.ChildId == ii).ParentId,parents=p});
+                deps1.Add(new Deps { Child = db.DepPointer.Where(x => x.ParentId == ii).Select(x => x.ChildId).ToList(), Dep = db.department.First(x => x.Id == ii), Parent = db.DepPointer.First(x => x.ChildId == ii).ParentId});
 
             }
             deps1.Add(new Deps { Child = db.DepPointer.Where(x => x.ParentId == this.depId).Select(x => x.ChildId).ToList(), Dep = db.department.Find(this.depId), Parent = db.DepPointer.Where(x => x.ChildId == this.depId).ToList().Count > 0 ? db.DepPointer.First(x => x.ChildId == this.depId).ParentId : 0 });

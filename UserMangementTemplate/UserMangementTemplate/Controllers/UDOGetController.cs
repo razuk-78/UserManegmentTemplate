@@ -144,10 +144,36 @@ namespace UserMangementTemplate.Controllers
         public IHttpActionResult GetuserBasedUserIddepartmentId(int userid, int departmentId)
         {
             return Ok(new SearchBasedUser().SearchDetailsBasedUserIddepartmentId(db, userid, departmentId));
-        } 
-      
+        }
 
 
+        //New Search all the users who do not register in UserInOrg
+        public class GetUnregisterdUsersController : ApiController
+        {
+            private UserContext db = new UserContext();
+            //
+            public IHttpActionResult GetAllUserDoNotRegisterInUserInOrg()
+            {
+
+
+                return Ok(CommonFunctions.SearchUnregisterdUsers(db));
+            }
+
+
+            protected override void Dispose(bool disposing)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+                base.Dispose(disposing);
+            }
+
+
+
+
+
+        }
 
         protected override void Dispose(bool disposing)
         {

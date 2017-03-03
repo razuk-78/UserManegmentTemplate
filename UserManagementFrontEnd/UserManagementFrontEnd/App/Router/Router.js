@@ -2,6 +2,7 @@
 /// <reference path="C:\Users\raeli1\Desktop\UserManegmentTemplate\UserManagementFrontEnd\UserManagementFrontEnd\Script/angularRout.js" />
 /// <reference path="../mainApp/App.js" />
 app.config(function ($routeProvider, $locationProvider) {
+    //(function () { org.set(1); })();
     $locationProvider.hashPrefix('');
     $routeProvider.when('/index', {
         templateUrl: "index.html", caseInsensitiveMatch: false

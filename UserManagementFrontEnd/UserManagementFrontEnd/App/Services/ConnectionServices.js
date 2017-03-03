@@ -3,8 +3,17 @@
 /// <reference path="../mainApp/App.js" />
  
 // get all users in one org
-(function myfunction() {
+(function () {
     //get 
+    //get unregisterd users 
+    app.factory('getUnregisterdUsers', function ($http, webAddress, header) {
+        return {
+            get: function () {
+                return $http.get(webAddress.get() + 'GetUnregisterdUsers', { headers: header.get() })
+                   .then(function (users) { return users.data }, function (response) { return response })
+            }
+        }
+    });
     //getAllUsers.get().then(function(users){},function(response){});
     app.factory('getAllUsers', function ($http, webAddress, header) {
         return {
