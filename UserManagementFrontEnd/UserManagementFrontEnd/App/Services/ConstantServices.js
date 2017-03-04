@@ -80,3 +80,9 @@ app.service('authCheck', function () {
    
     
 })
+app.factory('refresh', function ($location) {
+    var meUrl = ""; var toUrl = ""
+    return {
+        send: function (me) { meUrl = me; $location.path("/refresh"); }, resend: function () { $location.path(meUrl);  }
+    }
+});

@@ -24,6 +24,8 @@ app.config(function ($routeProvider, $locationProvider) {
     }).when('/userinorg', {
         templateUrl: "/app/Views/userinorg/userinorg.html", caseInsensitiveMatch: false
 
+    }).when('/refresh', {
+        templateUrl: "/app/Views/refresh/refresh.html", caseInsensitiveMatch: false
     })
 
 

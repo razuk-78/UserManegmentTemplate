@@ -1,4 +1,4 @@
 ﻿app.controller('mainCtrl', function ($scope, org) {
-    org.set(1);
+    org.set(2);
 
 });

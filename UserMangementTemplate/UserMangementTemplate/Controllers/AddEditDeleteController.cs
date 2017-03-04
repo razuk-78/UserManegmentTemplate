@@ -189,7 +189,7 @@ namespace UserMangementTemplate.Controllers
         public IHttpActionResult PutEditDepParent(DepAddEditeDelete.DepDetailes Dep)
         {
             new DepAddEditeDelete().EditDepartmentParent(Dep, db);
-            return Ok();
+            return Ok("");
         }
         protected override void Dispose(bool disposing)
         {

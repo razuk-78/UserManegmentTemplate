@@ -12,6 +12,14 @@ using UserMangementTemplate.Models;
 using UserMangementTemplate.Security;
 namespace UserMangementTemplate.Controllers
 {
+    public class GetAuthTypes: ApiController
+    {
+        private UserContext db = new UserContext();
+        public IHttpActionResult GetAllType()
+        {
+            return Ok(CommonFunctions.SearchAuthType());
+        }
+    }
     public class GetBasedDepController:ApiController
     {
         private UserContext db = new UserContext();
@@ -33,6 +41,11 @@ namespace UserMangementTemplate.Controllers
         public IHttpActionResult GetdepartmentBaseOrgIddepartmentId(int orgid, int departmentId)
         {
             return Ok(new SearchDepTree().DepsTree(db, departmentId, orgid));
+        }
+        //get department based id
+        public IHttpActionResult GetdepartmentId(int id)
+        {
+            return Ok(CommonFunctions.SearchDepartmentBasedId(db,id));
         }
         protected override void Dispose(bool disposing)
         {

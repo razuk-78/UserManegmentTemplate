@@ -93,6 +93,7 @@ namespace UserMangementTemplate.Security
             db.department.Add(dep);
             db.SaveChanges();
         }
+
         //Search all the users who do not register in UserInOrg
         public static List<User> SearchUnregisterdUsers(UserContext db)
         {
@@ -109,7 +110,13 @@ namespace UserMangementTemplate.Security
             return AllUser;
         }
         //Search user by FirstName
-
-
+        public static List<string> SearchAuthType()
+        {
+            return AuthTypes.types;
+        }
+        public static department SearchDepartmentBasedId(UserContext db,int id)
+        {
+            return db.department.Find(id);
+        }
     }
 }

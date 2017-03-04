@@ -138,6 +138,7 @@ namespace UserMangementTemplate.Security
             db.department.Remove(Department);
                 db.SaveChanges();
             }
+            
            //delete all userinorg
             foreach (int i in Alldep.Distinct())
             {
@@ -145,22 +146,22 @@ namespace UserMangementTemplate.Security
                 if (dp != null)
                 {
                 db.UserInOrg.Remove(dp);
-                    db.SaveChanges();
+                    
                 }
 
                 
             }
-
+db.SaveChanges();
             foreach (int i in Alldep.Distinct())
             {
                 DepPointer dp = db.DepPointer.FirstOrDefault(x => x.ChildId == i);
                 if (dp != null)
                 {
                     db.DepPointer.Remove(dp);
-                    db.SaveChanges();
+                    
                 }
             }
-
+db.SaveChanges();
   
         }
 

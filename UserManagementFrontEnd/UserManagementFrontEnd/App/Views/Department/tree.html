@@ -1,15 +1,15 @@
 ﻿
-
+<!--change parent-->
 <div  class="modal fade" id="changeparent" tabindex="-1" role="dialog" aria-labelledby="changeparent">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <h4 t class="modal-title" id="myModalLabel"></h4>
             </div>
             <div class="modal-body">
                 <ul class="nav nav-stack">
-                    <li role="presentation" class="active" ng-repeat="p in parents"><span ng-click="changeParent(p.Id)" class="btn btn-danger">{{p.Name}}</span></li>
+                    <li role="presentation" class="active" ng-repeat="p in parents"><span ng-click="changeParent(p.Dep.Id)" class="btn btn-danger">{{"change To "+p.Dep.Name}}</span></li>
                  
                 </ul>
             </div>
@@ -127,7 +127,7 @@
         </div>
     </div>
 </div>
-<!-- delete department -->
+
 <div class="modal fade" id="editdep" tabindex="-1" role="dialog" aria-labelledby="editedep">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -136,30 +136,59 @@
                 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                <ul class="nav nav-stack">
-                    <li role="presentation" class="active"><a href="#">Go to user</a></li>
-                    <li role="presentation"><a href="#">go to department</a></li>
-                    <li role="presentation"><a href="#">go to auth</a></li>
-                    <li role="presentation"><a href="#">add dep</a></li>
-                    <li role="presentation"><a href="#">add dep</a></li>
-                </ul>
+                <div class="modal-body">
+                    <lable>Name</lable><input ng-model="Name" />
+
+                    <label>read</label><input t="read" type="checkbox"/>
+                    <br />
+                    <label>write</label><input t="write" type="checkbox" />
+                    <br />
+                    <label>delete</label><input t="delete" type="checkbox" />
+                    <br />
+                    <label>edite</label><input t="edite" type="checkbox" />
+                    <br />
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
+                <button type="button" ng-click="editDep()" class="btn btn-success" data-dismiss="modal">save</button>
             </div>
         </div>
     </div>
 </div>
-<!-- edite auth -->
-
+<!-- delete department -->
+<div class="modal fade" id="deletedep" tabindex="-1" role="dialog" aria-labelledby="editedep">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+               
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+           
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button ng-click="deleteDep()" type="button" class="btn btn-success" data-dismiss="modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div>
     <ul  data-id="0" data-p="0" style="margin:30px;list-style-type: none;">
-        <li data-id="0" style="width:10px"><span show  class="glyphicon glyphicon-minus"style="cursor:pointer;background-color:yellow;width:100px;height:30px">
+        <li data-id="0" style="width:10px">
+            <span show  class="glyphicon glyphicon-minus"style="cursor:pointer;background-color:yellow;width:100px;height:30px">
     
             </span>
        <div style="width:100%;background-color:gray;height:35px;position:absolute">-->
-            <span data-id="0" parent style="" class="btn btn-danger">change parent</span><span ng-click="getUsers()" addUser data-id="0"  type="button" class="btn btn-primary">add user</span><span adddep data-id="0" type="button" class="btn btn-danger">add department</span><span data-id="0" type="button" class="btn btn-primary">Go To Users</span><span data-id="0" type="button" class="btn btn-danger">Delete Department</span><span data-id="0" type="button" class="btn btn-danger">Edite Authentication</span>
+            <span data-id="0" parent style="" class="btn btn-danger">change parent</span>
+            <span ng-click="getUsers()" addUser data-id="0"  type="button" class="btn btn-primary">add user</span>
+            <span adddep data-id="0" type="button" class="btn btn-danger">add department</span>
+            <span gotousers data-id="0" type="button" class="btn btn-primary">Go To Users</span>
+            <span deletedep data-id="0" type="button" class="btn btn-danger">Delete Department</span>
+            <span editdep data-id="0" type="button" class="btn btn-danger">Edite Department</span>
        </div>
        
         </li>

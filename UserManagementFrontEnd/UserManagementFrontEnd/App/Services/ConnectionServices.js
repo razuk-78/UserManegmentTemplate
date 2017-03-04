@@ -65,6 +65,13 @@
             get: function (orgid, depid) { return $http.get(webAddress.get() + 'GetBasedDep?orgid=' + orgid + '&departmentId=' + depid, { headers: header.get() }).then(function (dep) { return dep.data }, function (response) { return response }) }
         }
     });
+    //get
+    //getDepBasedId.get(id).then(function(dep){},function(response){return response})
+    app.factory('getDepBasedId', function ($http, webAddress, header) {
+        return {
+            get: function (id) { return $http.get(webAddress.get() + 'GetBasedDep?id=' +id , { headers: header.get() }).then(function (dep) { return dep.data }, function (response) { return response }) }
+        }
+    });
     //post
     // parameter: DepAddEditeDelete.DepDetailes Dep
     //addDep.post(dep).then(function(deps){},function(response){return response})
@@ -89,7 +96,9 @@
     app.factory('editDepParent', function ($http, webAddress, header) {
         return {
             // parameter: DepAddEditeDelete.DepDetailes Dep
-            put: function (dep) { return $http.put(webAddress.get() + 'EditDepParent', dep, { headers: header.get() }).then(function (dep) { return dep.data }, function (response) { return response }) }
+            put: function (dep) {
+                return $http.put(webAddress.get() + 'EditDepParent', dep, { headers: header.get() }).then(function (dep) { return dep.data }, function (response) { return response }) 
+            }
         }
     });
     //put

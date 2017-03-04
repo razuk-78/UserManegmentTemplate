@@ -184,3 +184,19 @@
     Auth: null
 }
 }
+
+
+$scope.obja = [
+  { Dep: { Id: 1, Name: "soft" }, Child: [2, 3, 4], Parent: 0, Auth: ['read', 'write'], AdminId: 0 },
+  { Dep: { Id: 2, Name: "soft" }, Child: [13, 14], Parent: 1, Auth: ['read', 'write'], AdminId: 0 },
+  { Dep: { Id: 3, Name: "hardware" }, Child: [40], Parent: 1, Auth: ['read', 'write'], AdminId: 0 },
+  { Dep: { Id: 4, Name: "c" }, Child: [16, 15], Parent: 1, Auth: ['read', 'write'], AdminId: 0 },
+  { Dep: { Id: 13, Name: "f" }, Child: [130], Parent: 2, Auth: ['read', 'write'], AdminId: 0 },
+  { Dep: { Id: 14, Name: "java" }, Child: [140], Parent: 2, Auth: ['read', 'write'], AdminId: 0 },
+  { Dep: { Id: 40, Name: "mobil" }, Child: [], Parent: 3, Auth: ['read', 'write'], AdminId: 0 },
+  { Dep: { Id: 15, Name: "tv" }, Child: [], Parent: 4, Auth: ['read', 'write'], AdminId: 0 },
+  { Dep: { Id: 16, Name: "c#" }, Child: [], Parent: 4, Auth: ['read', 'write'], AdminId: 0 },
+  { Dep: { Id: 130, Name: "hard" }, Child: [], Parent: 13, Auth: ['read', 'write'], AdminId: 0 },
+  { Dep: { Id: 140, Name: "c++" }, Child: [222], Parent: 14, Auth: ['read', 'write'], AdminId: 0 },
+  { Dep: { Id: 111, Name: "angular" }, Child: [666, 333, 444], Parent: 0, Auth: ['read', 'write'], AdminId: 0 },
+  { Dep: { Id: 222, Name: "api" }, Child: [], Parent: 140, Auth: ['read', 'write'], AdminId: 0 }];
