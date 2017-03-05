@@ -105,20 +105,62 @@
 <!-- go to users -->
 
 <div class="modal fade" id="gotousers" tabindex="-1" role="dialog" aria-labelledby="gotousers">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document"style="max-width:100%;max-height:100%;width:100%">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
             </div>
             <div class="modal-body">
-                <ul class="nav nav-stack">
-                    <li role="presentation" class="active"><a href="#">Go to user</a></li>
-                    <li role="presentation"><a href="#">go to department</a></li>
-                    <li role="presentation"><a href="#">go to auth</a></li>
-                    <li role="presentation"><a href="#">add dep</a></li>
-                    <li role="presentation"><a href="#">add dep</a></li>
-                </ul>
+                <div class="container">
+                    <div class="row">
+                        <div class="colmd-12">
+                            <table class="table table-striped">
+                                <thead>                   
+                                    <tr>
+                                        <th>FirstName</th>
+                                        <th>Lastname</th>
+                                        <th>Email</th>
+                                        <th>PN</th>
+                                        <th>Address</th>
+                                        <th>City</th>
+                                        <th>City Code</th>
+                                        <th>Phone</th>
+                                        <th>Category</th>
+                                        <th>Authentication</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr ng-repeat="user in usersInOrg">
+                                        <td><label>{{user.User.FirstName}}</label></td>
+                                        <td><label>{{user.User.LastName}}</label></td>
+                                        <td><label>{{user.User.Email}}</label></td>
+                                        <td><label>{{user.User.PersonalNumber}}</label></td>
+                                        <td><label>{{user.User.Address}}</label></td>
+                                        <td><label>{{user.User.City}}</label></td>
+                                        <td><label>{{user.User.CityCode}}</label></td>
+                                        <td><label>{{user.User.Phone}}</label></td>
+                                        <td><label>{{user.User.Category}}</label></td>
+                                        <td>
+                                           
+                                            <label>read<input type="checkbox"   ind="{{$index}}"  t="read" /></label>
+                                            <label>write<input type="checkbox"  ind="{{$index}}" t="write" /></label>
+                                            <label>delete<input type="checkbox" ind="{{$index}}"  t="delete" /></label>
+                                            <label>edite<input type="checkbox"   ind="{{$index}}"   t="edite" /></label>
+                                        </td>
+                                        <td><button data-dismiss="modal" class="btn btn-danger" ng-click="deleteUser($index,user.UserInOrgId)">Delete From Department</button></td>
+                                        <td><button data-dismiss="modal" class="btn btn-success" ng-click="editeUserAuth($index,user.UserInOrgId)">save</button></td>
+                                      
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -195,5 +237,6 @@
     </ul>
 
 </div>
+
 <div id="cont"></div>
 <div id="sec" style="display:none"></div>

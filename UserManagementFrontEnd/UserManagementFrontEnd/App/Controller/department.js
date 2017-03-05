@@ -8,7 +8,7 @@ app.controller('departmentCtrl', function (refresh,$scope, org, $location, getAl
 
     $scope.edite = function (dep) { editDep.put(dep).then(function (deps) { }, function (response) { return response }) }
     $scope.editeParent = function (dep) { editDepParent.put(dep).then(function (deps) { }, function (response) { return response }) }
-    $scope.add = function (dep) { addDep.post(dep).then(function (deps) { }, function (response) { return response }) }
+    //$scope.add = function (dep) { addDep.post(dep).then(function (deps) { }, function (response) { return response }) }
     $scope.delete = function (dep) { deleteDep.put(dep).then(function (deps) { }, function (response) { return response }) }
     $scope.getAllDepBasedOrgId = function (orgid) { getAllDepBasedOrgId.get(org.get()).then(function (deps) { $scope.obj = deps; }, function (response) { return response }) }
     $scope.getAllDepBasedOrgIdDepId = function (orgid, depid) { getAllDepBasedOrgIdDepId.get(orgid, depid).then(function (users) { }, function (response) { return response }) }
@@ -20,7 +20,7 @@ app.controller('departmentCtrl', function (refresh,$scope, org, $location, getAl
     
 });
 
-app.directive('tree', function (getDepBasedId,refresh, $timeout, org, $location, getAllDepBasedOrgId, getAllDepBasedOrgIdDepId, addDep, editDep, editDepParent, editAuthToDep, deleteDep, getUnregisterdUsers) {
+app.directive('tree', function (getBasedUIOBasedDepId, dep, getDepBasedId, refresh, $timeout, org, $location,deleteUserInOrg, getAllDepBasedOrgId, getAllDepBasedOrgIdDepId, addDep, editDep, editDepParent, editAuthToDep, deleteDep, getUnregisterdUsers, addUserInOrg,editUserInOrg) {
 
     return {
 
@@ -29,9 +29,9 @@ app.directive('tree', function (getDepBasedId,refresh, $timeout, org, $location,
         link: function (s, el, attr) {
             //test
             s.changeParent;
-            s.obj = []; s.parents = []; s.users = []; s.depId; s.parentId = 0; s.Name; s.deps = []; s.dep = [];
+            s.obj = []; s.parents = []; s.users = []; s.depId; s.parentId = 0; s.Name; s.deps = []; s.dep = []; s.usersInOrg = [];
             getAllDepBasedOrgId.get(org.get()).then(function (deps) { s.obj = deps; start(); return false; }, function (response) { return response });
-            var ref = function () { getAllDepBasedOrgId.get(org.get()).then(function (deps) { s.obj = deps; start(); return false; }, function (response) { return response }); }
+            //var ref = function () { getAllDepBasedOrgId.get(org.get()).then(function (deps) { s.obj = deps; start(); return false; }, function (response) { return response }); }
             //var m;
            
             var matchChk = function (dep) {
@@ -146,6 +146,7 @@ app.directive('tree', function (getDepBasedId,refresh, $timeout, org, $location,
                            s.depId = $(this).attr('data-id');
                            $('#deletedep').modal('show');
                             });
+                            $('span[gotousers]').click(function () { s.depId = $(this).attr('data-id'); s.goToUsers(s.depId); });
                         }, 300);
                         //fill all parents
                         function fillParent(a) {
@@ -200,10 +201,50 @@ app.directive('tree', function (getDepBasedId,refresh, $timeout, org, $location,
                                 .then(function (deps) { refresh.send('/department') },
                                 function (response) { return response })
                         }
-                       
-                        $('#editdep').on('hidden', function () {
-                            refresh.send('/department');
-                        });
+                        s.goToUsers = function () {
+                        getBasedUIOBasedDepId.get(s.depId)
+                        .then(function (users) { s.usersInOrg = users; $('#gotousers').modal('show');s.checkType() },
+                        function (error) { });
+                        }
+                        s.deleteUser = function (i, uio) { var user = { UserInOrgId: uio }; deleteUserInOrg.put(user).then(function (user) { refresh.send('/department'); }, function (response) { return response }); }
+                        s.editeUserAuth = function (i, uio) { var user = { UserInOrgId: uio, Auth: getuserAuth(i) }; editUserInOrg.put(user).then(function (user) { refresh.send('/department'); }, function (response) { return response }) }
+                        s.checkType = function () {
+                          
+                            $timeout(function () {
+                                $('#gotousers input[ind]').each(function () {
+                                  
+                                });
+                                $('#gotousers input[t]').prop('checked',false);
+                                $.each(s.usersInOrg, function (i, v) {
+                                    $.each(v.Auth,function(ii,vv){
+                                        $('#gotousers input[ind='+i+']').each(function ()
+                                        {
+                                            if($(this).attr('t')==vv.Type){
+                                               $(this).prop('checked',true);
+                                            }
+                                              
+                                        });
+                                        
+                                    });
+
+                            
+
+                                });})
+                           
+                           
+                           
+                            
+                            return false;
+                        }
+                        var getuserAuth = function (i) {
+                            var m = [];
+                            $('#gotousers input[ind=' + i + ']').each(function () {
+                                if ($(this).prop('checked')) {
+                                    m.push($(this).attr('t'));
+                                }
+                            });
+                            return m;
+                        };
                     });
        
                 }

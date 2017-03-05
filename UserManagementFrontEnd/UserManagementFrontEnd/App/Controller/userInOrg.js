@@ -1,106 +1,112 @@
-﻿app.controller('userInOrgCtrl', function ($timeout, $scope, deleteUserInOrg, editUserInOrg, addUserInOrg,org, getUIOBasedOrg, getUserBasedAuthOrgId, getBasedAuth) {
+﻿app.controller('UserInOrgToDepartmentCtrl', function ($http, $timeout, $scope, deleteUserInOrg, editeUserInOrg, addUserInOrg, getUIOBasedOrg, getUserBasedAuthOrgId, getBasedAuth) {
+
+
     //Load All UserInOrg for one Org
     $scope.userInOrgList;
     $scope.userInOrg = {
         UserInOrgId: 0,
         Auth: []
+
     };
-   
-    $scope.authType = ['read', 'write', 'delete', 'edite'];
-     
-    var getallusers = function () {
-        getUIOBasedOrg.get(org.get())
-                 .then(function (m) {
-                     $scope.userInOrgList = m;
-                 }, function (response)
-                 { return response }
-                         )
+    //$scope.ind = [];
+    //debugger;   
+
+    //Show All UserInOrg Assign OrgId + Department Id  => departmentId?
+    $scope.ListOfUserInOrgBasedDepartmentId = $http.get('http://localhost:64492/api/GetBasedDep?departmentId=' + 2)
+        .then(function (ui) {
+            $scope.ListOfuserInOrg = ui.data;
+            $scope.NameDepartment = $scope.ListOfuserInOrg[0].Department.Name;
+        })
+
+    //Show All the users who do not register in UserInOrg        
+    $scope.AllUser;
+    $scope.AllUser = $http.get('http://localhost:64492/api/GetSpecificInformation').then(function (u) {
+        $scope.ListOfuser = u.data;
+    })
+    //Show and Hide User Details
+    $scope.show = false;
+    $scope.ShowUserDetails = function () {
+        $scope.show = !$scope.show;
     }
-    getallusers();
+
+    // Show Add UserInOrg
+    $scope.showAddUiO = false;
+    $scope.ShowAddUserInOrg = function () {
+        $scope.showAddUiO = !$scope.showAddUiO;
+    }
+
+
+    //Parameter for Add UserInOrg
+    $scope.AddUserInOrg = {
+        UserId: 0,
+        OrgId: 0,
+        departmentId: 0,
+        Auth: []
+    }
+    //Add UserInOrg
+    $scope.add = function (AddUserInOrg) {
+        //CheckBox
+        $('input[type="checkbox"]').each(function () {
+            if ($(this).prop("checked")) {
+                alert($(this).attr('t'));
+                AddUserInOrg.Auth.push($(this).attr('t'));
+            };
+        });
+
+        var userid = AddUserInOrg.UserId
+        var nameString = userid.split(" ");
+        alert(JSON.stringify(nameString));
+        AddUserInOrg.UserId = nameString[2];
+        alert(JSON.stringify(AddUserInOrg.UserId));
+        $.each($scope.ListOfuser, function (i, v) {
+            if (v.Email == AddUserInOrg.UserId) {
+                AddUserInOrg.UserId = v.Id;
+                alert(JSON.stringify(AddUserInOrg.UserId));
+            }
+        })
+        //OrgId + DepartmentId
+        AddUserInOrg.OrgId = $scope.ListOfuserInOrg[0].Department.OrgId;
+        AddUserInOrg.departmentId = $scope.ListOfuserInOrg[0].Department.Id;
+        addUserInOrg.post(AddUserInOrg).then(function (user) {
+            $scope.OpenCollapse = false;
+            getUIOBasedOrg.get(1)
+              .then(function (m) {
+                  $scope.userInOrgList = m;
+              }, function (response)
+              { return response }
+                        )
+        }, function (response) { return response })
+    }
+
+
+
     $scope.delete = function (useriorg) {
         deleteUserInOrg.put(useriorg)
             .then(function (u) {
                 $scope.userInOrgList = "";
-                $scope.userInOrgList = getUIOBasedOrg.get(org.get())
+                $scope.userInOrgList = getUIOBasedOrg.get(1)
         .then(function (m) {
             $scope.userInOrgList = m;
         }, function (response)
         { return response }
                 )
-                //$timeout(function () {
-                //    $scope.userInOrgList = u;
-                //}, 100);                  
+
             })
             , function (response) { return response }
     }
 
-    //Collapse
-    $scope.AddAuth = function (auth, i) {
-        //test
-        
-        var index = i;
-      
-        if ($scope.userInOrgList[index].Auth.length == 0) {
-            $scope.userInOrg.UserInOrgId = $scope.userInOrgList[index].UserInOrgId;
-            $scope.userInOrg.Auth.push(auth);
-            editUserInOrg.put($scope.userInOrg).then(function (m) {
-                getallusers();
-            }, function (response) { return response })
-        }
-        
-        var b = false;
-        $.each($scope.userInOrgList[index].Auth, function (i, v) {
-            
-            if (auth == v.Type) {
-               
-                b = true;
-            } 
 
-           
-            if (b == false && i == $scope.userInOrgList[index].Auth.length - 1) {
-               
-                $scope.userInOrg.UserInOrgId = $scope.userInOrgList[index].UserInOrgId;
-                $scope.userInOrg.Auth = [];
-                $.each($scope.userInOrgList[index].Auth, function (io, v) {
-                    $scope.userInOrg.Auth.push(v.Type)
-                });
-                $scope.userInOrg.Auth.push(auth);
-                editUserInOrg.put($scope.userInOrg).then(function (m) {
-                    getallusers();
-                }, function (response) { return response })
-                b = false;
-            }
-        });
-    }
-    $scope.delteAuth = function (auth, useriorg) {
-        var t = auth;
-      
-        $scope.userInOrg.Auth=[];
-        $scope.userInOrg.UserInOrgId = useriorg.UserInOrgId;
-        $.each(useriorg.Auth, function (i, v) {
-            if (v.Type != t) {
-                $scope.userInOrg.Auth.push(v.Type);
-            }
-          
-            
-        });
-           editUserInOrg.put($scope.userInOrg).then(function (m) {
-               getallusers();
-            }, function (response) { return response })
-    }
 
-    $scope.edite = function () {
+
+
+
+    $scope.editee = function () {
         var m = $scope.userInOrg;
-      
-        editUserInOrg.put(m).then(function (m) { }, function (response) { return response })
+        alert(JSON.stringify(m));
+        editeUserInOrg.put(m).then(function (m) { }, function (response) { return response })
     }
-    //$scope.edite = function (useriorg) {
-    //    editUserInOrg.put(useriorg).then(function (useriorg) { }, function (response) { return response })
-    //}
-    //$scope.getOrg = function (OrgId) { getUIOBasedOrg.get(OrgId).then(function (user) { }, function (response) { return response }) }
-    //$scope.delete= function (user) { deleteUserInOrg.put(user).then(function (user) { }, function (response) { return response });}
-    //$scope.edite = function (user) { editUserInOrg.put(user).then(function (user) { }, function (response) { return response }) }   
-    //$scope.add=function (user) { addUserInOrg.post(user).then(function(user){},function(response){return response})}
-    //$scope.getAuthOrg=function (OrgId, auth) {  getUserBasedAuthOrgId.get(OrgId, auth).then(function (user) { }, function (response) { return response })}
-    //$scope.getAuth = function (OrgId, auth, Dep) { getBasedAuth.get(OrgId, auth, Dep).then(function (user) { }, function (response) { return response }) }
+
+
+
+
 });

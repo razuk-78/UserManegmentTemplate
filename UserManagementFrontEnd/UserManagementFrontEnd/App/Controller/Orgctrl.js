@@ -13,12 +13,12 @@ app.controller('orgCtrl', function ($scope, userAuth, authCheck, getAllOrg, addO
     
    
     getAllOrg.get().then(function (orgs) { $scope.orgs = ""; $scope.orgs = orgs }, function (response) { return response });
-    $scope.add = function (org) { addOrg.post(org).then(function (orgs) { $scope.orgs = ""; $scope.orgs = orgs }, function (response) { return response }) };
-    //$scope.edite = function (org) { editOrg.put(org).then(function (orgs) {$scope.orgs=""; $scope.orgs=orgs }, function (response) { return response });}
+    $scope.addOrg = function (name) { var org = { Name: name }; addOrg.post(org).then(function (orgs) { $scope.orgs = []; $scope.orgs = orgs }, function (response) { return response }) };
+    //$scope.editee = function (org) { editeOrg.put(org).then(function (orgs) {$scope.orgs=""; $scope.orgs=orgs }, function (response) { return response });}
     $scope.delete = function (org) { deleteOrg.put(org).then(function (orgs) { $scope.orgs = ""; $scope.orgs = orgs }, function (response) { return response }); }
    
 
-    $scope.edite = function (c, i) {
+    $scope.editee = function (c, i) {
         index = i; authCheck.check('read', ['read', 'write'], function () {
             if ($scope.chk)
             { $.each($scope.active, function (i, v) { $scope.active[i] = false; }); $scope.active[index] = true; $scope.chk = false; }
@@ -27,13 +27,13 @@ app.controller('orgCtrl', function ($scope, userAuth, authCheck, getAllOrg, addO
             }
         }, function () { alert('access deny'); $.each($scope.active, function (i, v) { $scope.active[i] = false; }); });
     }
-    $scope.saveEdite = function (org) {
+    $scope.saveeditee = function (org) {
         editOrg.put(org).then(function (orgs) {
             $scope.orgList = ""; $scope.orgList = orgs; alert('success');
                 $.each($scope.active, function (i, v) { $scope.active[i] = false; })
             }, function () { alert('Error'); });
     }
-
+    
    
 
 });

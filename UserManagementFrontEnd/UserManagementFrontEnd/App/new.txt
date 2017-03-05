@@ -2,7 +2,7 @@
 /// <reference path="C:\Users\raeli1\Desktop\UserManegmentTemplate\UserManagementFrontEnd\UserManagementFrontEnd\Script/jquery-3.1.1.js" />
 
 
-app.controller('departmentCtrl', function ($scope, $location, getAllDepBasedOrgId, getAllDepBasedOrgIdDepId, addDep, editDep, editDepParent, editAuthToDep, deleteDep) {
+app.controller('departmentCtrl', function ($scope, $location, getAllDepBasedOrgId, getAllDepBasedOrgIdDepId, addDep, editeDep, editeDepParent, editeAuthToDep, deleteDep) {
     //public int Id { get; set; }
     //public string Name { get; set; }
     //public int AdminId { get; set; }
@@ -10,8 +10,8 @@ app.controller('departmentCtrl', function ($scope, $location, getAllDepBasedOrgI
     //public int parentId { get; set; }
     //public List<string> AuthType { get; set; }
    //check ?!
-    $scope.edite = function (dep) { editDep.put(dep).then(function (deps) { }, function (response) { return response }) }
-    $scope.editeParent = function (dep) { editDepParent.put(dep).then(function (deps) { }, function (response) { return response }) }
+    $scope.editee = function (dep) { editeDep.put(dep).then(function (deps) { }, function (response) { return response }) }
+    $scope.editeeParent = function (dep) { editeDepParent.put(dep).then(function (deps) { }, function (response) { return response }) }
     $scope.add = function (dep) { addDep.post(dep).then(function (deps) { }, function (response) { return response }) }
     $scope.delete = function (dep) { deleteDep.put(dep).then(function (deps) { }, function (response) { return response }) }
     $scope.getAllDepBasedOrgId = function (orgId) { getAllDepBasedOrgId.get(orgId).then(function (users) { }, function (response) { return response }) }

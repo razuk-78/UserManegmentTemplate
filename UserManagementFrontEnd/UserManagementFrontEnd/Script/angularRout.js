@@ -113,8 +113,8 @@
          *        when the route matches.
          *    * `path` can contain optional named groups with a question mark: e.g.`:name?`.
          *
-         *    For example, routes like `/color/:color/largecode/:largecode*\/edit` will match
-         *    `/color/brown/largecode/code/with/slashes/edit` and extract:
+         *    For example, routes like `/color/:color/largecode/:largecode*\/edite` will match
+         *    `/color/brown/largecode/code/with/slashes/edite` and extract:
          *
          *    * `color: brown`
          *    * `largecode: code/with/slashes`.

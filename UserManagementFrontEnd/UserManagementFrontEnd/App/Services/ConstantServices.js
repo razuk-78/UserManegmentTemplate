@@ -40,6 +40,13 @@ app.factory('org', function () {
         get: function () { return orgid }
     }
 });
+app.factory('dep', function () {
+    var dep;
+    return {
+        set: function (id) { dep = id },
+        get: function () { return dep }
+    }
+});
 app.factory('webAddress', function () {
     var address ='http://localhost:64492/api/';
     return {

@@ -8633,9 +8633,9 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
       var attributes = specialAttrHolder.firstChild.attributes;
       var attribute = attributes[0];
       // We have to remove the attribute from its container element before we can add it to the destination element
-      attributes.removeNamedItem(attribute.name);
+      attributes.removeNamediteem(attribute.name);
       attribute.value = value;
-      element.attributes.setNamedItem(attribute);
+      element.attributes.setNamediteem(attribute);
     }
 
     function safeAddClass($element, className) {
@@ -26335,7 +26335,7 @@ var ngCloakDirective = ngDirective({
  * also be the name of a globally accessible constructor function (deprecated, not recommended).
  *
  * @example
- * Here is a simple form for editing user contact information. Adding, removing, clearing, and
+ * Here is a simple form for editeing user contact information. Adding, removing, clearing, and
  * greeting are methods declared on the controller (see source tab). These methods can
  * easily be called from the angular markup. Any changes to the data are automatically reflected
  * in the View without the need for a manual update.
@@ -27983,16 +27983,16 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
  * `NgModelController` for data-binding to control elements.
  * Angular provides this DOM logic for most {@link input `input`} elements.
  * At the end of this page you can find a {@link ngModel.NgModelController#custom-control-example
- * custom control example} that uses `ngModelController` to bind to `contenteditable` elements.
+ * custom control example} that uses `ngModelController` to bind to `contentediteable` elements.
  *
  * @example
  * ### Custom Control Example
  * This example shows how to use `NgModelController` with a custom control to achieve
- * data-binding. Notice how different directives (`contenteditable`, `ng-model`, and `required`)
+ * data-binding. Notice how different directives (`contentediteable`, `ng-model`, and `required`)
  * collaborate together to achieve the desired result.
  *
- * `contenteditable` is an HTML5 attribute, which tells the browser to let the element
- * contents be edited in place by the user.
+ * `contentediteable` is an HTML5 attribute, which tells the browser to let the element
+ * contents be editeed in place by the user.
  *
  * We are using the {@link ng.service:$sce $sce} service here and include the {@link ngSanitize $sanitize}
  * module to automatically remove "bad" content like inline event listener (e.g. `<span onclick="...">`).
@@ -28001,7 +28001,7 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
  *
  * <example name="NgModelController" module="customControl" deps="angular-sanitize.js">
     <file name="style.css">
-      [contenteditable] {
+      [contentediteable] {
         border: 1px solid black;
         background-color: white;
         min-height: 20px;
@@ -28014,7 +28014,7 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
     </file>
     <file name="script.js">
       angular.module('customControl', ['ngSanitize']).
-        directive('contenteditable', ['$sce', function($sce) {
+        directive('contentediteable', ['$sce', function($sce) {
           return {
             restrict: 'A', // only activate on element attribute
             require: '?ngModel', // get a hold of NgModelController
@@ -28035,7 +28035,7 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
               // Write data to the model
               function read() {
                 var html = element.html();
-                // When we clear the content editable the browser leaves a <br> behind
+                // When we clear the content editeable the browser leaves a <br> behind
                 // If strip-br attribute is provided then we strip this out
                 if (attrs.stripBr && html === '<br>') {
                   html = '';
@@ -28048,7 +28048,7 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
     </file>
     <file name="index.html">
       <form name="myForm">
-       <div contenteditable
+       <div contentediteable
             name="myWidget" ng-model="userContent"
             strip-br="true"
             required>Change me!</div>
@@ -28060,19 +28060,19 @@ is set to `true`. The parse error is stored in `ngModel.$error.parse`.
     <file name="protractor.js" type="protractor">
     it('should data-bind and become invalid', function() {
       if (browser.params.browser === 'safari' || browser.params.browser === 'firefox') {
-        // SafariDriver can't handle contenteditable
-        // and Firefox driver can't clear contenteditables very well
+        // SafariDriver can't handle contentediteable
+        // and Firefox driver can't clear contentediteables very well
         return;
       }
-      var contentEditable = element(by.css('[contenteditable]'));
+      var contentediteable = element(by.css('[contentediteable]'));
       var content = 'Change me!';
 
-      expect(contentEditable.getText()).toEqual(content);
+      expect(contentediteable.getText()).toEqual(content);
 
-      contentEditable.clear();
-      contentEditable.sendKeys(protractor.Key.BACK_SPACE);
-      expect(contentEditable.getText()).toEqual('');
-      expect(contentEditable.getAttribute('class')).toMatch(/ng-invalid-required/);
+      contentediteable.clear();
+      contentediteable.sendKeys(protractor.Key.BACK_SPACE);
+      expect(contentediteable.getText()).toEqual('');
+      expect(contentediteable.getAttribute('class')).toMatch(/ng-invalid-required/);
     });
     </file>
  * </example>

@@ -13,7 +13,7 @@ namespace UserMangementTemplate.Controllers
     public class LogInController : ApiController
     {
         UserContext db = new UserContext();
-        [UserAuthCheck("read")]
+        
         public IHttpActionResult GetLogIn(string username,int orgid)
         {
             return Ok(new LogIn().GetuserLogInIfo(db, username,orgid));

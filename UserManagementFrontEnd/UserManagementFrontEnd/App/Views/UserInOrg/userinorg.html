@@ -1,64 +1,35 @@
-﻿<div ng-controller="userInOrgCtrl" ng-init="">
-    {{"userinorg"}}
-    {{1+2}}
-    <br /><br /><br />
-    <button ng-click="edite({})">edite</button>
-    <button ng-click="delete({})">delete</button>
-    <button ng-click="add({})">add</button>
-    <button ng-click="getOrg(1)">getOrg</button>
-    <button ng-click="getAuthOrg(2, {})">getAuthOrg</button>
-    <button ng-click="getAuth(1,1,1)">getAuth</button>
-    <br />
-    <br />
-    <br />
-    <div class="container">
-        <table class="table table-striped">
-            <thead>
-                <!--<tr>
-                    <td><label>Search User</label></td>
-                    <td><input ng-model="name" ng-keyup="search(name)" /></td>
-                </tr>-->
-                <tr>
-                    <th>User</th>
-                    <th>Department</th>
-                </tr>
-            </thead>
-            <!--ng-disabled="(!active[$index])?true:false"-->
-            <tbody>
-                <tr ng-repeat="useriorg in userInOrgList">
-                    <td><input ng-disabled="true" ng-model="useriorg.User.FirstName" /></td>
-                    <td><input ng-disabled="true" ng-model="useriorg.Department.Name" /></td>
+﻿<tr ng-repeat="useriorg in userInOrgList">
+    <td><input ng-disabled="true" ng-model="useriorg.User.FirstName" /></td>
+    <td><input ng-disabled="true" ng-model="useriorg.Department.Name" /></td>
 
-                    <td><button ng-click="delete(useriorg)">Delete</button></td>
-                    <td>
-                        <a data-target="#userinorg{{$index}}" class="btn btn-info" data-toggle="collapse">Edit Auth</a>
-                        <div id="userinorg{{$index}}" class="collapse">
-                          
-                              <input type="button" ng-click='AddAuth("read",$index)' value="read" />
-                             <input type="button" value="write" ng-click='AddAuth("write",$index)' />
-                             <input type="button" value="delete" ng-click='AddAuth("delete",$index)' />
-                             <button ng-click="edite()">Save</button>
-                             <br />
-                             <div ng-repeat="a in useriorg.Auth">
-                                 <label>
-                                     {{a.Type}}
-                                     <br />
-                                 </label><input type="button" value="delete"ng-click="delteAuth(a.Type,useriorg)"/>
-                             </div>
+    <td><button ng-click="delete(useriorg)">Delete</button></td>
+    <td>
+        <a data-target="#userinorg{{$index}}" class="btn btn-info" data-toggle="collapse">edite Auth</a>
+        <div id="userinorg{{$index}}" class="collapse">
+
+            <input type="button" ng-click='AddAuth("read",$index)' value="read" />
+            <input type="button" value="write" ng-click='AddAuth("write",$index)' />
+            <input type="button" value="delete" ng-click='AddAuth("delete",$index)' />
 
 
-                        </div>
-                    </td>
-                    <!--<td><button class="btn btn-active" ng-model="chk" ng-click="edite(chk,$index)">Edite</button></td>
-                    <td><button ng-hide="(!active[$index])?true:false" class="btn btn-success" ng-click="saveEdite(user)">save</button></td>
-                    <td><button class="btn btn-danger" ng-click="delete(user)">Delete</button></td>-->
-                </tr>
-            </tbody>
-        </table>
+            <!--<div class="checkbox" ng-repeat="a in useriorg.Auth">
+                <label><input type="checkbox" value="a" ng-model="a">{{a}}</label>-->
+            <!--</div>-->
+
+            <button ng-click="editee()">Save</button>
+            <br />
+            <div ng-repeat="a in useriorg.Auth">
+                <label>
+                    {{a.Type}}
+                    <br />
+                </label>
+            </div>
 
 
 
-
-
-    </div>
-</div>
+        </div>
+    </td>
+    <!--<td><button class="btn btn-active" ng-model="chk" ng-click="editee(chk,$index)">editee</button></td>
+    <td><button ng-hide="(!active[$index])?true:false" class="btn btn-success" ng-click="saveeditee(user)">save</button></td>
+    <td><button class="btn btn-danger" ng-click="delete(user)">Delete</button></td>-->
+</tr>

@@ -1,11 +1,6 @@
 ﻿<div ng-controller="departmentCtrl">
     <h1>{{"dep"}}</h1>
-    <button ng-click="edite({})" >edite</button>
-    <button ng-click="editeParent({})">editeParent</button>
-    <button ng-click="add({})">add</button>
-    <button ng-click="delete({})">delete</button>
-    <button ng-click="getAllDepBasedOrgId(1)">getAllDepBasedOrgId</button>
-    <button ng-click="getAllDepBasedOrgIdDepId(1,1)">getAllDepBasedOrgIdDepId</button>
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#adddepartment">add new department</button>
     <tree></tree>
 
 

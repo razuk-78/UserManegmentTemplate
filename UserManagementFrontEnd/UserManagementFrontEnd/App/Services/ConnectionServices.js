@@ -173,6 +173,13 @@
             get: function (OrgId, auth, Depid) { return $http.get(webAddress.get() + 'GetBasedAuth?OrgId=' + OrgId + '&auth=' + auth + '&Dep=' + Depid, { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
         }
     });
+    app.factory('getBasedUIOBasedDepId', function ($http, webAddress, header) {
+        return {
+            //parameter: string auth, int Orgid
+            //function : GetAuthOrgDep(string auth, int Orgid, int Dep)
+            get: function (Depid) { return $http.get(webAddress.get() + 'GetBasedDep?departmentId=' + Depid   , { headers: header.get() }).then(function (user) { return user.data }, function (response) { return response }) }
+        }
+    });
 
 })();
 //get add edite Org
