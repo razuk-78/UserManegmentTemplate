@@ -6,11 +6,6 @@ app.controller('departmentCtrl', function (refresh,$scope, org, $location, getAl
  
     //check ?!
 
-   
-
-
-
-
     $scope.edite = function (dep) { editDep.put(dep).then(function (deps) { }, function (response) { return response }) }
     $scope.editeParent = function (dep) { editDepParent.put(dep).then(function (deps) { }, function (response) { return response }) }
     $scope.add = function (dep) { addDep.post(dep).then(function (deps) { }, function (response) { return response }) }
@@ -40,13 +35,17 @@ app.directive('tree', function (getDepBasedId,refresh, $timeout, org, $location,
             //var m;
            
             var matchChk = function (dep) {
+                $('#editdep input[t]').prop('checked',false);
                 $.each(dep.Auth, function (i, v) {
+
                     $('#editdep input[t]').each(function () {
+                       
                         if ($(this).attr('t') == v.Type) {
-                            $(this).prop('checked',true);
-                        }
+                            $(this).prop('checked', true);
+                        } 
                     });
-                })
+                  
+                });
             }
             var getAuth = function () {
                 var type = [];
@@ -136,9 +135,11 @@ app.directive('tree', function (getDepBasedId,refresh, $timeout, org, $location,
                             });
                             $('span[editdep]').click(function () {
                                 s.depId = $(this).attr('data-id');
+                                
                                 getDepBasedId.get(s.depId).then(function (dep) {
                                     s.Name = dep.Name; matchChk(dep);
-                                    $('#editdep').modal('show'); return;
+                                    
+                                    $('#editdep').modal('show');  return;
                                 }, function (response) { return response });
                             });
                             $('span[deletedep]').click(function () {
@@ -186,10 +187,10 @@ app.directive('tree', function (getDepBasedId,refresh, $timeout, org, $location,
                                 }, function (response) { return response })
                         };
                         s.addDep = function () {
-                            var dep = { parentId: 0, OrgId: org.get(), Name: s.Name };
+                            var dep = { parentId: s.depId, OrgId: org.get(), Name: s.Name };
                             addDep.post(dep)
                            .then(function (deps)
-                           {  },
+                           {refresh.send('/department')  },
                            
                             function (response) { return response })
                         }
@@ -200,6 +201,9 @@ app.directive('tree', function (getDepBasedId,refresh, $timeout, org, $location,
                                 function (response) { return response })
                         }
                        
+                        $('#editdep').on('hidden', function () {
+                            refresh.send('/department');
+                        });
                     });
        
                 }

@@ -122,46 +122,50 @@ namespace UserMangementTemplate.Security
                 throw new Exception("the department not exsist");
             }
             List<int> Alldep = new List<int>();
+            #region MyRegion
             foreach (SearchDepTree.Deps deps in new SearchDepTree().DepsTree(db, dep.Id, dep.OrgId))
             {
                 Alldep.Add(deps.Dep.Id);
-                
-                foreach(int id in deps.Child)
+
+                foreach (int id in deps.Child)
                 {
                     Alldep.Add(id);
                 }
             }
-
-           foreach(int i in Alldep.Distinct())
-            {
-            department Department = db.department.First(x => x.Id == i);
-            db.department.Remove(Department);
-                db.SaveChanges();
-            }
-            
-           //delete all userinorg
-            foreach (int i in Alldep.Distinct())
-            {
-                UserInOrg dp = db.UserInOrg.FirstOrDefault(x => x.departmentId == i);
-                if (dp != null)
-                {
-                db.UserInOrg.Remove(dp);
-                    
-                }
-
-                
-            }
-db.SaveChanges();
+            #endregion
             foreach (int i in Alldep.Distinct())
             {
                 DepPointer dp = db.DepPointer.FirstOrDefault(x => x.ChildId == i);
                 if (dp != null)
                 {
                     db.DepPointer.Remove(dp);
-                    
+                    db.SaveChanges();
                 }
             }
-db.SaveChanges();
+            foreach (int i in Alldep.Distinct())
+            {
+            department Department = db.department.First(x => x.Id == i);
+            db.department.Remove(Department);
+                db.SaveChanges();
+            }
+
+            //delete all userinorg
+            #region MyRegion
+            foreach (int i in Alldep.Distinct())
+            {
+                UserInOrg dp = db.UserInOrg.FirstOrDefault(x => x.departmentId == i);
+                if (dp != null)
+                {
+                    db.UserInOrg.Remove(dp);
+                    db.SaveChanges();
+                }
+
+
+            } 
+            #endregion
+
+          
+
   
         }
 
