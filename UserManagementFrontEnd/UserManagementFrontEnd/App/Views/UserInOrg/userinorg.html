@@ -1,35 +1,79 @@
-﻿<tr ng-repeat="useriorg in userInOrgList">
-    <td><input ng-disabled="true" ng-model="useriorg.User.FirstName" /></td>
-    <td><input ng-disabled="true" ng-model="useriorg.Department.Name" /></td>
-
-    <td><button ng-click="delete(useriorg)">Delete</button></td>
-    <td>
-        <a data-target="#userinorg{{$index}}" class="btn btn-info" data-toggle="collapse">edite Auth</a>
-        <div id="userinorg{{$index}}" class="collapse">
-
-            <input type="button" ng-click='AddAuth("read",$index)' value="read" />
-            <input type="button" value="write" ng-click='AddAuth("write",$index)' />
-            <input type="button" value="delete" ng-click='AddAuth("delete",$index)' />
+﻿<div ng-controller="userInOrgCtrl" ng-init="">
+    {{"userinorg"}}
 
 
-            <!--<div class="checkbox" ng-repeat="a in useriorg.Auth">
-                <label><input type="checkbox" value="a" ng-model="a">{{a}}</label>-->
-            <!--</div>-->
-
-            <button ng-click="editee()">Save</button>
-            <br />
-            <div ng-repeat="a in useriorg.Auth">
-                <label>
-                    {{a.Type}}
-                    <br />
-                </label>
+    <div class="container">
+        <div>
+            <!--Add UserInOrg-->
+            <button ng-click="ShowAddUserInOrg()">Add UserInOrg</button>
+            <div ng-show="showAddUiO">
+                <br />
+                <div>
+                    <label>User Name + Email </label>
+                    <select style="width: 50%;" ng-model="AddUserInOrg.UserId">
+                        <option ng-repeat="uiorg in ListOfuser">{{uiorg.FirstName}} {{uiorg.LastName}} {{uiorg.Email}}</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Department Name</label>
+                    <select style="width: 50%;" ng-model="AddUserInOrg.departmentId">
+                        <option ng-repeat="dep in ListOfDepartment">{{dep.Dep.Name}}</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Auth</label>
+                    <div id="chk">
+                        <!--CheckBox-->
+                        <label>read</label><input t="read" type="checkbox" ng-model="checkBoxread" />
+                        <br />
+                        <label>write</label><input t="write" type="checkbox" ng-model="checkBoxwrite" />
+                        <br />
+                        <label>delete</label><input t="delete" type="checkbox" ng-model="checkBoxdelete" />
+                        <br />
+                        <label>edite</label><input t='edite' type="checkbox" ng-model="checkBoxedite" />
+                    </div>
+                </div> <!--End CheckBox-->
+                <button ng-click="add(AddUserInOrg)">Save</button>
+                <button ng-click="ShowAddUserInOrg()">Cancel</button>
             </div>
+        </div> <!--End Add UserInOrg-->
+        <table class="table table-striped">
+            <thead>
+                <!--<tr>
+                    <td><label>Search User</label></td>
+                    <td><input ng-model="name" ng-keyup="search(name)" /></td>
+                </tr>-->
+                <tr>
+                    <th>User</th>
+                    <th>Department</th>
+                </tr>
+            </thead>
+            <!--ng-disabled="(!active[$index])?true:false"-->
+            <tbody>
+                <tr ng-repeat="useriorg in userInOrgList">
+                    <td><input ng-disabled="true" ng-model="useriorg.User.FirstName" /></td>
+                    <td><input ng-disabled="true" ng-model="useriorg.Department.Name" /></td>
+
+                    
+                    <td>
+                        <a ng-click="checkType($index)" data-target="#userinorg{{$index}}" class="btn btn-info" data-toggle="collapse">Edit Auth</a>
+                        <div  l ="{{$index}}" id="userinorg{{$index}}" class="collapse">
+                            <label>read<input type="checkbox" ind="{{$index}}" t="read" /></label>
+                            <label>write<input type="checkbox" ind="{{$index}}" t="write" /></label>
+                            <label>delete<input type="checkbox" ind="{{$index}}" t="delete" /></label>
+                            <label>edite<input type="checkbox" ind="{{$index}}" t="edite" /></label>
+                            <button class="btn btn-active" ng-model="chk" ng-click="edite(useriorg.UserInOrgId,$index)">Edite</button>
+                        </div>
+                    </td>
+                   
+                    <td><button class="btn btn-danger" ng-click="delete(useriorg)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
 
 
 
-        </div>
-    </td>
-    <!--<td><button class="btn btn-active" ng-model="chk" ng-click="editee(chk,$index)">editee</button></td>
-    <td><button ng-hide="(!active[$index])?true:false" class="btn btn-success" ng-click="saveeditee(user)">save</button></td>
-    <td><button class="btn btn-danger" ng-click="delete(user)">Delete</button></td>-->
-</tr>
+
+
+    </div>
+</div>

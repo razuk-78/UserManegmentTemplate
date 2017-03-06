@@ -122,7 +122,7 @@ namespace UserMangementTemplate.Security
                 throw new Exception("the department not exsist");
             }
             List<int> Alldep = new List<int>();
-            #region MyRegion
+            #region search
             foreach (SearchDepTree.Deps deps in new SearchDepTree().DepsTree(db, dep.Id, dep.OrgId))
             {
                 Alldep.Add(deps.Dep.Id);
@@ -133,6 +133,26 @@ namespace UserMangementTemplate.Security
                 }
             }
             #endregion
+ #region remove department
+            foreach (int i in Alldep.Distinct())
+            {
+                department Department = db.department.First(x => x.Id == i);
+                db.department.Remove(Department);
+                db.SaveChanges();
+            } 
+            #endregion
+ //delete all userinorg
+            #region MyRegion
+            foreach (int i in Alldep.Distinct())
+            {
+                db.UserInOrg.Where(x => x.departmentId == i).ToList().ForEach(x => db.UserInOrg.Remove(x) );
+
+                db.SaveChanges();
+
+            } 
+            #endregion
+
+            #region remove depPointer
             foreach (int i in Alldep.Distinct())
             {
                 DepPointer dp = db.DepPointer.FirstOrDefault(x => x.ChildId == i);
@@ -142,27 +162,10 @@ namespace UserMangementTemplate.Security
                     db.SaveChanges();
                 }
             }
-            foreach (int i in Alldep.Distinct())
-            {
-            department Department = db.department.First(x => x.Id == i);
-            db.department.Remove(Department);
-                db.SaveChanges();
-            }
-
-            //delete all userinorg
-            #region MyRegion
-            foreach (int i in Alldep.Distinct())
-            {
-                UserInOrg dp = db.UserInOrg.FirstOrDefault(x => x.departmentId == i);
-                if (dp != null)
-                {
-                    db.UserInOrg.Remove(dp);
-                    db.SaveChanges();
-                }
-
-
-            } 
             #endregion
+           
+
+           
 
           
 
